@@ -8,5 +8,6 @@ class TarjetaDeDebito: public Reserva {
 		std::string Banco;
 	public:
 		TarjetaDeDebito() : Reserva();
-		TarjetaDeDebito(std::string _banco, int _idSala, int _cantAsientos) : Reserva(_idSala, _cantAsientos);
+		TarjetaDeDebito(std::string _banco, int _idSala, int _cantAsientos) : Reserva(_precio, _cantAsientos);
+	    virtual ~Reserva();
 }
