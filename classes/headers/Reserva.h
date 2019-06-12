@@ -9,7 +9,6 @@ public:
     float getPrecio() const;
     int getCantidadAsientos() const;
     
-    virtual DtReserva* getDtReserva() = 0;
     virtual ~Reserva();
 private:
     float precio;

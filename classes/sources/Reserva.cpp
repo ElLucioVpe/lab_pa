@@ -5,8 +5,8 @@ Reserva::Reserva(float prec, int cantAsientos ){
     this->cantidadAsientos = cantAsientos;
 }
 
-int Reserva::getPrecio() const {
-    return this->Precio;
+float Reserva::getPrecio() const {
+    return this->precio;
 }
 
 int Reserva::getCantidadAsientos() const {
