@@ -5,14 +5,14 @@
 
 class Reserva {
 public:
-    Reserva(int, int);
-    int getId() const;
+    Reserva(float, int);
+    float getPrecio() const;
     int getCantidadAsientos() const;
     
     virtual DtReserva* getDtReserva() = 0;
     virtual ~Reserva();
 private:
-    int id;
+    float precio;
     int cantidadAsientos;
 };
 
