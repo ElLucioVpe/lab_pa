@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <string>
+#include "../../interfaces/ICollectible.h"
 
-class Usuario {
+class Usuario : public ICollectible {
     private:
         std::string NickName;
         std::string ImgPerfil;
