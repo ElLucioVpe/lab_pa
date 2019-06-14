@@ -1,9 +1,9 @@
 #ifndef RESERVA_H
 #define RESERVA_H
 
-#include "interfaces/ICollectible.h"
+#include "../../interfaces/ICollectible.h"
 
-class Reserva : ICollectible {
+class Reserva : public ICollectible {
 public:
     Reserva(float, int);
     float getPrecio() const;
