@@ -8,58 +8,26 @@
 #ifndef LIST_H
 #define	LIST_H
 
-#include "List.h"
+#include "../interfaces/ICollection.h"
+#include "../classes/headers/Reserva.h"
 
 /**
  *  Una lista común
  */
-class List: public ICollection {
+class ColReservas{
 private:
-    ListNode *head;
-    int size;
 public:
-    List();
+
+ColReservas();
     
-    /**
-     * Agrega un elemento a la colección al final de la lista.
-     * Si ya existía no hace nada
-     */
     void add(Reserva *);
+
     
-    
-    /**
-     * Borra el elementvoid remove(ICollectible *);o de la colección.
-     * Si no existe no hace nada
-     */
     void remove(Reserva *);
     
     
-    /*
-     * Devuelve true si hay un elemento en la colección cuya dirección de memoria
-     * coincide con el argumente
-     */ 
     bool member(Reserva *) const;
     
-    /*
-     * Devuelve true si size() es 0
-     */
-    bool isEmpty() const;
-    
-    /**
-     * Devuelve el tamaño de la colección
-     */
-    int getSize() const;
-    
-    /*
-     * Devuelve una instancia de IIterator creada con el operador new,
-     * El órden de la iteración respeta el orden de inserción de los elementos
-     */
-    IIterator *getIterator();
-
-    /**
-     * Destruye la lista (pero no sus elementos)
-     */
-    virtual ~List();
 };
 
 #endif	/* LIST_H */

@@ -6,50 +6,30 @@
  */
 
 #include "ColReservas.h"
-#include "ListIterator.h"
-
-List::List():
-   head(NULL), size(0){
-}
 
 void ColReservas::add(Reserva* c)
 {
-ICollectible *Rese = Reserva;
-add(Rese);
+add(c);
 
 }
 
 void ColReservas::remove(Reserva *c)
 {
-ICollectible *Rese = Reserva;
-remove(Rese);
+remove(c);
 }
 
 bool ColReservas::member(Reserva *c) const{
-ICollectible *Rese = Reserva;
-member(Rese);
+member(c);
         
 }
 
 int ColReservas::getSize() const
 {
-ICollectible *Rese = Reserva;
-getSize(Rese);
+getSize(c);
 }
 
 bool ColReservas::isEmpty() const
 {
-ICollectible *Rese = Reserva;
-isEmpty(Rese);
-}
-
-IIterator *ColReservas::getIterator()
-{
-ICollectible *Rese = Reserva;
-getIterator(Rese);
-}
-
-ColReservas::~List() {
-
+isEmpty(c);
 }
 
