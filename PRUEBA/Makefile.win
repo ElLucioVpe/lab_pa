@@ -1,0 +1,70 @@
+# Project: Prueba
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o classes/sources/Reserva.o collections/ColResrevas.o collections/List.o collections/ListIterator.o collections/ListNode.o collections/OrderedDictionary.o collections/OrderedDictionaryEntry.o collections/ReservaIterator.o interfaces/ICollectible.o interfaces/ICollection.o interfaces/IDictionary.o interfaces/IIterator.o interfaces/IKey.o interfaces/OrderedKey.o
+LINKOBJ  = main.o classes/sources/Reserva.o collections/ColResrevas.o collections/List.o collections/ListIterator.o collections/ListNode.o collections/OrderedDictionary.o collections/OrderedDictionaryEntry.o collections/ReservaIterator.o interfaces/ICollectible.o interfaces/ICollection.o interfaces/IDictionary.o interfaces/IIterator.o interfaces/IKey.o interfaces/OrderedKey.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = Prueba.exe
+CXXFLAGS = $(CXXINCS) -std=gnu++11
+CFLAGS   = $(INCS) -std=gnu++11
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+classes/sources/Reserva.o: classes/sources/Reserva.cpp
+	$(CPP) -c classes/sources/Reserva.cpp -o classes/sources/Reserva.o $(CXXFLAGS)
+
+collections/ColResrevas.o: collections/ColResrevas.cpp
+	$(CPP) -c collections/ColResrevas.cpp -o collections/ColResrevas.o $(CXXFLAGS)
+
+collections/List.o: collections/List.cpp
+	$(CPP) -c collections/List.cpp -o collections/List.o $(CXXFLAGS)
+
+collections/ListIterator.o: collections/ListIterator.cpp
+	$(CPP) -c collections/ListIterator.cpp -o collections/ListIterator.o $(CXXFLAGS)
+
+collections/ListNode.o: collections/ListNode.cpp
+	$(CPP) -c collections/ListNode.cpp -o collections/ListNode.o $(CXXFLAGS)
+
+collections/OrderedDictionary.o: collections/OrderedDictionary.cpp
+	$(CPP) -c collections/OrderedDictionary.cpp -o collections/OrderedDictionary.o $(CXXFLAGS)
+
+collections/OrderedDictionaryEntry.o: collections/OrderedDictionaryEntry.cpp
+	$(CPP) -c collections/OrderedDictionaryEntry.cpp -o collections/OrderedDictionaryEntry.o $(CXXFLAGS)
+
+collections/ReservaIterator.o: collections/ReservaIterator.cpp
+	$(CPP) -c collections/ReservaIterator.cpp -o collections/ReservaIterator.o $(CXXFLAGS)
+
+interfaces/ICollectible.o: interfaces/ICollectible.cpp
+	$(CPP) -c interfaces/ICollectible.cpp -o interfaces/ICollectible.o $(CXXFLAGS)
+
+interfaces/ICollection.o: interfaces/ICollection.cpp
+	$(CPP) -c interfaces/ICollection.cpp -o interfaces/ICollection.o $(CXXFLAGS)
+
+interfaces/IDictionary.o: interfaces/IDictionary.cpp
+	$(CPP) -c interfaces/IDictionary.cpp -o interfaces/IDictionary.o $(CXXFLAGS)
+
+interfaces/IIterator.o: interfaces/IIterator.cpp
+	$(CPP) -c interfaces/IIterator.cpp -o interfaces/IIterator.o $(CXXFLAGS)
+
+interfaces/IKey.o: interfaces/IKey.cpp
+	$(CPP) -c interfaces/IKey.cpp -o interfaces/IKey.o $(CXXFLAGS)
+
+interfaces/OrderedKey.o: interfaces/OrderedKey.cpp
+	$(CPP) -c interfaces/OrderedKey.cpp -o interfaces/OrderedKey.o $(CXXFLAGS)
