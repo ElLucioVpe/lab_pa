@@ -1,4 +1,4 @@
-#include "Usuario.h"
+#include "../headers/Usuario.h"
 
 Usuario::Usuario(std::string _nickname, std::string _img, std::string _contra) {
     this->NickName = _nickname;

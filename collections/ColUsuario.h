@@ -9,21 +9,19 @@
 
 class ColUsuario {
 private:
-    static ColUsuario* instance;
+    //static ColUsuario* instance;
     ICollection* usuarios;
 
 public:
-    ColUsuario()
+    ColUsuario();
     ~ColUsuario();
-    static ColUsuario* getInstance();
 
     void add(Usuario * u);
     void remove(Usuario * u);
     bool member(Usuario * u);
     bool isEmpty() const;
     int getSize() const;
+    IIterator* getIterator();
 };
-       
-}
 
 #endif /* COLUSUARIO_H */

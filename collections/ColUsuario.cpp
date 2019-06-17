@@ -4,27 +4,28 @@ ColUsuario::ColUsuario() {
     this->usuarios = new List();
 }
 
-ColUsuario* ColUsuario::getInstance(){
-    if (instance == nullptr)
+/*ColUsuario* ColUsuario::getInstance(){
+	if (instance == nullptr){
         instance = new ColUsuario();
+	}    
     return instance;
-}
+}*/
 
 
 void ColUsuario::add(Usuario * u) {
-    this->usuarios->add(u);
+    usuarios->add(u);
 }
 
 void ColUsuario::remove(Usuario * u) {
-    this->usuarios->remove(u);
+    usuarios->remove(u);
 }
 
 bool ColUsuario::member(Usuario * u) {
-    return this->usuarios->member(u);
+    return usuarios->member(u);
 }
 
 int ColUsuario::getSize() const {
-    return this->usuarios->getSize();
+    return usuarios->getSize();
 }
 
 bool ColUsuario::isEmpty() const {
@@ -36,8 +37,12 @@ bool ColUsuario::isEmpty() const {
     }
 }
 
+IIterator* ColUsuario::getIterator() {
+	return usuarios->getIterator();
+}
+
 ColUsuario::~ColUsuario() {
-    IIterator* it = this->usuarios->getIterator();
+    IIterator* it = usuarios->getIterator();
     while (it->hasCurrent()) {
         Usuario* temp = dynamic_cast<Usuario*>(it->getCurrent());
         it->next();
@@ -45,5 +50,5 @@ ColUsuario::~ColUsuario() {
     }
     delete it;
     delete usuarios;
-    instance = nullptr;
+    //instance = nullptr;
 }

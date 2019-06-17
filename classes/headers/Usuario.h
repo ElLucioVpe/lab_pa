@@ -22,6 +22,6 @@ class Usuario : public ICollectible {
 
         bool contraCorrecta(std::string c);
         ~Usuario();
-}
+};
 
 #endif /* USUARIO_H */
