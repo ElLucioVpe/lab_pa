@@ -11,6 +11,7 @@ class Usuario : public ICollectible {
         std::string ImgPerfil;
         std::string Contrasenia;
     public:
+    	Usuario();
         Usuario(std::string _nickname, std::string _img, std::string _contra);
         std::string getNickName();
         std::string getImgPerfil();

@@ -29,8 +29,23 @@ int main(int argc, char** argv) {
 	else {
 		cout << "A no pertenece a la coleccion" << endl;
 	}
+    
+    //Iterator concreto
+    UsuarioIterator it = usuarios.getIterator();
 	
-	IIterator* it = usuarios.getIterator();
+	int nro = 1;
+    while (it.hasCurrent()) {
+    	Usuario* u = it.getCurrent();
+        cout << nro << endl;
+        cout << "Nickname: " + u->getNickName() << endl;
+        cout << "Url Imagen de perfil: " + u->getImgPerfil() << endl;
+        cout << "Contrasenia: " + u->getContrasenia() << endl << endl;
+        it.next();
+        nro ++;
+    }
+    
+    //Ejemplo Iterator generico
+	/*IIterator* it = usuarios.getIterator(); // usuarios.getIterator() llamaria al getIterator() de List
 	
 	int nro = 1;
     while (it->hasCurrent()) {
@@ -41,7 +56,7 @@ int main(int argc, char** argv) {
         cout << "Contrasenia: " + temp->getContrasenia() << endl << endl;
         it->next();
         nro ++;
-    }
+    }*/
     
 	return 0;
 }

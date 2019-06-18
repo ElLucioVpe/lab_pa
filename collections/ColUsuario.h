@@ -5,6 +5,7 @@
 #include <string>
 #include "../classes/headers/Usuario.h"
 #include "../interfaces/ICollection.h"
+#include "UsuarioIterator.h"
 #include "List.h"
 
 class ColUsuario {
@@ -21,7 +22,7 @@ public:
     bool member(Usuario * u);
     bool isEmpty() const;
     int getSize() const;
-    IIterator* getIterator();
+    UsuarioIterator getIterator();
 };
 
 #endif /* COLUSUARIO_H */

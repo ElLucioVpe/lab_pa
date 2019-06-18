@@ -1,7 +1,7 @@
 #include "ColUsuario.h"
 
 ColUsuario::ColUsuario() {
-    this->usuarios = new List();
+    usuarios = new List();
 }
 
 /*ColUsuario* ColUsuario::getInstance(){
@@ -37,8 +37,8 @@ bool ColUsuario::isEmpty() const {
     }
 }
 
-IIterator* ColUsuario::getIterator() {
-	return usuarios->getIterator();
+UsuarioIterator ColUsuario::getIterator() {
+	return UsuarioIterator(usuarios->getIterator());
 }
 
 ColUsuario::~ColUsuario() {
