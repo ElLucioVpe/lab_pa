@@ -2,9 +2,9 @@
 #ifndef CINE_H
 #define CINE_H
 
-class cine {
+class Cine {
 public:
-	cine( int, string);
+	Cine( int, string);
 	int getIdCine();
 	string getDireccion();
 	funcion** getFunciones();

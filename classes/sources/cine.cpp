@@ -1,27 +1,27 @@
-#include "../headers/cine.h"
+#include "../headers/Cine.h"
 #include <cstdlib>
 
-cine::cine(int IdCine, string Direccion){
+Cine::Cine(int IdCine, string Direccion){
 	this->IdCine= IdCine;
 	this->Direccion= Direccion;
 	
 } 
-int cine::getIdCine() {
+int Cine::getIdCine() {
 	return this->idCine;
 	
 }
-string cine::getDireccion(){
+string Cine::getDireccion(){
 	return this->Direccion;
 }
-void cine::setDireccion(string Direccion){
+void Cine::setDireccion(string Direccion){
 	this->Direccion=Direccion;
 }
-void cine::setIdCine(int idCine){
+void Cine::setIdCine(int idCine){
 	this->idCine=idCine;
 }
-funcion** cine::getFunciones(){
+Funcion** Cine::getFunciones(){
 	return this->Funciones;
 }
-int cine::getcantFunciones(){
+int Cine::getcantFunciones(){
 	return this->cantFunciones;
 }

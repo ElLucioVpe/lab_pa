@@ -1,10 +1,10 @@
 #ifndef FUNCION_H
 #define FUNCION_H
-#include "../headers/cine.h"
+#include "../headers/Cine.h"
 
-class funcion {
+class Funcion {
 public:
-	funcion( int, date);
+    Funcion( int, date);
 	int getIdFuncion();
 	date getHorario();
 	//Dtfuncion getDatafuncion();
@@ -17,7 +17,7 @@ public:
 private: 
 	int IdFuncion;
 	date Horario;
-	cine* cine;
+	Cine* cine;
 	
 };
 

@@ -1,23 +1,23 @@
-#include "../headers/funcion.h"
+#include "../headers/Funcion.h"
 #include <cstdlib>
 
-funcion::funcion(int IdFuncion, date Horario ){
+Funcion::Funcion(int IdFuncion, date Horario ){
 	this->IdFuncion= IdFuncion;
 	this->Horario= Horario;
 }
-int funcion::getIdFuncion(){
+int Funcion::getIdFuncion(){
 	return this->IdFuncion;
 }
-date funcion::getHorario(){
+date Funcion::getHorario(){
 	return this->Horario;
 }
-cine funcion::getCines(){
+cine Funcion::getCines(){
 	return this->cine;
 }
-void funcion::setIdfuncion(int IdFuncion){
+void Funcion::setIdfuncion(int IdFuncion){
 	this->IdFuncion= IdFuncion;
 }
-void funcion::setHorario(date Horario){
+void Funcion::setHorario(date Horario){
 	this->Horario= Horario;
 }
 
