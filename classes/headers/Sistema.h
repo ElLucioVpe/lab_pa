@@ -8,7 +8,7 @@ class Sistema : public ISistema {
         Sistema();
         ~Sistema();
         bool iniciarSesion(string user, string pass);
-        void CrearReserva(int cantAsientos, float costo, int idSala, Usuario u);
+        void CrearReserva(int cantAsientos, float costo, int IdFuncion, Usuario u);
         set<string> ListarTitulos();
         DtPelicula SeleccionarPelicula(string titulo);
         void EliminarPelicula(string titulo);
