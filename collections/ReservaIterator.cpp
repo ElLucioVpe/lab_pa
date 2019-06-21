@@ -1,28 +1,27 @@
-
 #include "ReservaIterator.h"
+#include <stdexcept>
+using namespace std;
 
-ReservaIterator::~ReservaIterator(){
-    
+ReservaIterator::ReservaIterator(IIterator * listIt) {
+	it = listIt;
 }
 
- ReservaIterator:: ICollectible *getCurrent():ColReservas{
- return getCurrent();
+Reserva *ReservaIterator::getCurrent()
+{
+	return dynamic_cast<Reserva*>(it->getCurrent());
+}
 
- }
+bool ReservaIterator::hasCurrent()
+{
+    return it->hasCurrent();
+}
 
-    /*
-     *  Devuelve true si hay un elemento en la colección. 
-     */
-    ReservaIterator::bool hasCurrent():bool{
-    return hasCurrent();
-    
-    }
-    
-    /*
-     *  Hace un paso en la iteración. Si hasCurrent() es false
-     *  tira excepción out_of_range
-     */
-     ReservaIterator::void next(){
-     return next();
-         
-     }
+void ReservaIterator::next()
+{
+    it->next();
+}
+
+ReservaIterator::~UsuarioIterator()
+{
+   
+}

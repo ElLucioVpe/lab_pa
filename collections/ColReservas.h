@@ -5,30 +5,31 @@
  * Created on 26 de mayo de 2012, 02:33 PM
  */
 
-#ifndef LIST_H
-#define	LIST_H
+#ifndef COLRESERVAS_H
+#define	COLRESERVAS_H
 
-#include "../interfaces/ICollection.h"
+#include <iostream>
+#include <string>
 #include "../classes/headers/Reserva.h"
+#include "../interfaces/ICollection.h"
+#include "UsuarioIterator.h"
+#include "List.h"
 
-/**
- *  Una lista común
- */
 class ColReservas{
 private:
+    ICollection* reservas;
+
 public:
+    ColReservas();
+    ~ColReservas();
 
-ColReservas();
-    
-    void add(Reserva *);
-
-    
-    void remove(Reserva *);
-    
-    
-    bool member(Reserva *) const;
-    
+    void add(Reserva * u);
+    void remove(Reserva * u);
+    bool member(Reserva * u);
+    bool isEmpty() const;
+    int getSize() const;
+    ReservaIterator getIterator();
 };
 
-#endif	/* LIST_H */
+#endif	/* COLRESERVAS_H */
 

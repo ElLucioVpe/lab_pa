@@ -1,35 +1,46 @@
-/* 
- * File:   List.cpp
- * Author: igui
- * 
- * Created on 26 de mayo de 2012, 02:33 PM
- */
+c#include "ColReservas.h"
 
-#include "ColReservas.h"
-
-void ColReservas::add(Reserva* c)
-{
-add(c);
-
+ColReservas::ColReservas() {
+    reservas = new List();
 }
 
-void ColReservas::remove(Reserva *c)
-{
-remove(c);
+void ColUsuario::add(Reserva * u) {
+    reservas->add(u);
 }
 
-bool ColReservas::member(Reserva *c) const{
-member(c);
-        
+void ColReservas::remove(Reserva * u) {
+    reservas->remove(u);
 }
 
-int ColReservas::getSize() const
-{
-getSize(c);
+bool ColReservas::member(Reserva * u) {
+    return reservas->member(u);
 }
 
-bool ColReservas::isEmpty() const
-{
-isEmpty(c);
+int ColReservas::getSize() const {
+    return reservas->getSize();
 }
 
+bool ColReservas::isEmpty() const {
+    if (this->getSize() == 0){ 
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+ReservaIterator ColReservas::getIterator() {
+	return ReservaIterator(reservas->getIterator());
+}
+
+ColReservas::~ColReservas() {
+    IIterator* it = reservas->getIterator();
+    while (it->hasCurrent()) {
+        Reserva* temp = dynamic_cast<Reserva*>(it->getCurrent());
+        it->next();
+        delete temp;
+    }
+    delete it;
+    delete reservas;
+    //instance = nullptr;
+}
