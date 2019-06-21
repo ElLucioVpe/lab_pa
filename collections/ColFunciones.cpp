@@ -1,22 +1,46 @@
 #include "ColFunciones.h"
 
-void ColFunciones::add(funcion* f) {
-    add(f);
+ColFunciones::ColFunciones() {
+    funciones = new List();
 }
 
-void ColFunciones::remove(funcion* f) {
-    remove(f);
+void ColFunciones::add(Usuario * u) {
+    funciones->add(u);
 }
 
-bool ColFunciones::member(funcion* f) const{
-    member(f);
+void ColFunciones::remove(Usuario * u) {
+    funciones->remove(u);
+}
+
+bool ColFunciones::member(Usuario * u) {
+    return funciones->member(u);
 }
 
 int ColFunciones::getSize() const {
-    getSize(f);
+    return funciones->getSize();
 }
 
 bool ColFunciones::isEmpty() const {
-    isEmpty(f);
+    if (this->getSize() == 0){ 
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+IIterator* ColFunciones::getIterator() {
+	return funciones->getIterator();
+}
+
+ColFunciones::~ColFunciones() {
+    IIterator* it = funciones->getIterator();
+    while (it->hasCurrent()) {
+        Funcion* temp = dynamic_cast<Funcion*>(it->getCurrent());
+        it->next();
+        delete temp;
+    }
+    delete it;
+    delete funciones;
 }
 

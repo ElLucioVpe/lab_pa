@@ -5,12 +5,19 @@
 #include "../classes/headers/Pelicula.h"
 
 class ColPeliculas {
-    private:
-    public:
-        ColReservas();
-        void add(Pelicula *);
-        void remove(Pelicula *);
-        bool member(Pelicula *) const;
+private:
+    ICollection* peliculas;
+
+public:
+    ColPeliculas();
+    ~ColPeliculas();
+
+    void add(Pelicula * p);
+    void remove(Pelicula * p);
+    bool member(Pelicula * p);
+    bool isEmpty() const;
+    int getSize() const;
+    Iterator* getIterator();
 };
 
 #endif	/* COLPELICULAS_H */

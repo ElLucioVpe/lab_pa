@@ -5,12 +5,19 @@
 #include "../classes/headers/Funcion.h"
 
 class ColFunciones {
-    private:
-    public:
-        ColFunciones();
-        void add(funcion *);
-        void remove(funcion *);
-        bool member(funcion *) const;
+private:
+    ICollection* funciones;
+
+public:
+    ColFunciones();
+    ~ColFunciones();
+
+    void add(Funcion * f);
+    void remove(Funcion * f);
+    bool member(Funcion * f);
+    bool isEmpty() const;
+    int getSize() const;
+    Iterator* getIterator();
 };
 
 #endif	/* COLFUNCIONES_H */

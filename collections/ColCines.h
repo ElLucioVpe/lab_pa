@@ -5,12 +5,19 @@
 #include "../classes/headers/Cine.h"
 
 class ColCines {
-    private:
-    public:
-        ColCines();
-        void add(Cine *);
-        void remove(Cine *);
-        bool member(Cine *) const;
+private:
+    ICollection* cines;
+
+public:
+    ColCines();
+    ~ColCines();
+
+    void add(Cine * c);
+    void remove(Cine * c);
+    bool member(Cine * c);
+    bool isEmpty() const;
+    int getSize() const;
+    Iterator* getIterator();
 };
 
 #endif	/* COLCINES_H */

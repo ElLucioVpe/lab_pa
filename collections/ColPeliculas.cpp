@@ -1,22 +1,46 @@
 #include "ColPeliculas.h"
 
-void ColPeliculas::add(Pelicula* p) {
-    add(p);
+ColPeliculas::ColPeliculas() {
+    peliculas = new List();
 }
 
-void ColPeliculas::remove(Pelicula* p) {
-    remove(p);
+void ColPeliculas::add(Usuario * u) {
+    peliculas->add(u);
 }
 
-bool ColPeliculas::member(Pelicula* p) const{
-    member(p);
+void ColPeliculas::remove(Usuario * u) {
+    peliculas->remove(u);
+}
+
+bool ColPeliculas::member(Usuario * u) {
+    return peliculas->member(u);
 }
 
 int ColPeliculas::getSize() const {
-    getSize(p);
+    return peliculas->getSize();
 }
 
 bool ColPeliculas::isEmpty() const {
-    isEmpty(p);
+    if (this->getSize() == 0){ 
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+IIterator* ColPeliculas::getIterator() {
+	return peliculas->getIterator();
+}
+
+ColPeliculas::~ColPeliculas() {
+    IIterator* it = peliculas->getIterator();
+    while (it->hasCurrent()) {
+        Pelicula* temp = dynamic_cast<Pelicula*>(it->getCurrent());
+        it->next();
+        delete temp;
+    }
+    delete it;
+    delete peliculas;
 }
 
