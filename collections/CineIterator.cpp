@@ -25,7 +25,7 @@ void CineIterator::next()
 	it->next();
 }
 
-FuncionIterator::~FuncionIterator()
+CineIterator::~CineIterator()
 {
 
 }

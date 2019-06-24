@@ -10,7 +10,7 @@ public:
 
     int getIdCine() const;
     string getDireccion() const;
-
+	bool operator<(const DtCine& c) const;
     virtual ~DtCine();
 
 private:

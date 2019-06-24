@@ -1,5 +1,4 @@
 #include "../headers/Cine.h"
-#include <cstdlib>
 
 Cine::Cine(int IdCine, string Direccion){
 	this->IdCine= IdCine;
@@ -14,16 +13,10 @@ string Cine::getDireccion(){
 	return this->Direccion;
 }
 void Cine::setDireccion(string Direccion){
-	this->Direccion=Direccion;
+	this->Direccion = Direccion;
 }
 void Cine::setIdCine(int idCine){
-	this->IdCine=idCine;
-}
-ColFunciones Cine::getFunciones(){
-	return this->Funciones;
-}
-int Cine::getcantFunciones(){
-	return this->cantFunciones;
+	this->IdCine = idCine;
 }
 Cine::~Cine()
 {

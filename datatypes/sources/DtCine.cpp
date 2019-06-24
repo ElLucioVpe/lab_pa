@@ -18,5 +18,12 @@ string DtCine::getDireccion() const {
     return this->direccion;
 }
 
+bool DtCine::operator<(const DtCine& c) const{
+	if (idCine < c.getIdCine())
+		return true;
+	else
+		return false;
+}
+
 DtCine::~DtCine() {
 }

@@ -1,10 +1,3 @@
-/* 
- * File:   List.h
- * Author: igui
- *
- * Created on 26 de mayo de 2012, 02:33 PM
- */
-
 #ifndef COLRESERVAS_H
 #define	COLRESERVAS_H
 

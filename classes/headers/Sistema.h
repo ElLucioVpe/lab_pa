@@ -5,20 +5,20 @@
 
 class Sistema : public ISistema {
     public:
+    	ColUsuarios usuarios;
+        ColPeliculas peliculas;
+        ColCines cines;
+        
         Sistema();
-        ~Sistema();
         bool iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, int IdFuncion, Usuario u);
         set<string> ListarTitulos();
         DtPelicula SeleccionarPelicula(string titulo);
         void EliminarPelicula(string titulo);
         void VerInfoPelicula(string titulo);
-        set<int> ListarCines();
+		set<int> ListarCines();
         set<DtCine> ListarCinesPorTitulo(string tituloPelicula);
         set<DtFuncion> ListarFunciones(int idCine, string tituloPelicula);
-
-    private:
-        ColUsuarios usuarios;
-        ColPeliculas peliculas;
-        ColCines cines;
+        
+        virtual ~Sistema();
 };

@@ -1,4 +1,5 @@
 #include "../headers/Sistema.h"
+#include <stdexcept>
 
 Sistema::Sistema() {
     usuarios = ColUsuarios();
@@ -15,11 +16,13 @@ bool Sistema::iniciarSesion(string user, string pass) {
             if (u->contraCorrecta(pass)){
                 return true;
             } else {
+				throw std::invalid_argument("Contrasenia incorrecta");
                 return false;
             }
         }
         it.next();
     }
+	throw std::invalid_argument("No existe dicho usuario");
     return false;
 }
 

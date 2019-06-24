@@ -16,7 +16,7 @@ class ISistema {
         virtual DtPelicula SeleccionarPelicula(string) = 0;
         virtual void EliminarPelicula(string) = 0;
         virtual void VerInfoPelicula(string) = 0;
-        virtual set<string> ListarCines() = 0;
+        virtual set<int> ListarCines() = 0;
         virtual set<DtCine> ListarCinesPorTitulo(string) = 0;
         virtual set<DtFuncion> ListarFunciones(int, string) = 0;
         virtual ~ISistema();

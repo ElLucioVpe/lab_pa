@@ -10,6 +10,7 @@ public:
 
     int getIdFuncion() const;
     string getHorario() const;
+	bool operator< (const DtFuncion& f) const;
 
     virtual ~DtFuncion();
 

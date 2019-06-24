@@ -4,6 +4,7 @@
 #include "../interfaces/ICollection.h"
 #include "FuncionIterator.h"
 #include "../classes/headers/Funcion.h"
+#include "List.h"
 
 class ColFunciones {
 private:

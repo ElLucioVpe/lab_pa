@@ -4,6 +4,7 @@
 #include "../interfaces/ICollection.h"
 #include "CineIterator.h"
 #include "../classes/headers/Cine.h"
+#include "List.h"
 
 class ColCines {
 private:

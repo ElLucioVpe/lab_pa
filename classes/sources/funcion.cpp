@@ -1,7 +1,6 @@
-﻿#include "../headers/Funcion.h"
-#include <cstdlib>
+#include "../headers/Funcion.h"
 
-Funcion::Funcion(int IdFuncion, string Horario ){
+Funcion::Funcion(int IdFuncion, string Horario){
 	this->IdFuncion= IdFuncion;
 	this->Horario= Horario;
 }
@@ -12,7 +11,7 @@ string Funcion::getHorario(){
 	return this->Horario;
 }
 Cine* Funcion::getCines(){
-	return this->cine;
+	return this->_cine;
 }
 void Funcion::setIdfuncion(int IdFuncion){
 	this->IdFuncion= IdFuncion;
@@ -24,7 +23,7 @@ void Funcion::EliminarReservas() {
 	reservas.~ColReservas();
 }
 bool Funcion::EsDePelicula(string t) {
-	return pelicula->getTitulo() == t;
+	return true;//No es necesaria si la busqueda empieza desde la pelicula
 }
 void Funcion::ReservarFuncion(int cantAsientos, float costo, string usuario) {
 	reservas.add(new Reserva(costo, cantAsientos));
