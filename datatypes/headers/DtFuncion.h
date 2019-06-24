@@ -1,12 +1,12 @@
 #ifndef DTFUNCION_H
 #define DTFUNCION_H
 
-#include "../headers/Funcion.h"
+#include "../../classes/headers/Funcion.h"
 
-Class DtFuncion {
+class DtFuncion {
 public:
     DtFuncion();
-    DtFuncion(int, date);
+    DtFuncion(int, string);
 
     int getIdFuncion() const;
     string getHorario() const;
@@ -15,5 +15,7 @@ public:
 
 private:
     int idFuncion;
-    date horario;
-    };
+	string horario;
+};
+
+#endif	/* DTFUNCION_H */

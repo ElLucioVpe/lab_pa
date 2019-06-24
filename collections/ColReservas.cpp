@@ -1,19 +1,19 @@
-c#include "ColReservas.h"
+#include "ColReservas.h"
 
 ColReservas::ColReservas() {
     reservas = new List();
 }
 
-void ColUsuario::add(Reserva * u) {
-    reservas->add(u);
+void ColReservas::add(Reserva * r) {
+    reservas->add(r);
 }
 
-void ColReservas::remove(Reserva * u) {
-    reservas->remove(u);
+void ColReservas::remove(Reserva * r) {
+    reservas->remove(r);
 }
 
-bool ColReservas::member(Reserva * u) {
-    return reservas->member(u);
+bool ColReservas::member(Reserva * r) {
+    return reservas->member(r);
 }
 
 int ColReservas::getSize() const {
@@ -42,5 +42,4 @@ ColReservas::~ColReservas() {
     }
     delete it;
     delete reservas;
-    //instance = nullptr;
 }

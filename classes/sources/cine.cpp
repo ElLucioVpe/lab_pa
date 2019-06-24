@@ -7,7 +7,7 @@ Cine::Cine(int IdCine, string Direccion){
 	
 } 
 int Cine::getIdCine() {
-	return this->idCine;
+	return this->IdCine;
 	
 }
 string Cine::getDireccion(){
@@ -17,11 +17,16 @@ void Cine::setDireccion(string Direccion){
 	this->Direccion=Direccion;
 }
 void Cine::setIdCine(int idCine){
-	this->idCine=idCine;
+	this->IdCine=idCine;
 }
-Funcion** Cine::getFunciones(){
+ColFunciones Cine::getFunciones(){
 	return this->Funciones;
 }
 int Cine::getcantFunciones(){
 	return this->cantFunciones;
 }
+Cine::~Cine()
+{
+
+}
+

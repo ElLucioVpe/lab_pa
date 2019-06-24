@@ -1,6 +1,10 @@
 #include "ReservaIterator.h"
 #include <stdexcept>
-using namespace std;
+
+ReservaIterator::ReservaIterator()
+{
+
+}
 
 ReservaIterator::ReservaIterator(IIterator * listIt) {
 	it = listIt;
@@ -21,7 +25,7 @@ void ReservaIterator::next()
     it->next();
 }
 
-ReservaIterator::~UsuarioIterator()
+ReservaIterator::~ReservaIterator()
 {
-   
+
 }

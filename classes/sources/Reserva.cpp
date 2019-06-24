@@ -1,6 +1,11 @@
-//INCLUDE HEADER
+#include "../headers/Reserva.h"
 
-Reserva::Reserva(float prec, int cantAsientos ){
+Reserva::Reserva()
+{
+
+}
+
+Reserva::Reserva(float prec, int cantAsientos){
     this->precio = prec;
     this->cantidadAsientos = cantAsientos;
 }

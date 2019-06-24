@@ -1,11 +1,11 @@
 #include "../headers/TarjetaDeDebito.h"
 
-TarjetaDeDebito(std::string _banco, int _idSala, int _cantAsientos) : Reserva(_precio, _cantAsientos) {
-	this->banco = _banco;
+TarjetaDeDebito::TarjetaDeDebito(std::string _banco, int _idSala, float _precio, int _cantAsientos) : Reserva(_precio, _cantAsientos) {
+	this->Banco = _banco;
 }
 
-TarjetaDeDebito() : Reserva(nullptr) {
+TarjetaDeDebito::TarjetaDeDebito() : Reserva() {
 }
 
-Reserva::~Reserva() {
+TarjetaDeDebito::~TarjetaDeDebito() {
 }

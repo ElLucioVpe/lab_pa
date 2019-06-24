@@ -2,22 +2,22 @@
 #define TARJETADECREDITO_H
 
 #include "Reserva.h"
-#include "string"
+#include <iostream>
 
-class TarjetaDeCredito: public Reserva {
-	private:
-		std::string Financiera;
-		float PorcentajeDescuento;
-	public:
-		TarjetaDeCredito(std::string _financiera, float _porcentaje);
+class TarjetaDeCredito : public Reserva {
+private:
+	std::string Financiera;
+	float PorcentajeDescuento;
+public:
+	TarjetaDeCredito(std::string _financiera, float _porcentaje, float _precio, int _cantAsientos);
 
-		std::string getFinanciera();
-		float getDescuento();
-		
-		void setFinanciera(f);
-		void setDescuento(p);
+	std::string getFinanciera();
+	float getDescuento();
 
-		~TarjetaDeCredito();
-}
+	void setFinanciera(std::string f);
+	void setDescuento(float p);
+
+	~TarjetaDeCredito();
+};
 
 #endif /* TARJETADECREDITO_H */

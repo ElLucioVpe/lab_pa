@@ -4,13 +4,13 @@ DtFuncion::DtFuncion(){
 
 }
 
-DtFuncion::DtFuncion(int idFuncion, date horario)
+DtFuncion::DtFuncion(int idFuncion, string horario)
   {
     this->idFuncion = idFuncion;
     this->horario = horario;
     }
 
-    string DtFuncion::getIdFuncion() const {
+int DtFuncion::getIdFuncion() const {
     return this->idFuncion;
 }
 

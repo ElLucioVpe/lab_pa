@@ -2,6 +2,7 @@
 #define	COLCINES_H
 
 #include "../interfaces/ICollection.h"
+#include "CineIterator.h"
 #include "../classes/headers/Cine.h"
 
 class ColCines {
@@ -17,7 +18,7 @@ public:
     bool member(Cine * c);
     bool isEmpty() const;
     int getSize() const;
-    Iterator* getIterator();
+    CineIterator getIterator();
 };
 
 #endif	/* COLCINES_H */

@@ -1,22 +1,27 @@
-
 #ifndef CINE_H
 #define CINE_H
 
-class Cine {
+#include <iostream>
+#include "../../interfaces/ICollectible.h"
+#include "../../collections/ColFunciones.h"
+using namespace std;
+
+class Cine : public ICollectible {
 public:
-	Cine( int, string);
+	Cine(int, string);
 	int getIdCine();
 	string getDireccion();
-	funcion** getFunciones();
+	ColFunciones getFunciones();
 	int getcantFunciones();
 	//DtCine getDatacine();
 	void setIdCine( int idCine );
-	void setDireccion( string Direccion);
+	void setDireccion(string Direccion);
+	~Cine();
 
 private: 
 	string Direccion;
 	int IdCine;
-	funcion ** Funciones;
+	ColFunciones Funciones;
 	int cantFunciones;
 };
 

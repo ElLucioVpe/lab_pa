@@ -13,7 +13,7 @@ class Sistema : public ISistema {
         DtPelicula SeleccionarPelicula(string titulo);
         void EliminarPelicula(string titulo);
         void VerInfoPelicula(string titulo);
-        set<string> ListarCines();
+        set<int> ListarCines();
         set<DtCine> ListarCinesPorTitulo(string tituloPelicula);
         set<DtFuncion> ListarFunciones(int idCine, string tituloPelicula);
 

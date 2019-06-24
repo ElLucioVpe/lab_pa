@@ -1,8 +1,11 @@
 #ifndef COLPELICULAS_H
 #define	COLPELICULAS_H
 
+#include <iostream>
 #include "../interfaces/ICollection.h"
+#include "PeliculaIterator.h"
 #include "../classes/headers/Pelicula.h"
+#include "List.h"
 
 class ColPeliculas {
 private:
@@ -17,7 +20,7 @@ public:
     bool member(Pelicula * p);
     bool isEmpty() const;
     int getSize() const;
-    Iterator* getIterator();
+    PeliculaIterator getIterator();
 };
 
 #endif	/* COLPELICULAS_H */

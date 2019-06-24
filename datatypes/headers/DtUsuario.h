@@ -16,7 +16,7 @@ class DtUsuario {
         std::string getContrasenia();
 
         bool contraCorrecta(std::string c);
-        ~DtUsuario();
+        virtual ~DtUsuario();
 }
 
 #endif /* DTUSUARIO_H */

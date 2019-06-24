@@ -1,19 +1,19 @@
-#include "ColCines.cpp"
+#include "ColCines.h"
 
 ColCines::ColCines() {
     cines = new List();
 }
 
-void ColCines::add(Usuario * u) {
-    cines->add(u);
+void ColCines::add(Cine * c) {
+    cines->add(c);
 }
 
-void ColCines::remove(Usuario * u) {
-    cines->remove(u);
+void ColCines::remove(Cine* c) {
+    cines->remove(c);
 }
 
-bool ColCines::member(Usuario * u) {
-    return cines->member(u);
+bool ColCines::member(Cine* c) {
+    return cines->member(c);
 }
 
 int ColCines::getSize() const {
@@ -29,8 +29,8 @@ bool ColCines::isEmpty() const {
     }
 }
 
-IIterator* ColCines::getIterator() {
-	return cines->getIterator();
+CineIterator ColCines::getIterator() {
+	return CineIterator(cines->getIterator());
 }
 
 ColCines::~ColCines() {

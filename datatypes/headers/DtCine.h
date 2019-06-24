@@ -1,9 +1,9 @@
 #ifndef DTCINE_H
 #define DTCINE_H
 
-#include "../headers/Cine.h"
+#include "../../classes/headers/Cine.h"
 
-Class DtCine {
+class DtCine {
 public:
     DtCine();
     DtCine(int, string);
@@ -16,7 +16,8 @@ public:
 private:
     int idCine;
     string direccion;
-    };
 
+};
 
+#endif	/* DTCINE_H */
     

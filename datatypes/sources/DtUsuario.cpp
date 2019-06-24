@@ -1,4 +1,4 @@
-#include "Usuario.h"
+#include "../headers/DtUsuario.h"
 
 DtUsuario::DtUsuario(std::string _nickname, std::string _img, std::string _contra) {
     this->NickName = _nickname;

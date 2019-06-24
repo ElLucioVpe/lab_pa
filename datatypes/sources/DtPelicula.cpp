@@ -4,7 +4,7 @@
 DtPelicula::DtPelicula(){
 
 }
-DtPelicula::DtPelicula(string titulo, string poster, string sinopsis, string puntaje){
+DtPelicula::DtPelicula(string titulo, string poster, string sinopsis, float puntaje){
   this->titulo=titulo;
   this->poster=poster;
   this->sinopsis=sinopsis;
@@ -20,6 +20,9 @@ string DtPelicula::getPoster(){
 string DtPelicula::getSinopsis(){
     return this->sinopsis;
 }
-string DtPelicula::getPuntaje(){
+float DtPelicula::getPuntaje(){
     return this->puntaje;
+}
+DtPelicula::~DtPelicula()
+{
 }

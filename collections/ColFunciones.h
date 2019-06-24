@@ -2,6 +2,7 @@
 #define	COLFUNCIONES_H
 
 #include "../interfaces/ICollection.h"
+#include "FuncionIterator.h"
 #include "../classes/headers/Funcion.h"
 
 class ColFunciones {
@@ -17,7 +18,7 @@ public:
     bool member(Funcion * f);
     bool isEmpty() const;
     int getSize() const;
-    Iterator* getIterator();
+    FuncionIterator getIterator();
 };
 
 #endif	/* COLFUNCIONES_H */

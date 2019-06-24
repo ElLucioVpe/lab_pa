@@ -4,16 +4,16 @@ ColFunciones::ColFunciones() {
     funciones = new List();
 }
 
-void ColFunciones::add(Usuario * u) {
-    funciones->add(u);
+void ColFunciones::add(Funcion * f) {
+    funciones->add(f);
 }
 
-void ColFunciones::remove(Usuario * u) {
-    funciones->remove(u);
+void ColFunciones::remove(Funcion * f) {
+    funciones->remove(f);
 }
 
-bool ColFunciones::member(Usuario * u) {
-    return funciones->member(u);
+bool ColFunciones::member(Funcion * f) {
+    return funciones->member(f);
 }
 
 int ColFunciones::getSize() const {
@@ -29,8 +29,8 @@ bool ColFunciones::isEmpty() const {
     }
 }
 
-IIterator* ColFunciones::getIterator() {
-	return funciones->getIterator();
+FuncionIterator ColFunciones::getIterator() {
+	return FuncionIterator(funciones->getIterator());
 }
 
 ColFunciones::~ColFunciones() {

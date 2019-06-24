@@ -1,15 +1,18 @@
-#ifndef PELICULA_H
-#define PELICULA_H
+#ifndef DTPELICULA_H
+#define DTPELICULA_H
+
+#include <iostream>
+using namespace std;
 
 class DtPelicula {
 public:
-    void DtPelicula();
-    void DtPelicula(string , string , string , string );
-    string DtgetTitulo();
-    string DtgetPoster();
-    string DtgetSinopsis();
-    float DtgetPuntaje();
-    virtual ~DtPelicula();
+    DtPelicula();
+    DtPelicula(string , string , string , float );
+    string getTitulo();
+    string getPoster();
+    string getSinopsis();
+    float getPuntaje();
+	virtual ~DtPelicula();
 
 private:
   string titulo;
@@ -17,4 +20,6 @@ private:
   string sinopsis;
   float puntaje;
 
-}
+};
+
+#endif /* DTPELICULA_H */

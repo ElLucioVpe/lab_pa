@@ -1,9 +1,9 @@
 #include "../headers/Sistema.h"
 
 Sistema::Sistema() {
-    usuarios();
-    peliculas();
-    cines();
+    usuarios = ColUsuarios();
+    peliculas = ColPeliculas();
+    cines = ColCines();
 }
 
 bool Sistema::iniciarSesion(string user, string pass) {
@@ -11,7 +11,7 @@ bool Sistema::iniciarSesion(string user, string pass) {
     Usuario* u;
     while (it.hasCurrent()) {
         u = it.getCurrent();
-        if (user = u->getNickName()){
+        if (user == u->getNickName()){
             if (u->contraCorrecta(pass)){
                 return true;
             } else {
@@ -30,14 +30,16 @@ void Sistema::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario
 }
 
 set<string> Sistema::ListarTitulos() {
-    //set<string> titulos;
-    IIterator* it = peliculas->getIterator();
+    set<string> titulos;
+    PeliculaIterator it = peliculas.getIterator();
     Pelicula* p;
-    while (it->hasCurrent()) {
-        p = dynamic_cast<Pelicula*>(it->getCurrent())
-        //titulos.insert(p->getTitulo());
-        it->next();
+    while (it.hasCurrent()) {
+		p = it.getCurrent();
+        titulos.insert(p->getTitulo());
+        it.next();
     }
+
+	return titulos;
 }
 
 DtPelicula Sistema::SeleccionarPelicula(string titulo) {
@@ -52,15 +54,17 @@ void Sistema::VerInfoPelicula(string titulo) {
 
 }
 
-set<string> Sistema::ListarCines() {
-    //set<string> ids;
-    IIterator* it = cines.getIterator();
+set<int> Sistema::ListarCines() {
+    set<int> ids;
+    CineIterator it = cines.getIterator();
     Cine* c;
-    while (it->hasCurrent()) {
-        c = dynamic_cast<Cine*>(it->getCurrent())
-        //ids.insert(c->getTitulo());
-        it->next();
+    while (it.hasCurrent()) {
+		c = it.getCurrent();
+        ids.insert(c->getIdCine());
+        it.next();
     }
+
+	return ids;
 }
 
 set<DtCine> Sistema::ListarCinesPorTitulo(string tituloPelicula) {

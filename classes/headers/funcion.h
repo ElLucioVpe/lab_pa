@@ -1,23 +1,29 @@
 #ifndef FUNCION_H
 #define FUNCION_H
-#include "../headers/Cine.h"
+#include "Cine.h"
+#include "Pelicula.h"
+#include "../../collections/ColReservas.h"
 
-class Funcion {
+class Funcion : public ICollectible{
 public:
-    Funcion(int, date);
+    Funcion(int, string);
 	int getIdFuncion();
-	date getHorario();
+	string getHorario();
+	Cine* getCines();
 	//Dtfuncion getDatafuncion();
 	void setIdfuncion( int IdFuncion);
-	void setHorario(date);
-	void ElimiarReservas();
+	void setHorario(string);
+	void EliminarReservas();
 	bool EsDePelicula(string);
-	void ReservarFuncion(int, float, int, string);
-	void getCines();
+	void ReservarFuncion(int, float, string);
+	~Funcion();
+	
 private: 
 	int IdFuncion;
-	date Horario;
+	string Horario;
 	Cine* cine;
+	Pelicula* pelicula;
+	ColReservas reservas;
 };
 
 #endif /* FUNCION_H */

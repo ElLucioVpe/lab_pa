@@ -21,7 +21,7 @@ class Usuario : public ICollectible {
         void setContrasenia(std::string _contra);
 
         bool contraCorrecta(std::string c);
-        ~Usuario();
+		~Usuario();
 };
 
 #endif /* USUARIO_H */

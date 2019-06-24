@@ -4,16 +4,16 @@ ColPeliculas::ColPeliculas() {
     peliculas = new List();
 }
 
-void ColPeliculas::add(Usuario * u) {
-    peliculas->add(u);
+void ColPeliculas::add(Pelicula* p) {
+	peliculas->add(p);
 }
 
-void ColPeliculas::remove(Usuario * u) {
-    peliculas->remove(u);
+void ColPeliculas::remove(Pelicula* p) {
+    peliculas->remove(p);
 }
 
-bool ColPeliculas::member(Usuario * u) {
-    return peliculas->member(u);
+bool ColPeliculas::member(Pelicula* p) {
+    return peliculas->member(p);
 }
 
 int ColPeliculas::getSize() const {
@@ -29,8 +29,8 @@ bool ColPeliculas::isEmpty() const {
     }
 }
 
-IIterator* ColPeliculas::getIterator() {
-	return peliculas->getIterator();
+PeliculaIterator ColPeliculas::getIterator() {
+	return PeliculaIterator(peliculas->getIterator());
 }
 
 ColPeliculas::~ColPeliculas() {

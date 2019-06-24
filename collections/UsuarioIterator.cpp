@@ -1,6 +1,10 @@
 #include "UsuarioIterator.h"
 #include <stdexcept>
-using namespace std;
+
+UsuarioIterator::UsuarioIterator()
+{
+
+}
 
 UsuarioIterator::UsuarioIterator(IIterator * listIt) {
 	it = listIt;

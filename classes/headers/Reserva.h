@@ -5,6 +5,7 @@
 
 class Reserva : public ICollectible {
 public:
+	Reserva();
     Reserva(float, int);
     float getPrecio() const;
     int getCantidadAsientos() const;

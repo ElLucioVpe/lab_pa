@@ -12,7 +12,7 @@
 #include <string>
 #include "../classes/headers/Reserva.h"
 #include "../interfaces/ICollection.h"
-#include "UsuarioIterator.h"
+#include "ReservaIterator.h"
 #include "List.h"
 
 class ColReservas{
@@ -23,9 +23,9 @@ public:
     ColReservas();
     ~ColReservas();
 
-    void add(Reserva * u);
-    void remove(Reserva * u);
-    bool member(Reserva * u);
+    void add(Reserva * r);
+    void remove(Reserva * r);
+    bool member(Reserva * r);
     bool isEmpty() const;
     int getSize() const;
     ReservaIterator getIterator();

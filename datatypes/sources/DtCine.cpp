@@ -10,7 +10,7 @@ DtCine::DtCine(int idCine, string direccion)
     this->direccion = direccion;
     }
 
-    string DtCine::getIdCine() const {
+int DtCine::getIdCine() const {
     return this->idCine;
 }
 
