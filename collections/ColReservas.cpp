@@ -4,15 +4,15 @@ ColReservas::ColReservas() {
     reservas = new List();
 }
 
-void ColReservas::add(Reserva * r) {
+void ColReservas::add(Reserva* r) {
     reservas->add(r);
 }
 
-void ColReservas::remove(Reserva * r) {
+void ColReservas::remove(Reserva* r) {
     reservas->remove(r);
 }
 
-bool ColReservas::member(Reserva * r) {
+bool ColReservas::member(Reserva* r) {
     return reservas->member(r);
 }
 

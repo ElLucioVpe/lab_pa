@@ -15,9 +15,9 @@ public:
     ColReservas();
     ~ColReservas();
 
-    void add(Reserva * r);
-    void remove(Reserva * r);
-    bool member(Reserva * r);
+    void add(Reserva* r);
+    void remove(Reserva* r);
+    bool member(Reserva* r);
     bool isEmpty() const;
     int getSize() const;
     ReservaIterator* getIterator();

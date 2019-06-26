@@ -3,8 +3,8 @@
 Cine::Cine(int IdCine, string Direccion){
 	this->IdCine= IdCine;
 	this->Direccion= Direccion;
-	
-} 
+
+}
 int Cine::getIdCine() {
 	return this->IdCine;
 }
@@ -21,4 +21,3 @@ Cine::~Cine()
 {
 
 }
-

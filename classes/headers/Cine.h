@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "../../interfaces/ICollectible.h"
+#include <string>
+
 using namespace std;
 
 class Cine : public ICollectible {
@@ -11,14 +13,13 @@ public:
 	int getIdCine();
 	string getDireccion();
 	//DtCine getDatacine();
-	void setIdCine( int idCine );
+	void setIdCine(int idCine);
 	void setDireccion(string Direccion);
 	~Cine();
 
-private: 
+private:
 	string Direccion;
 	int IdCine;
 };
 
 #endif /* CINE_H */
-

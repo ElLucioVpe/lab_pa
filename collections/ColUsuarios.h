@@ -6,7 +6,7 @@
 #include "../classes/headers/Usuario.h"
 #include "UsuarioIterator.h"
 #include "OrderedDictionary.h"
-#include "../String.h"
+#include "../KeyString.h"
 
 class ColUsuarios {
 private:
@@ -16,10 +16,10 @@ public:
     ColUsuarios();
     ~ColUsuarios();
 
-    void add(String* k,Usuario * u);
-    void remove(String* k);
-    bool member(String* k);
-	Usuario* find(String* k);
+    void add(KeyString* k,Usuario * u);
+    void remove(KeyString* k);
+    bool member(KeyString* k);
+	Usuario* find(KeyString* k);
     bool isEmpty() const;
     int getSize() const;
     UsuarioIterator getIterator();

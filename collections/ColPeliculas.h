@@ -6,7 +6,7 @@
 #include "PeliculaIterator.h"
 #include "../classes/headers/Pelicula.h"
 #include "OrderedDictionary.h"
-#include "List.h"
+#include "../KeyString.h"
 
 class ColPeliculas {
 private:
@@ -16,10 +16,10 @@ public:
     ColPeliculas();
     ~ColPeliculas();
 
-    void add(String * k,Pelicula * p);
-    void remove(String * k);
-    bool member(String * k);
-    Pelicula* find(String* k);
+    void add(KeyString* k,Pelicula * p);
+    void remove(KeyString* k);
+    bool member(KeyString* k);
+    Pelicula* find(KeyString* k);
     bool isEmpty() const;
     int getSize() const;
     PeliculaIterator getIterator();

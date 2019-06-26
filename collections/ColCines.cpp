@@ -1,19 +1,24 @@
 #include "ColCines.h"
 
 ColCines::ColCines() {
-    cines = new List();
+    cines = new OrderedDictionary();
 }
 
-void ColCines::add(Cine * c) {
-    cines->add(c);
+void ColCines::add(KeyInteger* k,Cine * c) {
+    cines->add(k,c);
 }
 
-void ColCines::remove(Cine* c) {
-    cines->remove(c);
+void ColCines::remove(KeyInteger*k) {
+    cines->remove(k);
 }
 
-bool ColCines::member(Cine* c) {
-    return cines->member(c);
+bool ColCines::member(KeyInteger*k) {
+    return cines->member(k);
+}
+
+Cine* ColCines::find(KeyInteger* k)
+{
+	return dynamic_cast<Cine*>(cines->find(k));
 }
 
 int ColCines::getSize() const {
@@ -21,7 +26,7 @@ int ColCines::getSize() const {
 }
 
 bool ColCines::isEmpty() const {
-    if (this->getSize() == 0){ 
+    if (this->getSize() == 0){
         return true;
     }
     else{

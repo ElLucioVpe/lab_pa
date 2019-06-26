@@ -17,6 +17,27 @@ Sistema* Sistema::getInstance()
 	return instance;
 }
 
+void Sistema::AltaUsuario(string nick, string img, string contra)
+{
+	KeyString* k = new KeyString(nick);
+	Usuario* u = new Usuario(nick, img, contra);
+	usuarios->add(k, u);
+}
+
+void Sistema::AltaPelicula(string titulo, string poster, string sinopsis)
+{
+	KeyString* k = new KeyString(titulo);
+	Pelicula* p = new Pelicula(titulo, poster, sinopsis, NULL);
+	peliculas->add(k, p);
+}
+
+void Sistema::AltaCine(int id, string dir)
+{
+	KeyInteger* k = new KeyInteger(id);
+	Cine* c = new Cine(id, dir);
+	cines->add(k, c);
+}
+
 bool Sistema::iniciarSesion(string user, string pass) {
     UsuarioIterator it = usuarios->getIterator();
     Usuario* u = NULL;
@@ -42,14 +63,14 @@ void Sistema::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario
     //y añadir la reserva a la coleccion de reservas en dicha funcion
 }
 
-set<string> Sistema::ListarTitulos() {
-	set<string> titulos;
+ICollection* Sistema::ListarTitulos() {
+	ICollection* titulos = NULL;
     PeliculaIterator it = peliculas->getIterator();
     
 	Pelicula* p = NULL;
     while (it.hasCurrent()) {
 		p = it.getCurrent();
-		titulos.insert(p->getTitulo());
+		titulos->add(new KeyString(p->getTitulo()));
         it.next();
     }
 
@@ -69,13 +90,13 @@ void Sistema::VerInfoPelicula(string titulo) {
 
 }
 
-set<int> Sistema::ListarCines() {
-	set<int> ids;
+ICollection* Sistema::ListarCines() {
+	ICollection* ids = NULL;
     CineIterator it = cines->getIterator();
     Cine* c = NULL;
     while (it.hasCurrent()) {
 		c = it.getCurrent();
-        ids.insert(c->getIdCine());
+        ids->add(new KeyInteger(c->getIdCine()));
         it.next();
     }
 
@@ -83,15 +104,15 @@ set<int> Sistema::ListarCines() {
 }
 
 ICollection* Sistema::ListarCinesPorTitulo(string tituloPelicula) {
-	ICollection* cines;
+	ICollection* dts = NULL;
 	//buscar los cines que tengan funciones de la pelicula
-	return cines;
+	return dts;
 }
 
 ICollection* Sistema::ListarFunciones(int idCine, string tituloPelicula) {
-	ICollection* funciones;
+	ICollection* dts = NULL;
 	//buscar los cines que tengan funciones de la pelicula
-	return funciones;
+	return dts;
 }
 
 Sistema::~Sistema() {

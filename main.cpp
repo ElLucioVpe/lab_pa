@@ -141,5 +141,19 @@ int main() {
 }
 
 void DatosTesteo() {
+	ISistema* s = Sistema::getInstance();
+	s->AltaUsuario("user1", "www.perfiles.com/user1.jpg", "contra1");
+	s->AltaUsuario("user2", "www.perfiles.com/user2.jpg", "contra2");
+	s->AltaUsuario("user3", "www.perfiles.com/user3.jpg", "contra3");
 
+	s->AltaPelicula("Avengers: Endgame", "www.posters.com/endgame.jpg", "Thanos 2");
+	s->AltaPelicula("Avengers: Endgame (Reestreno)", "www.posters.com/endgame2.jpg", "Thanos 2 2");
+	s->AltaPelicula("Jhon Whick 1", "www.posters.com/jw1.jpg", "Primera entrega de la saga de Jhon Whick tu asesino favorito");
+	s->AltaPelicula("Jhon Whick 2", "www.posters.com/jw2.jpg", "Segunda entrega de la saga de Jhon Whick tu asesino favorito");
+	s->AltaPelicula("Jhon Whick 3", "www.posters.com/jw3.jpg", "Tercera entrega de la saga de Jhon Whick tu asesino favorito");
+	
+	s->AltaCine(1, "Calle 1 Nro. 1");
+	s->AltaCine(2, "Calle 2 Nro. 2");
+	s->AltaCine(3, "Calle 3 Nro. 3");
+	s->AltaCine(4, "Calle 4 Nro. 4");
 }

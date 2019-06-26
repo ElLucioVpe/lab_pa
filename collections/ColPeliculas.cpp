@@ -4,19 +4,19 @@ ColPeliculas::ColPeliculas() {
     peliculas = new OrderedDictionary();
 }
 
-void ColPeliculas::add(String* k,Pelicula* p) {
+void ColPeliculas::add(KeyString* k,Pelicula* p) {
 	peliculas->add(k,p);
 }
 
-void ColPeliculas::remove(String* k) {
+void ColPeliculas::remove(KeyString* k) {
     peliculas->remove(k);
 }
 
-bool ColPeliculas::member(String* k) {
+bool ColPeliculas::member(KeyString* k) {
     return peliculas->member(k);
 }
 
-Pelicula* ColPeliculas::find(String* k)
+Pelicula* ColPeliculas::find(KeyString* k)
 {
 	return dynamic_cast<Pelicula*>(peliculas->find(k));
 }

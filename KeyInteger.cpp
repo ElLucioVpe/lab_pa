@@ -1,20 +1,20 @@
 #include <stddef.h>
 #include <stdexcept>
-#include "Integer.h"
+#include "KeyInteger.h"
 
-Integer::Integer(int i):
+KeyInteger::KeyInteger(int i):
         val(i)
 {
 }
 
-int Integer::getValue() const
+int KeyInteger::getValue() const
 {
     return val;
 }
 
-ComparisonRes Integer::compare(OrderedKey* k) const
+ComparisonRes KeyInteger::compare(OrderedKey* k) const
 {
-    Integer *i = dynamic_cast<Integer *>(k);
+	KeyInteger*i = dynamic_cast<KeyInteger*>(k);
     if(i == NULL) // no se puede comparar si no es entero
         throw std::invalid_argument("Invalid key k");
     if(i->val == val)
