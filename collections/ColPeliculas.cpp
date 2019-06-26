@@ -1,27 +1,33 @@
 #include "ColPeliculas.h"
 
 ColPeliculas::ColPeliculas() {
-    peliculas = new List();
+    peliculas = new OrderedDictionary();
 }
 
-void ColPeliculas::add(Pelicula* p) {
-	peliculas->add(p);
+void ColPeliculas::add(String* k,Pelicula* p) {
+	peliculas->add(k,p);
 }
 
-void ColPeliculas::remove(Pelicula* p) {
-    peliculas->remove(p);
+void ColPeliculas::remove(String* k) {
+    peliculas->remove(k);
 }
 
-bool ColPeliculas::member(Pelicula* p) {
-    return peliculas->member(p);
+bool ColPeliculas::member(String* k) {
+    return peliculas->member(k);
 }
+
+Pelicula* ColPeliculas::find(String* k)
+{
+	return dynamic_cast<Pelicula*>(peliculas->find(k));
+}
+
 
 int ColPeliculas::getSize() const {
     return peliculas->getSize();
 }
 
 bool ColPeliculas::isEmpty() const {
-    if (this->getSize() == 0){ 
+    if (this->getSize() == 0){
         return true;
     }
     else{
@@ -43,4 +49,3 @@ ColPeliculas::~ColPeliculas() {
     delete it;
     delete peliculas;
 }
-
