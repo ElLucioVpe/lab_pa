@@ -4,21 +4,22 @@
 #include <iostream>
 #include <string>
 #include "../classes/headers/Reserva.h"
-#include "../interfaces/ICollection.h"
+#include "OrderedDictionary.h"
 #include "ReservaIterator.h"
-#include "List.h"
+#include "../String.h"
 
 class ColReservas{
 private:
-    ICollection* reservas;
+    IDictionary* reservas;
 
 public:
     ColReservas();
     ~ColReservas();
 
-    void add(Reserva * r);
-    void remove(Reserva * r);
-    bool member(Reserva * r);
+    void add(String* k,Usuario * u);
+    void remove(String* k);
+    bool member(String* k);
+	Reserva* find(String* k);
     bool isEmpty() const;
     int getSize() const;
     ReservaIterator getIterator();

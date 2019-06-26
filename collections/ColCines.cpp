@@ -4,16 +4,16 @@ ColCines::ColCines() {
     cines = new List();
 }
 
-void ColCines::add(Cine * c) {
-    cines->add(c);
+void ColCines::add(String *k,Cine * c) {
+    cines->add(k,c);
 }
 
-void ColCines::remove(Cine* c) {
-    cines->remove(c);
+void ColCines::remove(String *k) {
+    cines->remove(k);
 }
 
-bool ColCines::member(Cine* c) {
-    return cines->member(c);
+bool ColCines::member(String *k) {
+    return cines->member(k);
 }
 
 int ColCines::getSize() const {
@@ -21,7 +21,7 @@ int ColCines::getSize() const {
 }
 
 bool ColCines::isEmpty() const {
-    if (this->getSize() == 0){ 
+    if (this->getSize() == 0){
         return true;
     }
     else{
