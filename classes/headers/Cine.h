@@ -3,22 +3,23 @@
 
 #include <iostream>
 #include "../../interfaces/ICollectible.h"
+#include <string>
+
 using namespace std;
 
 class Cine : public ICollectible {
 public:
-	Cine(int, string);
+	Cine(int, String);
 	int getIdCine();
 	string getDireccion();
 	//DtCine getDatacine();
-	void setIdCine( int idCine );
-	void setDireccion(string Direccion);
+	void setIdCine(int idCine);
+	void setDireccion(String Direccion);
 	~Cine();
 
-private: 
-	string Direccion;
+private:
+	String Direccion;
 	int IdCine;
 };
 
 #endif /* CINE_H */
-

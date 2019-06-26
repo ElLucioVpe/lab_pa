@@ -4,19 +4,20 @@
 #include "../interfaces/ICollection.h"
 #include "CineIterator.h"
 #include "../classes/headers/Cine.h"
+#include "OrderedDictionary.h"
 #include "List.h"
 
 class ColCines {
 private:
-    ICollection* cines;
+    IDictionary* cines;
 
 public:
     ColCines();
     ~ColCines();
 
-    void add(Cine * c);
-    void remove(Cine * c);
-    bool member(Cine * c);
+    void add(String *k, Cine * c);
+    void remove(String *k);
+    bool member(String *k);
     bool isEmpty() const;
     int getSize() const;
     CineIterator getIterator();
