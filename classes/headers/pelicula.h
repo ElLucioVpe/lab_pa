@@ -23,7 +23,7 @@ public:
 	void setPuntaje(float puntaje);
 
 	void EliminarFunciones();
-	//set<DtFuncion> ListarFunciones();
+	set<DtFuncion> ListarFunciones();
 	set<DtCine> getCines();
 	~Pelicula();
 

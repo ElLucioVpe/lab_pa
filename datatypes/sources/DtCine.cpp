@@ -4,11 +4,10 @@ DtCine::DtCine(){
 
 }
 
-DtCine::DtCine(int idCine, string direccion)
-  {
+DtCine::DtCine(int idCine, string direccion){
     this->idCine = idCine;
     this->direccion = direccion;
-    }
+}
 
 int DtCine::getIdCine() const {
     return this->idCine;

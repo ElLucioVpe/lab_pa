@@ -1,19 +1,24 @@
 #include "ColUsuarios.h"
 
 ColUsuarios::ColUsuarios() {
-    usuarios = new List();
+    usuarios = new OrderedDictionary();
 }
 
-void ColUsuarios::add(Usuario * u) {
-    usuarios->add(u);
+void ColUsuarios::add(String* k,Usuario * u) {
+    usuarios->add(k, u);
 }
 
-void ColUsuarios::remove(Usuario * u) {
-    usuarios->remove(u);
+void ColUsuarios::remove(String* k) {
+    usuarios->remove(k);
 }
 
-bool ColUsuarios::member(Usuario * u) {
-    return usuarios->member(u);
+bool ColUsuarios::member(String * k) {
+    return usuarios->member(k);
+}
+
+Usuario* ColUsuarios::find(String* k)
+{
+	return dynamic_cast<Usuario*>(usuarios->find(k));
 }
 
 int ColUsuarios::getSize() const {

@@ -4,21 +4,26 @@
 #include "../../collections/ColCines.h"
 
 class Sistema : public ISistema {
-    public:
-    	ColUsuarios usuarios;
-        ColPeliculas peliculas;
-        ColCines cines;
-        
-        Sistema();
+	private:
+		static Sistema* instance;
+		Sistema();
+		
+		ColUsuarios* usuarios;
+        ColPeliculas* peliculas;
+        ColCines* cines;
+	public:
+    	
+		static Sistema* getInstance();
+		~Sistema();
+
+		//-----
         bool iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, int IdFuncion, Usuario u);
-        set<string> ListarTitulos();
+		set<string> ListarTitulos();
         DtPelicula SeleccionarPelicula(string titulo);
         void EliminarPelicula(string titulo);
         void VerInfoPelicula(string titulo);
 		set<int> ListarCines();
-        set<DtCine> ListarCinesPorTitulo(string tituloPelicula);
-        set<DtFuncion> ListarFunciones(int idCine, string tituloPelicula);
-        
-        virtual ~Sistema();
+        ICollection* ListarCinesPorTitulo(string tituloPelicula);
+		ICollection* ListarFunciones(int idCine, string tituloPelicula);
 };

@@ -7,7 +7,6 @@ Cine::Cine(int IdCine, string Direccion){
 } 
 int Cine::getIdCine() {
 	return this->IdCine;
-	
 }
 string Cine::getDireccion(){
 	return this->Direccion;

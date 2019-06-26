@@ -21,7 +21,7 @@ void List::add(ICollectible* c)
     }
     
     ListNode *current = head;
-    ListNode *previous;
+    ListNode *previous = NULL;
     while(current != NULL && current->getElem() != c){
         previous = current;
         current = current->getNext();

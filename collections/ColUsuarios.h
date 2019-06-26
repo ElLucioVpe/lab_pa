@@ -4,21 +4,22 @@
 #include <iostream>
 #include <string>
 #include "../classes/headers/Usuario.h"
-#include "../interfaces/ICollection.h"
 #include "UsuarioIterator.h"
-#include "List.h"
+#include "OrderedDictionary.h"
+#include "../String.h"
 
 class ColUsuarios {
 private:
-    ICollection* usuarios;
+    IDictionary* usuarios;
 
 public:
     ColUsuarios();
     ~ColUsuarios();
 
-    void add(Usuario * u);
-    void remove(Usuario * u);
-    bool member(Usuario * u);
+    void add(String* k,Usuario * u);
+    void remove(String* k);
+    bool member(String* k);
+	Usuario* find(String* k);
     bool isEmpty() const;
     int getSize() const;
     UsuarioIterator getIterator();
