@@ -33,17 +33,17 @@ bool ColSalas::isEmpty() const {
     }
 }
 
-//SalaIterator ColSala::getIterator() {
-//	return SalaIterator(salas->getIterator());
-//}
+SalaIterator ColSala::getIterator() {
+	return SalaIterator(salas->getIterator());
+}
 
-//ColSalas::~ColSalas() {
-//    IIterator* it = salas->getIterator();
-//    while (it->hasCurrent()) {
-//        Sala* temp = dynamic_cast<Salas*>(it->getCurrent());
-//        it->next();
-//        delete temp;
-//    }
-//    delete it;
-//    delete salas;
-//}
+ColSalas::~ColSalas() {
+    IIterator* it = salas->getIterator();
+    while (it->hasCurrent()) {
+        Sala* temp = dynamic_cast<Salas*>(it->getCurrent());
+        it->next();
+        delete temp;
+    }
+    delete it;
+    delete salas;
+}

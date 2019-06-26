@@ -2,7 +2,7 @@
 #define	COLSALAS_H
 
 #include "../interfaces/ICollection.h"
-//#include "SalaIterator.h"
+#include "SalaIterator.h"
 #include "../classes/headers/Sala.h"
 #include "OrderedDictionary.h"
 #include "List.h"
@@ -21,7 +21,7 @@ public:
     Cines * find(String *k);
     bool isEmpty() const;
     int getSize() const;
-    //SalaIterator getIterator();
+    SalaIterator getIterator();
 };
 
 #endif	/* COLSALAS_H */
