@@ -76,10 +76,23 @@ int main() {
 
 				switch (op)
 				{
-					case 0:
+				case 0: {
+						sistema->ListarTitulos();
+						IIterator* it;
+						while (it->hasCurrent())
+
+						int cantAsientos, idFuncion;
+						cout << "Ingrese la cantidad de asientos que desea reservar: ";
+						cin >> cantAsientos;
+
+						float costo = cantAsientos * 300;
+						sistema->CrearReserva(cantAsientos, costo, idFuncion, new Usuario("","",""));
 						break;
-					case 1:
-						break;
+					}
+						
+				case 1: {
+					break;
+					}
 					case 2:
 						break;
 					case 3:
