@@ -24,10 +24,6 @@ Cine* ColCines::find(KeyInteger* k)
 int ColCines::getSize() const {
     return cines->getSize();
 }
-Cines* ColCines::find(String* k)
-{
-	return dynamic_cast<Cines*>(cines->find(k));
-}
 
 bool ColCines::isEmpty() const {
     if (this->getSize() == 0){
