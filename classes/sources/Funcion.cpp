@@ -26,7 +26,7 @@ bool Funcion::EsDePelicula(string t) {
 	return true;//No es necesaria si la busqueda empieza desde la pelicula
 }
 void Funcion::ReservarFuncion(int cantAsientos, float costo, string usuario) {
-	reservas.add(new Reserva(costo, cantAsientos));
+	//reservas.add(new Reserva(costo, cantAsientos));
 	//se necesita agregar un parametro Usuario a Reserva o alguna otra forma de saber quien la reservo 
 }
 

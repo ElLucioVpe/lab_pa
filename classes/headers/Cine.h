@@ -9,16 +9,16 @@ using namespace std;
 
 class Cine : public ICollectible {
 public:
-	Cine(int, String);
+	Cine(int, string);
 	int getIdCine();
 	string getDireccion();
 	//DtCine getDatacine();
 	void setIdCine(int idCine);
-	void setDireccion(String Direccion);
+	void setDireccion(string Direccion);
 	~Cine();
 
 private:
-	String Direccion;
+	string Direccion;
 	int IdCine;
 };
 

@@ -1,6 +1,6 @@
 #include "../headers/Cine.h"
 
-Cine::Cine(int IdCine, String Direccion){
+Cine::Cine(int IdCine, string Direccion){
 	this->IdCine= IdCine;
 	this->Direccion= Direccion;
 
@@ -8,10 +8,10 @@ Cine::Cine(int IdCine, String Direccion){
 int Cine::getIdCine() {
 	return this->IdCine;
 }
-String Cine::getDireccion(){
+string Cine::getDireccion(){
 	return this->Direccion;
 }
-void Cine::setDireccion(String Direccion){
+void Cine::setDireccion(string Direccion){
 	this->Direccion = Direccion;
 }
 void Cine::setIdCine(int idCine){

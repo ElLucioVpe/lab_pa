@@ -5,7 +5,7 @@
 #include "CineIterator.h"
 #include "../classes/headers/Cine.h"
 #include "OrderedDictionary.h"
-#include "List.h"
+#include "../KeyInteger.h"
 
 class ColCines {
 private:
@@ -15,9 +15,10 @@ public:
     ColCines();
     ~ColCines();
 
-    void add(String *k, Cine * c);
-    void remove(String *k);
-    bool member(String *k);
+    void add(KeyInteger*k, Cine * c);
+    void remove(KeyInteger*k);
+    bool member(KeyInteger*k);
+	Cine* find(KeyInteger* k);
     bool isEmpty() const;
     int getSize() const;
     CineIterator getIterator();
