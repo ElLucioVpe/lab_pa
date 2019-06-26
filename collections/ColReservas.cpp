@@ -1,18 +1,18 @@
 #include "ColReservas.h"
 
 ColReservas::ColReservas() {
-    reservas = new OrderedDictionary();
+    reservas = new List();
 }
 
-void ColReservas::add(String* k,Usuario * u) {
+void ColReservas::add(Reserva * r) {
     reservas->add(r);
 }
 
-void ColReservas::remove(String* k) {
+void ColReservas::remove(Reserva * r) {
     reservas->remove(r);
 }
 
-bool ColReservas::member(String* k) {
+bool ColReservas::member(Reserva * r) {
     return reservas->member(r);
 }
 
