@@ -57,7 +57,8 @@ bool Sistema::iniciarSesion(string user, string pass) {
     return false;
 }
 
-void Sistema::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario u) {
+void Sistema::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* u) {
+	delete u; //solo por las dudas, por ahora no lo utilizamos
     //buscar por el cine de dicha funcion
     //cine.funciones.member(f)
     //y añadir la reserva a la coleccion de reservas en dicha funcion

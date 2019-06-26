@@ -20,7 +20,7 @@ class Sistema : public ISistema {
 		void AltaPelicula(string titulo, string poster, string sinopsis);
 		void AltaCine(int id, string dir);
         bool iniciarSesion(string user, string pass);
-        void CrearReserva(int cantAsientos, float costo, int IdFuncion, Usuario u);
+        void CrearReserva(int cantAsientos, float costo, int IdFuncion, Usuario* u);
 		ICollection* ListarTitulos();
         DtPelicula SeleccionarPelicula(string titulo);
         void EliminarPelicula(string titulo);
