@@ -83,15 +83,15 @@ set<int> Sistema::ListarCines() {
 }
 
 ICollection* Sistema::ListarCinesPorTitulo(string tituloPelicula) {
-	ICollection* cines;
+	ICollection* dts = NULL;
 	//buscar los cines que tengan funciones de la pelicula
-	return cines;
+	return dts;
 }
 
 ICollection* Sistema::ListarFunciones(int idCine, string tituloPelicula) {
-	ICollection* funciones;
+	ICollection* dts = NULL;
 	//buscar los cines que tengan funciones de la pelicula
-	return funciones;
+	return dts;
 }
 
 Sistema::~Sistema() {
@@ -101,4 +101,19 @@ Sistema::~Sistema() {
 	delete peliculas;
     cines->~ColCines();
 	delete cines;
+}
+
+void Sistema::AltaUsuario(string nick, string img, string contra)
+{
+	KeyString* k = new KeyString(nick.c_str());
+	Usuario* u = new Usuario(nick, img, contra);
+	usuarios->add(k, u);
+}
+
+void Sistema::AltaPelicula(string titulo, string poster, string sinopsis)
+{
+}
+
+void Sistema::AltaCine(int id, string dir)
+{
 }

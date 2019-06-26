@@ -16,7 +16,9 @@ class Sistema : public ISistema {
 		static Sistema* getInstance();
 		~Sistema();
 
-		//-----
+		void AltaUsuario(string nick, string img, string contra);
+		void AltaPelicula(string titulo, string poster, string sinopsis);
+		void AltaCine(int id, string dir);
         bool iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, int IdFuncion, Usuario u);
 		set<string> ListarTitulos();

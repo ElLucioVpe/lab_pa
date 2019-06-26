@@ -4,19 +4,19 @@ ColUsuarios::ColUsuarios() {
     usuarios = new OrderedDictionary();
 }
 
-void ColUsuarios::add(String* k,Usuario * u) {
+void ColUsuarios::add(KeyString* k, Usuario * u) {
     usuarios->add(k, u);
 }
 
-void ColUsuarios::remove(String* k) {
+void ColUsuarios::remove(KeyString* k) {
     usuarios->remove(k);
 }
 
-bool ColUsuarios::member(String * k) {
+bool ColUsuarios::member(KeyString* k) {
     return usuarios->member(k);
 }
 
-Usuario* ColUsuarios::find(String* k)
+Usuario* ColUsuarios::find(KeyString* k)
 {
 	return dynamic_cast<Usuario*>(usuarios->find(k));
 }

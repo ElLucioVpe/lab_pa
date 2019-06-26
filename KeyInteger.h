@@ -9,16 +9,16 @@
 #include "interfaces/OrderedKey.h"
 
 
-#ifndef _INTEGER_H
-#define	_INTEGER_H
+#ifndef _KEYINTEGER_H
+#define	_KEYINTEGER_H
 
 // datatype para representar un entero
-class Integer: public ICollectible, public OrderedKey
+class KeyInteger: public ICollectible, public OrderedKey
 {
 private:
     const int val;
 public:
-    Integer(int i);
+	KeyInteger(int i);
     int getValue() const;
     ComparisonRes compare(OrderedKey *k) const;
 };
