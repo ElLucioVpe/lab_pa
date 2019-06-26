@@ -20,4 +20,4 @@ private:
 	int IdSala;
 };
 
-#endif /* CINE_H */
+#endif /* SALA_H */
