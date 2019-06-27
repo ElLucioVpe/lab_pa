@@ -17,4 +17,4 @@ private:
 	IIterator* it;
 };
 
-#endif	/* PELICULAITERATOR_H */
+#endif	/* COMENTARIOITERATOR_H */
