@@ -22,9 +22,10 @@ public:
 	void setSinopsis(string sinopsis);
 	void setPuntaje(float puntaje);
 
+	void CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera);
 	void EliminarFunciones();
-	set<DtFuncion> ListarFunciones();
-	set<DtCine> getCines();
+	ICollection* ListarFunciones(int IdCine);
+	ICollection* getCines();
 	~Pelicula();
 
 private:

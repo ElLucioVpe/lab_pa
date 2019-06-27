@@ -18,8 +18,8 @@ public:
 	void setIdfuncion(int IdFuncion);
 	void setHorario(string h);
 	void EliminarReservas();
-	bool EsDePelicula(string t);
-	void ReservarFuncion(int, float, string);
+	bool EsDeCine(int IdCine);
+	void ReservarFuncion(int, float, string, string, string);
 	~Funcion();
 	
 private: 

@@ -57,15 +57,16 @@ bool Sistema::iniciarSesion(string user, string pass) {
     return false;
 }
 
-void Sistema::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* u) {
-	delete u; //solo por las dudas, por ahora no lo utilizamos
-    //buscar por el cine de dicha funcion
-    //cine.funciones.member(f)
-    //y añadir la reserva a la coleccion de reservas en dicha funcion
+void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idFuncion, string usuario, string banco, string financiera) {
+	Pelicula* p = peliculas->find(new KeyString(titulo));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+	
+	p->CrearReserva(cantAsientos, costo, idFuncion, usuario, banco, financiera);
 }
 
 ICollection* Sistema::ListarTitulos() {
-	ICollection* titulos = NULL;
+	ICollection* titulos = new List();
     PeliculaIterator it = peliculas->getIterator();
     
 	Pelicula* p = NULL;
@@ -78,9 +79,12 @@ ICollection* Sistema::ListarTitulos() {
 	return titulos;
 }
 
-DtPelicula Sistema::SeleccionarPelicula(string titulo) {
-	//peliculas.find(titulo)
-	return DtPelicula();
+DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
+	Pelicula* p = peliculas->find(new KeyString(titulo));
+	
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
+	return new DtPelicula(p->getTitulo(), p->getPoster(), p->getSinopsis(), p->getPuntaje());
 }
 
 void Sistema::EliminarPelicula(string titulo) {
@@ -88,11 +92,18 @@ void Sistema::EliminarPelicula(string titulo) {
 }
 
 void Sistema::VerInfoPelicula(string titulo) {
+	Pelicula* p = peliculas->find(new KeyString(titulo));
 
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
+	cout << "\n\tInformacion sobre " + p->getTitulo() << endl << endl;
+	cout << "Poster: \n" + p->getPoster() << endl;
+	cout << "Sinopsis: \n" + p->getSinopsis() << endl;
+	cout << "Puntaje: " + p->getPuntaje() << endl;
 }
 
 ICollection* Sistema::ListarCines() {
-	ICollection* ids = NULL;
+	ICollection* ids = new List();
     CineIterator it = cines->getIterator();
     Cine* c = NULL;
     while (it.hasCurrent()) {
@@ -105,15 +116,19 @@ ICollection* Sistema::ListarCines() {
 }
 
 ICollection* Sistema::ListarCinesPorTitulo(string tituloPelicula) {
-	ICollection* dts = NULL;
-	//buscar los cines que tengan funciones de la pelicula
-	return dts;
+	Pelicula* p = peliculas->find(new KeyString(tituloPelicula));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
+	return p->getCines();
 }
 
 ICollection* Sistema::ListarFunciones(int idCine, string tituloPelicula) {
-	ICollection* dts = NULL;
-	//buscar los cines que tengan funciones de la pelicula
-	return dts;
+	Pelicula* p = peliculas->find(new KeyString(tituloPelicula));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
+	return p->ListarFunciones(idCine);
 }
 
 Sistema::~Sistema() {

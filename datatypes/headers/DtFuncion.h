@@ -3,7 +3,7 @@
 
 #include "../../classes/headers/Funcion.h"
 
-class DtFuncion {
+class DtFuncion : public ICollectible {
 public:
     DtFuncion();
     DtFuncion(int, string);
