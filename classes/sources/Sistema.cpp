@@ -130,6 +130,14 @@ ICollection* Sistema::ListarFunciones(int idCine, string tituloPelicula) {
 	return p->ListarFunciones(idCine);
 }
 
+ICollection* Sistema::ListarSalas(int idCine) {
+	Cine* c = cines->find(new KeyString(idCine));
+
+	if (c == NULL) throw std::invalid_argument("El cine no existe");
+
+	return c->ListarSalas();
+}
+
 Sistema::~Sistema() {
     usuarios->~ColUsuarios();
 	delete usuarios;
