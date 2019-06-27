@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <stdexcept>
+#include <vector>
 #include "classes/headers/Sistema.h"
 #include "datatypes/headers/DtUsuario.h"
 
@@ -60,8 +61,8 @@ int main() {
 					cin >> pass;
 					cout << "Agregue una imagen de perfil (URL): ";
 					cin >> img;
-					sistema->AltaUsuario(user, img, pass);
-					usuarioActual = new DtUsuario(user, img, pass);
+					sistema->AltaUsuario(user, img, pass, false);
+					usuarioActual = new DtUsuario(user, img, pass, false);
 					break;
 				}
 				default:
@@ -111,7 +112,9 @@ int main() {
 						OpcionVerComentariosyPuntajes();
 						break;
 					case 6:
-						OpcionesAdministrativas();
+						if (usuarioActual->getAdmin()) OpcionesAdministrativas();
+						else throw std::invalid_argument("No tiene permitido el acceso");
+						
 						break;
 					default:
 						throw std::invalid_argument("La opcion ingresada no es valida");
@@ -136,20 +139,21 @@ int main() {
 //Funciones auxiliares
 void DatosTesteo() {
 	ISistema* s = Sistema::getInstance();
-	s->AltaUsuario("user1", "www.perfiles.com/user1.jpg", "contra1");
-	s->AltaUsuario("user2", "www.perfiles.com/user2.jpg", "contra2");
-	s->AltaUsuario("user3", "www.perfiles.com/user3.jpg", "contra3");
+	s->AltaUsuario("admin", "www.perfiles.com/admin.jpg", "admin123", true);
+	s->AltaUsuario("user1", "www.perfiles.com/user1.jpg", "contra1", false);
+	s->AltaUsuario("user2", "www.perfiles.com/user2.jpg", "contra2", false);
+	s->AltaUsuario("user3", "www.perfiles.com/user3.jpg", "contra3", false);
 
 	s->AltaPelicula("Avengers: Endgame", "www.posters.com/endgame.jpg", "Thanos 2");
 	s->AltaPelicula("Avengers: Endgame (Reestreno)", "www.posters.com/endgame2.jpg", "Thanos 2 2");
-	s->AltaPelicula("Jhon Whick 1", "www.posters.com/jw1.jpg", "Primera entrega de la saga de Jhon Whick tu asesino favorito");
-	s->AltaPelicula("Jhon Whick 2", "www.posters.com/jw2.jpg", "Segunda entrega de la saga de Jhon Whick tu asesino favorito");
-	s->AltaPelicula("Jhon Whick 3", "www.posters.com/jw3.jpg", "Tercera entrega de la saga de Jhon Whick tu asesino favorito");
+	s->AltaPelicula("Jhon Whick 1", "www.posters.com/jw1.jpg", "Primera entrega de la saga de Jhon Whick, tu asesino favorito");
+	s->AltaPelicula("Jhon Whick 2", "www.posters.com/jw2.jpg", "Segunda entrega de la saga de Jhon Whick, tu asesino favorito");
+	s->AltaPelicula("Jhon Whick 3", "www.posters.com/jw3.jpg", "Tercera entrega de la saga de Jhon Whick, tu asesino favorito");
 	
-	s->AltaCine(1, "Calle 1 Nro. 1");
-	s->AltaCine(2, "Calle 2 Nro. 2");
-	s->AltaCine(3, "Calle 3 Nro. 3");
-	s->AltaCine(4, "Calle 4 Nro. 4");
+	s->AltaCine("Calle 1 Nro. 1");
+	s->AltaCine("Calle 2 Nro. 2");
+	s->AltaCine("Calle 3 Nro. 3");
+	s->AltaCine("Calle 4 Nro. 4");
 }
 
 bool DeseaContinuar(string msg) {
@@ -223,7 +227,8 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	while (it->hasCurrent()) {
 		DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
 		cout << "Funcion " + f->getIdFuncion() << endl;
-		cout << "Horario :" + f->getHorario() << endl;
+		time_t h = f->getHorario();
+		cout << "Horario :" << ctime(&h) << endl;
 		it->next();
 	}
 
@@ -294,37 +299,26 @@ void OpcionesAdministrativas() {
 		case 0:
 			break;
 		case 1:
-			s->AltaCine("ejemplo");
+			OpcionAltaCine();
 			break;
-		case 2:
-			s->AltaPelicula("ejemplo", "ejemplo", "ejemplo");
+		case 2: {
+			string titulo, img, sinopsis;
+
+
+			cin.ignore();
+			getline(cin, titulo);
+
+
+			cin.ignore();
+			getline(cin, img);
+
+			cin.ignore();
+			getline(cin, sinopsis);
+			s->AltaPelicula(titulo, img, sinopsis);
 			break;
+		}
 		case 3:
-		//Luigi
-		//Films
-		cout << "\n\tCatalogo de Peliculas" << endl << endl;
-		ICollection* t = sistema->ListarTitulos();
-		IIterator* it = t->getIterator();
-		while (it->hasCurrent()) {
-			cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
-			it->next();
-		}
-
-
-
-		//Cines
-		ICollection* c = sistema->ListarCinesPorTitulo(titulo);
-		it = c->getIterator();
-
-		while (it->hasCurrent()) {
-			DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
-			cout << "Cine " + c->getIdCine() << endl; 
-			cout << "Direccion :"+c->getDireccion() << endl;
-			it->next();
-		}
-
-
-			s->AltaFuncion();
+			//s->AltaFuncion();
 			break;
 		case 4: {
 			string t;
@@ -343,5 +337,30 @@ void OpcionesAdministrativas() {
 			cin.get();
 			cout << endl;
 		}
+	}
+}
+
+void OpcionAltaCine() {
+	ISistema* s = Sistema::getInstance();
+
+	string dir;
+	int cantaux;
+	vector<int> cantAsientos;
+
+	cout << "Ingrese la direccion del cine: ";
+	cin.ignore();
+	getline(cin, dir);
+
+	while (DeseaContinuar("Desea ingresar una sala? (Si/No): ")) {
+		cout << "Ingrese la capacidad de la sala: ";
+		cin >> cantaux;
+		cantAsientos.push_back(cantaux);
+	}
+
+	if (DeseaContinuar("Desea completar la operacion? (Si/No): ") == false) return;
+	s->AltaCine(dir);
+	
+	for (auto i = cantAsientos.begin(); i != cantAsientos.end(); i++) {
+		//s->AltaSala(*i);
 	}
 }

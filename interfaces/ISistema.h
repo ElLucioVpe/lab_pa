@@ -11,9 +11,11 @@
 
 class ISistema {
     public:
-		virtual void AltaUsuario(string nick, string img, string contra) = 0;
+		virtual void AltaUsuario(string nick, string img, string contra, bool admin) = 0;
 		virtual void AltaPelicula(string titulo, string poster, string sinopsis) = 0;
 		virtual void AltaCine(string dir) = 0;
+		virtual void AltaSala(int idCine, int cantAsientos) = 0;
+		virtual void AltaFuncion(string titulo, string horario) = 0;
         virtual DtUsuario* iniciarSesion(string , string) = 0;
         virtual void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string usuario, string banco, string financiera) = 0;
         virtual ICollection* ListarTitulos() = 0;
@@ -23,6 +25,7 @@ class ISistema {
         virtual ICollection* ListarCines() = 0;
         virtual ICollection* ListarCinesPorTitulo(string) = 0;
         virtual ICollection* ListarFunciones(int, string) = 0;
+		virtual ICollection* ListarSalas(int idCine) = 0;
         virtual ~ISistema();
 };
 

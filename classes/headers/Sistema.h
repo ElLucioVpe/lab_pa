@@ -16,10 +16,11 @@ class Sistema : public ISistema {
 		static Sistema* getInstance();
 		~Sistema();
 
-		void AltaUsuario(string nick, string img, string contra);
-		void AltaFuncion(string horario);
+		void AltaUsuario(string nick, string img, string contra, bool admin);
 		void AltaPelicula(string titulo, string poster, string sinopsis);
 		void AltaCine(string dir);
+		void AltaSala(int idCine, int cantAsientos);
+		void AltaFuncion(string titulo, string horario);
         DtUsuario* iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera);
 		ICollection* ListarTitulos();
@@ -29,4 +30,5 @@ class Sistema : public ISistema {
 		ICollection* ListarCines();
         ICollection* ListarCinesPorTitulo(string tituloPelicula);
 		ICollection* ListarFunciones(int idCine, string tituloPelicula);
+		ICollection* ListarSalas(int idCine);
 };

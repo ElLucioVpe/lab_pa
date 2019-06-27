@@ -1,9 +1,10 @@
 #include "../headers/DtUsuario.h"
 
-DtUsuario::DtUsuario(std::string _nickname, std::string _img, std::string _contra) {
+DtUsuario::DtUsuario(std::string _nickname, std::string _img, std::string _contra, bool _admin) {
     this->NickName = _nickname;
     this->ImgPerfil = _img;
     this->Contrasenia = _contra;
+	this->Admin = _admin;
 }
 
 std::string DtUsuario::getNickName() {
@@ -16,6 +17,11 @@ std::string DtUsuario::getImgPerfil() {
 
 std::string DtUsuario::getContrasenia() {
     return this->Contrasenia;
+}
+
+bool DtUsuario::getAdmin()
+{
+	return this->Admin;
 }
 
 
