@@ -10,14 +10,13 @@ public:
 	Sala(int, int);
 	int getIdSala();
 	int getCantAsientos();
-	//DtCine getDatacine();
 	void setIdSala( int idCine );
-	void setCantAsientos(string Direccion);
+	void setCantAsientos(int cant);
 	~Sala();
 
 private:
-	int CantAsientos;
 	int IdSala;
+	int CantAsientos;
 };
 
 #endif /* SALA_H */
