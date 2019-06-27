@@ -300,7 +300,31 @@ void OpcionesAdministrativas() {
 			s->AltaPelicula("ejemplo", "ejemplo", "ejemplo");
 			break;
 		case 3:
-			//s->AltaFuncion();
+		//Luigi
+		//Films
+		cout << "\n\tCatalogo de Peliculas" << endl << endl;
+		ICollection* t = sistema->ListarTitulos();
+		IIterator* it = t->getIterator();
+		while (it->hasCurrent()) {
+			cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
+			it->next();
+		}
+
+
+
+		//Cines
+		ICollection* c = sistema->ListarCinesPorTitulo(titulo);
+		it = c->getIterator();
+
+		while (it->hasCurrent()) {
+			DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
+			cout << "Cine " + c->getIdCine() << endl; 
+			cout << "Direccion :"+c->getDireccion() << endl;
+			it->next();
+		}
+
+
+			s->AltaFuncion();
 			break;
 		case 4: {
 			string t;
