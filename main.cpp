@@ -41,8 +41,9 @@ int main() {
 					getline(cin, user);
 					cout << "Ingrese su contrasenia: ";
 					cin >> pass;
-					if (sistema->iniciarSesion(user, pass)) { //iniciar sesion a DtUsuario seria mejor en vez de bool
-						//usuarioActual = sistema->iniciarSesion(user, pass);
+
+					if (sistema->iniciarSesion(user, pass)) {
+						usuarioActual = sistema->iniciarSesion(user, pass);
 						cout << "Ha iniciado sesion con exito" << endl;
 					}
 					else {
@@ -254,8 +255,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 		}
 	}
 	
-	cout << "Usted pagara: ";
-	cout << costo << endl;
+	cout << "Usted pagara: " << costo << endl;
 	if (DeseaContinuar("Continuar con la reserva? (Si/No): ") == false) return;
 	sistema->CrearReserva(cantAsientos, costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera);
 }
@@ -294,7 +294,7 @@ void OpcionesAdministrativas() {
 		case 0:
 			break;
 		case 1:
-			s->AltaCine(0, "ejemplo");
+			s->AltaCine("ejemplo");
 			break;
 		case 2:
 			s->AltaPelicula("ejemplo", "ejemplo", "ejemplo");

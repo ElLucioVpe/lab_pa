@@ -7,7 +7,7 @@
 KeyString::KeyString(std::string str){
     if(str == "")
         throw std::invalid_argument("str es NULL");
-        
+
 	s = str;
 }
 

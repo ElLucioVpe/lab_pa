@@ -1,20 +1,25 @@
-#ifndef FUNCION_H
-#define FUNCION_H
+#ifndef COLCOMENTARIO_H
+#define COLCOMENTARIO_H
 
 #include <iostream>
 #include "../../interfaces/ICollectible.h"
-#include "../../collections/ColReservas.h"
+#include "../../collections/ColComentarios.h"
 
 using namespace std;
 
 class Comentario : public ICollectible {
 public:
-  Comentario(String Texto);
-  String getComentario();
-  Void setComentario(string t);
-  ~Comentario();
+	Comentario(string Texto);
+	int getId();
+	string getTexto();
+	void setId(int _id);
+	void setTexto(string t);
+	void agregarHijo(Comentario* c);
+	~Comentario();
 private:
-  String Texto;
+	int Id;
+	string Texto;
+	ColComentarios* hijos;
 };
 
-#endif /* FUNCION_H */
+#endif /* COLCOMENTARIO_H */

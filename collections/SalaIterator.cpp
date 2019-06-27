@@ -19,3 +19,13 @@ bool SalaIterator::hasCurrent()
 {
 	return it->hasCurrent();
 }
+
+void SalaIterator::next()
+{
+	it->next();
+}
+
+SalaIterator::~SalaIterator()
+{
+
+}

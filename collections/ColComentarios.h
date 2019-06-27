@@ -2,19 +2,19 @@
 #define	COLCOMENTARIOS_H
 
 #include "../interfaces/ICollection.h"
-#include "FuncionIterator.h"
+#include "ComentarioIterator.h"
 #include "../classes/headers/Comentario.h"
 #include "OrderedDictionary.h"
 #include "List.h"
 #include "../KeyString.h"
 
 
-class ColComentarios_H {
+class ColComentarios {
 private:
-    IDictionary* comentarios
+	IDictionary* comentarios;
   public:
-      ColPeliculas();
-      ~ColPeliculas();
+	  ColComentarios();
+      ~ColComentarios();
       void add(KeyString * k,Comentario * c);
       void remove(KeyString * k);
       bool member(KeyString * k);
