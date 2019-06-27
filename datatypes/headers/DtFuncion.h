@@ -6,17 +6,17 @@
 class DtFuncion : public ICollectible {
 public:
     DtFuncion();
-    DtFuncion(int, string);
+    DtFuncion(int, time_t);
 
     int getIdFuncion() const;
-    string getHorario() const;
+    time_t getHorario() const;
 	bool operator< (const DtFuncion& f) const;
 
     virtual ~DtFuncion();
 
 private:
     int idFuncion;
-	string horario;
+	time_t horario;
 };
 
 #endif	/* DTFUNCION_H */

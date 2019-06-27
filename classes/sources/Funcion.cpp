@@ -2,9 +2,12 @@
 #include "../headers/TarjetaDeCredito.h"
 #include "../headers/TarjetaDeDebito.h"
 
-Funcion::Funcion(int IdFuncion, string _horario){
+Funcion::Funcion(int IdFuncion, string _horario, Cine* _cine, Sala* _sala){
 	this->IdFuncion= IdFuncion;
+	this->_cine = _cine;
+	this->_sala = _sala;
 
+	//Conversion de string a time_t
 	time_t horario;
 	int yy, month, dd, hh, mm, ss;
 	struct tm horariotm = { 0 };
@@ -35,7 +38,7 @@ Cine* Funcion::getCines(){
 void Funcion::setIdfuncion(int IdFuncion){
 	this->IdFuncion= IdFuncion;
 }
-void Funcion::setHorario(string Horario){
+void Funcion::setHorario(time_t Horario){
 	this->Horario= Horario;
 }
 void Funcion::EliminarReservas() {

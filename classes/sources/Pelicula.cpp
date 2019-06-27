@@ -52,9 +52,13 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 {
 	ICollection* dts = new List();
 	FuncionIterator it = funciones.getIterator();
+
+	time_t tiempoActual;
+	time(&tiempoActual);
+
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();
-		if (f->EsDeCine(idCine) /*&& funcion.horario < tiempoActual*/) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario()));
+		if (f->EsDeCine(idCine) && f->getHorario() < tiempoActual) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario()));
 
 		it.next();
 	}

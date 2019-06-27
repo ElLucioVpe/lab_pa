@@ -6,18 +6,19 @@
 #include <ctime>
 #include "../../interfaces/ICollectible.h"
 #include "Cine.h"
+#include "Sala.h"
 #include "../../collections/ColReservas.h"
 
 using namespace std;
 
 class Funcion : public ICollectible {
 public:
-    Funcion(int idFuncion, string horario);
+    Funcion(int IdFuncion, string _horario, Cine* _cine, Sala* _sala);
 	int getIdFuncion();
 	time_t getHorario();
 	Cine* getCines();
 	void setIdfuncion(int IdFuncion);
-	void setHorario(string h);
+	void setHorario(time_t h);
 	void EliminarReservas();
 	bool EsDeCine(int IdCine);
 	void ReservarFuncion(int, float, string, string, string);
@@ -27,6 +28,7 @@ private:
 	int IdFuncion;
 	time_t Horario;
 	Cine* _cine;
+	Sala* _sala;
 	ColReservas reservas;
 };
 
