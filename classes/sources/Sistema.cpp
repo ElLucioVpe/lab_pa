@@ -93,6 +93,14 @@ void Sistema::VerInfoPelicula(string titulo) {
 	cout << "Puntaje: " << p->getPuntaje() << endl;
 }
 
+void Sistema::AltaFuncion(string horario){
+	Pelicula* p = peliculas->find(new KeyString(tituloPelicula));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
+	return p->ListarFunciones(idCine);
+}
+
 ICollection* Sistema::ListarCines() {
 	ICollection* ids = new List();
     CineIterator it = cines->getIterator();
@@ -120,6 +128,14 @@ ICollection* Sistema::ListarFunciones(int idCine, string tituloPelicula) {
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 
 	return p->ListarFunciones(idCine);
+}
+
+ICollection* Sistema::ListarSalas(int idCine) {
+	Cine* c = cines->find(new KeyString(idCine));
+
+	if (c == NULL) throw std::invalid_argument("El cine no existe");
+
+	return c->ListarSalas();
 }
 
 Sistema::~Sistema() {

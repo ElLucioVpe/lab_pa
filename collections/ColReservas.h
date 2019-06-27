@@ -20,7 +20,7 @@ public:
     bool member(Reserva* r);
     bool isEmpty() const;
     int getSize() const;
-    ReservaIterator getIterator();
+    ReservaIterator* getIterator();
 };
 
 #endif	/* COLRESERVAS_H */

@@ -1,7 +1,7 @@
 #ifndef COLCINES_H
 #define	COLCINES_H
 
-#include "../interfaces/ICollection.h"
+//#include "../interfaces/ICollection.h"
 #include "CineIterator.h"
 #include "../classes/headers/Cine.h"
 #include "OrderedDictionary.h"

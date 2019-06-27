@@ -17,6 +17,7 @@ class Sistema : public ISistema {
 		~Sistema();
 
 		void AltaUsuario(string nick, string img, string contra);
+		void AltaFuncion(string horario);
 		void AltaPelicula(string titulo, string poster, string sinopsis);
 		void AltaCine(string dir);
         DtUsuario* iniciarSesion(string user, string pass);
