@@ -1,23 +1,28 @@
 #include "ColFunciones.h"
 
 ColFunciones::ColFunciones() {
-    funciones = new List();
+    funciones = new OrderedDictionary();
 }
 
-void ColFunciones::add(Funcion * f) {
-    funciones->add(f);
+void ColFunciones::add(KeyInteger* k, Funcion * f) {
+    funciones->add(k, f);
 }
 
-void ColFunciones::remove(Funcion * f) {
-    funciones->remove(f);
+void ColFunciones::remove(KeyInteger* k) {
+    funciones->remove(k);
 }
 
-bool ColFunciones::member(Funcion * f) {
-    return funciones->member(f);
+bool ColFunciones::member(KeyInteger* k) {
+    return funciones->member(k);
 }
 
 int ColFunciones::getSize() const {
     return funciones->getSize();
+}
+
+Funcion* ColFunciones::find(KeyInteger* k)
+{
+	return dynamic_cast<Funcion*>(funciones->find(k));
 }
 
 bool ColFunciones::isEmpty() const {

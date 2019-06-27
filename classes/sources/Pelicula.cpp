@@ -32,10 +32,10 @@ void Pelicula::setPuntaje(float puntaje){
 	this->puntaje=puntaje;
 }
 
-void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* u, string banco, string financiera)
+void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera)
 {
 	Funcion* f = funciones.find(new KeyInteger(idFuncion));
-	f->ReservarFuncion(cantAsientos, costo, u->getNickname(), banco, financiera);
+	f->ReservarFuncion(cantAsientos, costo, usuario, banco, financiera);
 }
 
 void Pelicula::EliminarFunciones()
@@ -48,13 +48,14 @@ void Pelicula::EliminarFunciones()
 	}
 }
 
-ICollection* Pelicula::ListarFunciones()
+ICollection* Pelicula::ListarFunciones(int idCine)
 {
-	ICollection* dts;
+	ICollection* dts = new List();
 	FuncionIterator it = funciones.getIterator();
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();
-		dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario()));
+		if (f->EsDeCine(idCine) /*&& funcion.horario < tiempoActual*/) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario()));
+
 		it.next();
 	}
 
@@ -63,7 +64,7 @@ ICollection* Pelicula::ListarFunciones()
 
 ICollection* Pelicula::getCines()
 {
-	ICollection* dts = NULL;
+	ICollection* dts = new List();
 	FuncionIterator it = funciones.getIterator();
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();

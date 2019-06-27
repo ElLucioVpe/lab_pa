@@ -24,15 +24,16 @@ void Funcion::setHorario(string Horario){
 void Funcion::EliminarReservas() {
 	reservas.~ColReservas();
 }
-bool Funcion::EsDePelicula(string t) {
-	return true;//No es necesaria si la busqueda empieza desde la pelicula
+bool Funcion::EsDeCine(int idCine)
+{
+	return _cine->getIdCine() == idCine;
 }
 void Funcion::ReservarFuncion(int cantAsientos, float costo, string usuario, string banco, string financiera) {
 	
 	if (banco == "") reservas.add(new TarjetaDeCredito(financiera, costo, cantAsientos));
 	else reservas.add(new TarjetaDeDebito(banco, costo, cantAsientos));
 
-	//se necesita agregar un parametro Usuario a Reserva o alguna otra forma de saber quien la reservo 
+	//se deberia agregar un parametro Usuario a Reserva o alguna otra forma de saber quien la reservo 
 }
 
 Funcion::~Funcion()

@@ -18,7 +18,7 @@ public:
 	void setIdfuncion(int IdFuncion);
 	void setHorario(string h);
 	void EliminarReservas();
-	bool EsDePelicula(string t);
+	bool EsDeCine(int IdCine);
 	void ReservarFuncion(int, float, string, string, string);
 	~Funcion();
 	
