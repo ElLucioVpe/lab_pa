@@ -6,15 +6,15 @@
 
 class ComentarioIterator {
 public:
-  ComentarioIterator();
-  ComentarioIterator(IIterator* listIt);
-  Comentario* getCurrent();
-  bool hasCurrent();
-  void next();
-  ~ComentarioIterator();
+	ComentarioIterator();
+	ComentarioIterator(IIterator* listIt);
+	Comentario* getCurrent();
+	bool hasCurrent();
+	void next();
+	~ComentarioIterator();
 
-Private:
-IIterator* it;
+private:
+	IIterator* it;
 };
 
 #endif	/* PELICULAITERATOR_H */

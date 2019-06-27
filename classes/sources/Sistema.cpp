@@ -31,30 +31,21 @@ void Sistema::AltaPelicula(string titulo, string poster, string sinopsis)
 	peliculas->add(k, p);
 }
 
-void Sistema::AltaCine(int id, string dir)
+void Sistema::AltaCine(string dir)
 {
+	int id = cines->getSize() + 1;
 	KeyInteger* k = new KeyInteger(id);
 	Cine* c = new Cine(id, dir);
 	cines->add(k, c);
 }
 
-bool Sistema::iniciarSesion(string user, string pass) {
-    UsuarioIterator it = usuarios->getIterator();
-    Usuario* u = NULL;
-    while (it.hasCurrent()) {
-        u = it.getCurrent();
-        if (user == u->getNickName()){
-            if (u->contraCorrecta(pass)){
-                return true;
-            } else {
-				throw std::invalid_argument("Contrasenia incorrecta");
-                return false;
-            }
-        }
-        it.next();
-    }
-	throw std::invalid_argument("No existe dicho usuario");
-    return false;
+DtUsuario* Sistema::iniciarSesion(string user, string pass) {
+	Usuario* u = usuarios->find(new KeyString(user));
+
+	if (u == NULL) throw std::invalid_argument("No existe dicho usuario");
+	if (u->contraCorrecta(pass) == false) throw std::invalid_argument("Constrasenia incorrecta");
+
+    return new DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia());
 }
 
 void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idFuncion, string usuario, string banco, string financiera) {
@@ -99,7 +90,7 @@ void Sistema::VerInfoPelicula(string titulo) {
 	cout << "\n\tInformacion sobre " + p->getTitulo() << endl << endl;
 	cout << "Poster: \n" + p->getPoster() << endl;
 	cout << "Sinopsis: \n" + p->getSinopsis() << endl;
-	cout << "Puntaje: " + p->getPuntaje() << endl;
+	cout << "Puntaje: " << p->getPuntaje() << endl;
 }
 
 ICollection* Sistema::ListarCines() {

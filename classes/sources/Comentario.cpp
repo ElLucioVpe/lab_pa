@@ -1,15 +1,31 @@
 #include "../headers/Comentario.h"
 
-Comentario::Comentario(String Texto){
+Comentario::Comentario(string Texto){
 	this->Texto= Texto;
+	hijos = new ColComentarios();
 }
 
-int Comentario::getTexto(){
+int Comentario::getId()
+{
+	return this->Id;
+}
+
+string Comentario::getTexto(){
 	return this->Texto;
 }
 
-void Comentario::setTexto(String t){
+void Comentario::setId(int _id)
+{
+	this->Id = _id;
+}
+
+void Comentario::setTexto(string t){
 	this->Texto= t;
+}
+
+void Comentario::agregarHijo(Comentario* c)
+{
+	hijos->add(new KeyInteger(c->Id), c);
 }
 
 Comentario::~Comentario()

@@ -18,8 +18,8 @@ class Sistema : public ISistema {
 
 		void AltaUsuario(string nick, string img, string contra);
 		void AltaPelicula(string titulo, string poster, string sinopsis);
-		void AltaCine(int id, string dir);
-        bool iniciarSesion(string user, string pass);
+		void AltaCine(string dir);
+        DtUsuario* iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera);
 		ICollection* ListarTitulos();
         DtPelicula* SeleccionarPelicula(string titulo);

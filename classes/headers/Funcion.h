@@ -2,6 +2,8 @@
 #define FUNCION_H
 
 #include <iostream>
+#include <string>
+#include <ctime>
 #include "../../interfaces/ICollectible.h"
 #include "Cine.h"
 #include "../../collections/ColReservas.h"
@@ -10,21 +12,20 @@ using namespace std;
 
 class Funcion : public ICollectible {
 public:
-    Funcion(int idFuncion, string Horario);
+    Funcion(int idFuncion, string horario);
 	int getIdFuncion();
-	string getHorario();
+	time_t getHorario();
 	Cine* getCines();
-	//Dtfuncion getDatafuncion();
 	void setIdfuncion(int IdFuncion);
 	void setHorario(string h);
 	void EliminarReservas();
 	bool EsDeCine(int IdCine);
 	void ReservarFuncion(int, float, string, string, string);
 	~Funcion();
-	
+
 private: 
 	int IdFuncion;
-	string Horario;
+	time_t Horario;
 	Cine* _cine;
 	ColReservas reservas;
 };

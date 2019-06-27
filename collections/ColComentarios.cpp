@@ -16,7 +16,7 @@ bool ColComentarios::member(KeyString* k) {
     return comentarios->member(k);
 }
 
-Comentarios* ColComentarios::find(KeyString* k)
+Comentario* ColComentarios::find(KeyString* k)
 {
 	return dynamic_cast<Comentario*>(comentarios->find(k));
 }
@@ -40,7 +40,7 @@ ComentarioIterator ColComentarios::getIterator() {
 }
 
 ColComentarios::~ColComentarios() {
-    IIterator* it = Comentarios->getIterator();
+    IIterator* it = comentarios->getIterator();
     while (it->hasCurrent()) {
         Comentario* temp = dynamic_cast<Comentario*>(it->getCurrent());
         it->next();
