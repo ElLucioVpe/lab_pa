@@ -14,7 +14,7 @@ class ISistema {
 		virtual void AltaPelicula(string titulo, string poster, string sinopsis) = 0;
 		virtual void AltaCine(int id, string dir) = 0;
         virtual bool iniciarSesion(string , string) = 0;
-        virtual void CrearReserva(int, float, int, Usuario*) = 0;
+        virtual void CrearReserva(int cantAsientos, float costo, int IdFuncion, Usuario* u, string banco, string financiera) = 0;
         virtual ICollection* ListarTitulos() = 0;
         virtual DtPelicula SeleccionarPelicula(string) = 0;
         virtual void EliminarPelicula(string) = 0;

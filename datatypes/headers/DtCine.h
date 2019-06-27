@@ -3,7 +3,7 @@
 
 #include "../../classes/headers/Cine.h"
 
-class DtCine {
+class DtCine : public ICollectible {
 public:
     DtCine();
     DtCine(int, string);

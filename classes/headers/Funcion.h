@@ -19,7 +19,7 @@ public:
 	void setHorario(string h);
 	void EliminarReservas();
 	bool EsDePelicula(string t);
-	void ReservarFuncion(int, float, string);
+	void ReservarFuncion(int, float, string, string, string);
 	~Funcion();
 	
 private: 

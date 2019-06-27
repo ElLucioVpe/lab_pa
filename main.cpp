@@ -76,27 +76,112 @@ int main() {
 
 				switch (op)
 				{
-				case 0: {
-						sistema->ListarTitulos();
-						IIterator* it;
-						while (it->hasCurrent())
-
-						int cantAsientos, idFuncion;
-						cout << "Ingrese la cantidad de asientos que desea reservar: ";
-						cin >> cantAsientos;
-
-						float costo = cantAsientos * 300;
-						sistema->CrearReserva(cantAsientos, costo, idFuncion, new Usuario("","",""));
+					case 0:
 						break;
-					}
-						
-				case 1: {
-					break;
+					case 1: {
+						break;
 					}
 					case 2:
 						break;
-					case 3:
-						break;
+					case 3: {
+						string titulo, elegir, banco = "", financiera = "";
+						int cantAsientos, idFuncion, idCine;
+
+						ICollection* t = sistema->ListarTitulos();
+						IIterator* it = t->getIterator();
+						while (it->hasCurrent()) {
+							cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue();
+						}
+
+						cout << "Continuar con la reserva? (Si/No): ";
+						cin >> elegir;
+
+						if (elegir == "Si" || elegir == "si") {
+							cout << "Ingrese el titulo de la pelicula que desee: ";
+							cin >> titulo;
+
+							sistema->VerInfoPelicula(titulo);
+
+							cout << "Desea ver informacion adicional? (Si/No)";
+							if(elegir == "Si" || elegir == "si") {
+								sistema->ListarCinesPorTitulo(titulo);
+
+								cout << "Desea elegir un cine? (Si/No)";
+								if (elegir == "Si" || elegir == "si") {
+									cout << "Ingrese el numero del cine que desee: ";
+									cin >> idCine;
+
+									sistema->ListarFunciones(idCine, titulo);
+									cout << "Elija una funcion: ";
+									cin >> idFuncion;
+
+									cout << "Ingrese la cantidad de asientos que desea reservar: ";
+									cin >> cantAsientos;
+
+									float costo = cantAsientos * 300;
+
+									cout << "Elija su tipo de pago (Debito/Credito): ";
+									cin >> elegir;
+
+									if (elegir == "Debito") { 
+										cout << "Ingrese su banco: "; 
+										cin >> banco;
+									}
+									else {
+										if (elegir == "Credito") {
+											cout << "Ingrese su financiera: ";
+											cin >> financiera;
+											
+										}
+										else throw std::invalid_argument("La opcion ingresada no es valida");
+									}
+
+									cout << "Continuar con la reserva? (Si/No): ";
+									cin >> elegir;
+
+									if (elegir == "Si" || elegir == "si") {
+										sistema->CrearReserva(cantAsientos, costo, idFuncion, new Usuario("", "", ""), banco, financiera);
+									}
+									else {
+										if (elegir == "No" || elegir == "no") {
+											cout << "Se cancela la reserva" << endl;
+										}
+										else {
+											throw std::invalid_argument("La opcion ingresada no es valida");
+										}
+									}
+									
+								}
+								else {
+									if (elegir == "No" || elegir == "no") {
+										cout << "Se cancela la reserva" << endl;
+									}
+									else {
+										throw std::invalid_argument("La opcion ingresada no es valida");
+									}
+								}
+							}
+							else {
+								if (elegir == "No" || elegir == "no") {
+										cout << "Se cancela la reserva" << endl;
+								}
+								else {
+										throw std::invalid_argument("La opcion ingresada no es valida");
+								}
+							}
+						}
+						else {
+							if (elegir == "No" || elegir == "no") {
+								cout << "Se cancela la reserva" << endl;
+							}
+							else {
+								throw std::invalid_argument("La opcion ingresada no es valida");
+							}
+						}
+
+					}
+					break;
+					
 						// ...
 					case 4: {
 						while (op != 0) {

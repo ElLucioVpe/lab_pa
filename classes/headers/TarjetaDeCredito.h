@@ -9,7 +9,7 @@ private:
 	std::string Financiera;
 	float PorcentajeDescuento;
 public:
-	TarjetaDeCredito(std::string _financiera, float _porcentaje, float _precio, int _cantAsientos);
+	TarjetaDeCredito(std::string _financiera, float _precio, int _cantAsientos);
 
 	std::string getFinanciera();
 	float getDescuento();

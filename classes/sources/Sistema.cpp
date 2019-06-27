@@ -57,11 +57,14 @@ bool Sistema::iniciarSesion(string user, string pass) {
     return false;
 }
 
-void Sistema::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* u) {
+void Sistema::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* u, string banco, string financiera) {
 	delete u; //solo por las dudas, por ahora no lo utilizamos
-    //buscar por el cine de dicha funcion
+    
+	//buscar por el cine de dicha funcion
+	peliculas
     //cine.funciones.member(f)
     //y añadir la reserva a la coleccion de reservas en dicha funcion
+	//tirar error si la funcion u otro parametro no es correcto
 }
 
 ICollection* Sistema::ListarTitulos() {
@@ -88,7 +91,9 @@ void Sistema::EliminarPelicula(string titulo) {
 }
 
 void Sistema::VerInfoPelicula(string titulo) {
-
+	Pelicula* p = peliculas->find(new KeyString(titulo));
+	cout << "Poster: \n" + p->getPoster() << endl;
+	cout << "Sinopsis: \n" + p->getSinopsis() << endl;
 }
 
 ICollection* Sistema::ListarCines() {
@@ -107,6 +112,13 @@ ICollection* Sistema::ListarCines() {
 ICollection* Sistema::ListarCinesPorTitulo(string tituloPelicula) {
 	ICollection* dts = NULL;
 	//buscar los cines que tengan funciones de la pelicula
+	PeliculaIterator it = peliculas->getIterator();
+	Pelicula* p = NULL;
+	while (it.hasCurrent()) {
+		p = it.getCurrent();
+		dts->add(p->getCines());
+		it.next();
+	}
 	return dts;
 }
 
