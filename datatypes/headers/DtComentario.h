@@ -12,13 +12,15 @@ using namespace std;
 class DtComentario : public ICollectible {
 public:
     DtComentario();
-    DtComentario(int, string);
+    DtComentario(int, string, DtUsuario);
     string getTexto();
     int getId();
+    DtUsuario getDtUsuario();
     virtual ~DtComentario();
 private:
     int id;
     string texto;
+     DtUsuario user;
 };
 
 #define DTCOMENTARIO_H
