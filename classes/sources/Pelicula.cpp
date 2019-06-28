@@ -125,5 +125,7 @@ ICollection* Pelicula::getComentarios()
 }
 
 Pelicula::~Pelicula() {
-	EliminarFunciones();
+	delete funciones; //el destructor de cada funcion ya se encarga de eliminar las reservas en dicha funcion 
+	delete puntajes;
+	delete comentarios;
 }

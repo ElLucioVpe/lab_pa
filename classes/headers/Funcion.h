@@ -29,7 +29,7 @@ private:
 	time_t Horario;
 	Cine* _cine;
 	Sala* _sala;
-	ColReservas reservas;
+	ColReservas* reservas;
 };
 
 #endif /* FUNCION_H */

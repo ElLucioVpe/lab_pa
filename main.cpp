@@ -375,20 +375,15 @@ void OpcionesAdministrativas() {
 		case 1:
 			OpcionAltaCine();
 			break;
-		case 2: {
+		case 2:
 			OpcionAltaPelicula();
 			break;
-		}
 		case 3:
 			OpcionAltaFuncion();
 			break;
-		case 4: {
-			string t;
-			cout << "Ingrese el titulo de la pelicula a eliminar: ";
-			cin >> t;
-			s->EliminarPelicula(t);
+		case 4:
+			OpcionEliminarPelicula();
 			break;
-		}
 		default:
 			throw std::invalid_argument("La opcion ingresada no es valida");
 		}
@@ -570,4 +565,23 @@ void OpcionAltaFuncion(){
 
 void OpcionEliminarPelicula()
 {
+	ISistema* s = Sistema::getInstance();
+	string titulo;
+
+	cout << "\n\tCatalogo de Peliculas" << endl << endl;
+	ICollection* t = s->ListarTitulos();
+	IIterator* it = t->getIterator();
+	while (it->hasCurrent()) {
+		cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
+		it->next();
+	}
+
+	cout << "Ingrese el titulo de la pelicula a eliminar: ";
+	cin.ignore();
+	getline(cin, titulo);
+
+	if (DeseaContinuar("Enserio desea eliminar dicha pelicula? (Si/No): ") == false) return;
+
+	s->EliminarPelicula(titulo);
+	cout << "La pelicula " << titulo << " ha sido eliminada" << endl;
 }

@@ -100,7 +100,9 @@ DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
 }
 
 void Sistema::EliminarPelicula(string titulo) {
-
+	Pelicula* p = peliculas->find(new KeyString(titulo));
+	peliculas->remove(new KeyString(p->getTitulo())); //Remuevo la pelicula de la coleccion
+	delete p; //Elimina sus funciones las cuales eliminan sus reservas, ademas de los comentarios y puntajes
 }
 
 void Sistema::VerInfoPelicula(string titulo) {
