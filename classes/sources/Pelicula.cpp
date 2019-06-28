@@ -99,6 +99,14 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 	return dts;
 }
 
+Icollection* Pelicula::ListarComentarios(){
+    ICollection* dts = new List();
+    ComentarioIterator it = comentarios->getIterator();
+    while (it.hasCurrent()){
+        Comentario * c = it.getCurrent();
+        dts->add(new DtComentario(c->getId(), c->getTexto()));
+    }
+}
 ICollection* Pelicula::getCines()
 {
 	ICollection* dts = new List();
@@ -112,10 +120,12 @@ ICollection* Pelicula::getCines()
 	return dts;
 }
 
-void Pelicula::agregarComentario(string _comentario)
+void Pelicula::agregarComentario(string _comentario, Usuario* autor)
 {
+    string user.getNickName();
+
    int _number = comentarios->getSize() + 1;
-   Comentario* _com = new Comentario(_number, _comentario);
+   Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
 }
 
