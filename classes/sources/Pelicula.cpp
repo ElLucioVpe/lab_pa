@@ -122,11 +122,15 @@ ICollection* Pelicula::getCines()
 
 void Pelicula::agregarComentario(string _comentario, Usuario* autor)
 {
-    string user.getNickName();
 
    int _number = comentarios->getSize() + 1;
    Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
+}
+void Pelicula::agregarPuntaje(int _puntaje, Usuario * user){
+    int _number = puntajes->getSize() + 1;
+    Puntaje* _pun = new Puntaje(_puntaje, user);
+    puntajes->add( _pun);
 }
 
 ICollection* Pelicula::getComentarios()
