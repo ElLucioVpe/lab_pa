@@ -58,7 +58,22 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 
-	//p->AltaFuncion();
+	Cine* c = cines->find(new KeyInteger(idCine));
+
+	if (c == NULL) throw std::invalid_argument("El cine no existe");
+
+	p->AltaFuncion(titulo,horario,idCine,idSala);
+}
+
+void Sistema::AltaComentario(string texto, string pelicula, string autor)
+{
+	Pelicula* p = peliculas->find(new KeyString(pelicula));
+	Usuario* u = usuarios->find(new KeyString(autor));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+	if (u == NULL) throw std::invalid_argument("El usuario no existe");
+
+	p->agregarComentario(texto, u);
 }
 
 ICollection* Sistema::ListarSalas(int idCine) {
@@ -98,12 +113,22 @@ DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
 
 	return new DtPelicula(p->getTitulo(), p->getPoster(), p->getSinopsis(), p->getPuntaje());
 }
+void Sistema::ListarComentariosypuntajes(string titulo){
 
+
+Pelicula* p = peliculas->find(new  KeyString(titulo));
+cout << "\n\tComentarios de: " + p->getTitulo() << endl << endl;
+cout << "Su puntaje es: " + p->getPuntaje()<< endl;
+
+return p->ListarComentarios();
+
+}
 void Sistema::EliminarPelicula(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 	peliculas->remove(new KeyString(p->getTitulo())); //Remuevo la pelicula de la coleccion
 	delete p; //Elimina sus funciones las cuales eliminan sus reservas, ademas de los comentarios y puntajes
 }
+
 
 void Sistema::VerInfoPelicula(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
@@ -166,4 +191,9 @@ int Sistema::DarUltimoCine()
 		it.next();
 	}
 	return previous->getIdCine();
+}
+Usuario * Sistema::ListarUsuario(DtUsuario * user){
+     Usuario * User = usuarios->find(new KeyString(user->getNickName()));
+    return User;
+
 }

@@ -24,7 +24,7 @@ add_executable(lab_pa
         classes/sources/TarjetaDeDebito.cpp
         classes/sources/Usuario.cpp
         collections/ColReservas.h
-        collections/ColResrevas.cpp
+        collections/ColReservas.cpp
         collections/List.cpp
         collections/List.h
         collections/ListIterator.cpp

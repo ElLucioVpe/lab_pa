@@ -3,10 +3,11 @@
 
 #include "../interfaces/ICollection.h"
 #include "ComentarioIterator.h"
-#include "../classes/headers/Comentario.h"
+//#include "../classes/headers/Comentario.h"
 #include "OrderedDictionary.h"
 #include "../KeyInteger.h"
 
+class Comentario;
 
 class ColComentarios {
 private:

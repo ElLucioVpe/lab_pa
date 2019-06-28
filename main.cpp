@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 #include "classes/headers/Sistema.h"
@@ -110,7 +110,7 @@ int main() {
 						OpcionPuntuarPelicula(usuarioActual);
 						break;
 					case 4:
-						OpcionComentarPelicula();
+						OpcionComentarPelicula(usuarioActual);
 						break;
 					case 5:
 						OpcionVerComentariosyPuntajes();
@@ -324,35 +324,77 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
     }
 }
 
-void OpcionComentarPelicula()
+void OpcionComentarPelicula(DtUsuario* usuarioActual)
 {
    ISistema* sistema = Sistema::getInstance();
 
    string _nombre;
    string _comentario;
 
-   cout << "Nombre de pelicula: " << endl;
-   cin >> _nombre;
+   cout << "Ingrese el nombre de una pelicula: " << endl;
+   cin.ignore();
+   getline(cin, _nombre);
 
-   cout << "Comentario: " << endl;
-   cin >> _comentario;
+   //Listar comentarios de la pelicula
+   while (DeseaContinuar("Desea ingresar un comentario? (Si/No): "))
+   {
+	   if(DeseaContinuar("Desea comentar un comentario ya existente? (Si/No): ")) {
+		   cout << "Ingrese su comentario: " << endl;
+		   cin.ignore();
+		   getline(cin, _comentario);
+	   }
+	   else {
+		   cout << "Ingrese su comentario: " << endl;
+		   cin.ignore();
+		   getline(cin, _comentario);
+	   }
+	   
+   }
 
-   ICollection* _peliculas = sistema->ListarFunciones();
+   //Reparaciones
+   sistema->AltaComentario(_comentario, _nombre, usuarioActual->getNickName());
+
+   //Esto no deberia hacerse en el main, ni se puede tampoco
+
+   /*ICollection* _peliculas = sistema->ListarFunciones();
    IIterator* _iterator = _peliculas->getIterator();
 
    while (_iterator->hasCurrent()) {
       Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
 
       if(p->getTitulo() == _nombre) {
-         p->agregarComentario(_comentario);
+          Usuario* _Usuario = sistema->ListarUsuario(usuarioActual);
+
+          p->agregarComentario(_comentario, _Usuario);
       }
 
       _iterator->next();
-   }
+   }*/
 }
 
 void OpcionVerComentariosyPuntajes()
 {
+    ISistema* sistema = Sistema::getInstance(); //Obtengo la instancia de Sistema
+
+    //Lista Films
+    cout << "\n\tCatalogo de Peliculas" << endl << endl;
+    ICollection* t = sistema->ListarTitulos();
+    IIterator* it = t->getIterator();
+    while (it->hasCurrent()) {
+        cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
+        it->next();
+    }
+
+    //Selecciona Films
+    cout << "Ingrese el titulo de la pelicula que desee: ";
+    cin.ignore();
+    getline(cin, titulo);
+
+    sistema->VerInfoPelicula(titulo);
+    sistema->ListarComentarios(titulo);
+
+
+
 }
 
 void OpcionesAdministrativas() {
@@ -518,7 +560,8 @@ void OpcionAltaFuncion(){
 			time_t h = f->getHorario();
 			//Me fijo si dicha funcion + 3 horas esta en el rango de la hora y fecha que el user puso
 			//No me salio ese if xD
-			if(horario<h+3){
+			DiffSeconds = difftime(horario,h);
+			if(DiffSeconds<10800){
 			//En el caso de ser asi, es porque esta ocupada esa sala entonces la pusheo dentro del vector dinamico
 				SalasOcupadas.push_back(f->getIdSala()); //Crear getIdSala
 
@@ -533,7 +576,6 @@ void OpcionAltaFuncion(){
 	}
 
 	//Mostramos las salas
-
 	ICollection* s = sistema->ListarSalas(idCine);
 	it = s->getIterator();
 	while (it->hasCurrent()) {
@@ -552,15 +594,43 @@ void OpcionAltaFuncion(){
 
 	//Selecionar Sala
 	int idSala;
+	bool existeSala=false;
 	cout << "Ingrese el numero de sala que desee: ";
 	cin >> idSala;
 
-	//Crear Reserva
+
+	//La llamo otra vez porque soy tonto
+	ICollection* s2 = sistema->ListarSalas(idCine);
+	it = s2->getIterator();
+
+	while (it->hasCurrent()) {
+		DtSala* s = dynamic_cast<DtSala*>(it->getCurrent());
+		if(it->getIdSala==idSala) {
+			existeSala=true;
+		} else {
+
+		}
+			it->next();
+	}
+
+	//Si termino el while y la encontro Existe
+	if(existeSala==true){
+		//Ahora veremos si esta ocupada o no
 		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), idSala) != SalasOcupadas.end()) {
 			cout << "Esta Seleccionando una sala que esta ocupada" << endl;
 		} else {
+			//Todo bien, hagamos el alta.
 	 		sistema->AltaFuncion(titulo,fechaFun,idCine,idSala);
 		}
+
+	}else{
+
+		cout << "La sala que selecciono no existe" << endl;
+	}
+
+	//Crear Reserva
+
+
 }
 
 void OpcionEliminarPelicula()

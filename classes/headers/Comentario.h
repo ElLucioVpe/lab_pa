@@ -4,15 +4,13 @@
 #include <iostream>
 #include "../../interfaces/ICollectible.h"
 #include "../../collections/ColComentarios.h"
-#include "Usuario.h"
+#include "../../classes/headers/Usuario.h"
 
 using namespace std;
 
-class ColComentarios;
-
 class Comentario : public ICollectible {
 public:
-	Comentario(int id, string Texto, Usuario* user);
+	Comentario(int id, string Texto, Usuario* autor);
 	int getId();
 	string getTexto();
 	Usuario GetUsuario();
@@ -24,7 +22,7 @@ public:
 private:
 	int Id;
 	string Texto;
-	Usuario* user;
+	Usuario* Autor;
 	ColComentarios* hijos;
 };
 

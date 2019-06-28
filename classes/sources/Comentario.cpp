@@ -1,9 +1,9 @@
 #include "../headers/Comentario.h"
 
-Comentario::Comentario(int id, string Texto, Usuario* user){
+Comentario::Comentario(int id, string Texto, Usuario* autor){
 	this->Id = id;
-	this->Texto= Texto;
-	this->Usuario= user;
+	this->Texto = Texto;
+	this->Autor = autor;
 	hijos = new ColComentarios();
 }
 
