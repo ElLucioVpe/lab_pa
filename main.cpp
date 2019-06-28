@@ -301,6 +301,29 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
 
 void OpcionComentarPelicula()
 {
+   ISistema* sistema = Sistema::getInstance();
+
+   string _nombre;
+   string _comentario;
+
+   cout << "Nombre de pelicula: " << endl;
+   cin >> _nombre;
+
+   cout << "Comentario: " << endl;
+   cin >> _comentario;
+
+   ICollection* _peliculas = sistema->ListarFunciones();
+   IIterator* _iterator = _peliculas->getIterator();
+
+   while (_iterator->hasCurrent()) {
+      Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
+
+      if(p->getTitulo() == _nombre) {
+         p->agregarComentario(_comentario);
+      }
+
+      _iterator->next();
+   }
 }
 
 void OpcionVerComentariosyPuntajes()

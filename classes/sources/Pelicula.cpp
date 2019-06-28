@@ -105,6 +105,14 @@ ICollection* Pelicula::getCines()
 	return dts;
 }
 
+void Pelicula::agregarComentario(string _comentario)
+{
+   int _number = this->comentarios.getSize() + 1;
+   KeyString _key = std::to_string(_number);
+   Comentario* _com = new Comentario(_comentario);
+   this->comentarios.add(&_key, _com);
+}
+
 ICollection* Pelicula::getComentarios()
 {
    ICollection* dts = new List();

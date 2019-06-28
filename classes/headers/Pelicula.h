@@ -27,7 +27,8 @@ public:
 	void setSinopsis(string sinopsis);
 
     void CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera);
-	void EliminarFunciones();
+    void agregarComentario(string comentario);
+    void EliminarFunciones();
     void puntuarPelicula(int puntaje, Usuario* user);
     ICollection* ListarFunciones(int IdCine);
     ICollection* getComentarios();
