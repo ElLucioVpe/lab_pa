@@ -61,6 +61,17 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 	//p->AltaFuncion();
 }
 
+void Sistema::AltaComentario(string texto, string pelicula, string autor)
+{
+	Pelicula* p = peliculas->find(new KeyString(pelicula));
+	Usuario* u = usuarios->find(new KeyString(autor));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+	if (u == NULL) throw std::invalid_argument("El usuario no existe");
+
+	p->agregarComentario(texto, u);
+}
+
 ICollection* Sistema::ListarSalas(int idCine) {
 	Cine* c = cines->find(new KeyInteger(idCine));
 
@@ -109,7 +120,9 @@ return p->ListarComentarios();
 
 }
 void Sistema::EliminarPelicula(string titulo) {
-
+	Pelicula* p = peliculas->find(new KeyString(titulo));
+	peliculas->remove(new KeyString(p->getTitulo())); //Remuevo la pelicula de la coleccion
+	delete p; //Elimina sus funciones las cuales eliminan sus reservas, ademas de los comentarios y puntajes
 }
 
 

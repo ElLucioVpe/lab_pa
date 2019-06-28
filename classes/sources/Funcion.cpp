@@ -23,6 +23,7 @@ Funcion::Funcion(int IdFuncion, string _horario, Cine* _cine, Sala* _sala){
 
 	horario = mktime(&horariotm);
 	this->Horario= horario;
+	reservas = new ColReservas();
 }
 
 int Funcion::getIdFuncion(){
@@ -42,7 +43,7 @@ void Funcion::setHorario(time_t Horario){
 	this->Horario= Horario;
 }
 void Funcion::EliminarReservas() {
-	reservas.~ColReservas();
+	delete reservas;
 }
 bool Funcion::EsDeCine(int idCine)
 {
@@ -50,8 +51,8 @@ bool Funcion::EsDeCine(int idCine)
 }
 void Funcion::ReservarFuncion(int cantAsientos, float costo, string usuario, string banco, string financiera) {
 	
-	if (banco == "") reservas.add(new TarjetaDeCredito(financiera, costo, cantAsientos));
-	else reservas.add(new TarjetaDeDebito(banco, costo, cantAsientos));
+	if (banco == "") reservas->add(new TarjetaDeCredito(financiera, costo, cantAsientos));
+	else reservas->add(new TarjetaDeDebito(banco, costo, cantAsientos));
 
 	//se deberia agregar un parametro Usuario a Reserva o alguna otra forma de saber quien la reservo
 }

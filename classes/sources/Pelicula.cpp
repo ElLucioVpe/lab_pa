@@ -53,8 +53,7 @@ void Pelicula::setSinopsis(string sinopsis){
 }
 
 void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
-    Puntaje* puntajeNuevo;
-    puntajeNuevo = new Puntaje(valorPuntaje, this, user);
+	Puntaje* puntajeNuevo = new Puntaje(valorPuntaje, this, user);
     puntajes->add(puntajeNuevo);
 }
 
@@ -113,12 +112,12 @@ ICollection* Pelicula::getCines()
 	return dts;
 }
 
-void Pelicula::agregarComentario(string _comentario, DtUsuario user)
+void Pelicula::agregarComentario(string _comentario, Usuario* autor)
 {
     string user.getNickName();
 
    int _number = comentarios->getSize() + 1;
-   Comentario* _com = new Comentario(_number, _comentario);
+   Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
 }
 
@@ -136,5 +135,7 @@ ICollection* Pelicula::getComentarios()
 }
 
 Pelicula::~Pelicula() {
-	EliminarFunciones();
+	delete funciones; //el destructor de cada funcion ya se encarga de eliminar las reservas en dicha funcion 
+	delete puntajes;
+	delete comentarios;
 }

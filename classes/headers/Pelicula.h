@@ -10,11 +10,8 @@
 #include "../../datatypes/headers/DtFuncion.h"
 #include "../../datatypes/headers/DtComentario.h"
 #include "../../datatypes/headers/DtCine.h"
-#include "../headers/Puntaje.h"
 
 using namespace std;
-
-class ColPuntajes;
 
 class Pelicula : public ICollectible {
 public:
@@ -29,7 +26,7 @@ public:
 	void setSinopsis(string sinopsis);
 
     void CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera);
-    void agregarComentario(string comentario, Usuario* user);
+	void agregarComentario(string _comentario, Usuario* autor);
     void EliminarFunciones();
     void puntuarPelicula(int puntaje, Usuario* user);
     ICollection* ListarFunciones(int IdCine);
