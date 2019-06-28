@@ -17,6 +17,7 @@ public:
 	int getIdFuncion();
 	time_t getHorario();
 	Cine* getCines();
+	Sala* getSala();
 	void setIdfuncion(int IdFuncion);
 	void setHorario(time_t h);
 	void EliminarReservas();
