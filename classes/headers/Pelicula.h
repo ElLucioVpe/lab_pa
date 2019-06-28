@@ -6,7 +6,9 @@
 #include "../../interfaces/ICollectible.h"
 #include "../../collections/ColFunciones.h"
 #include "../../collections/ColPuntajes.h"
+#include "../../collections/ColComentarios.h"
 #include "../../datatypes/headers/DtFuncion.h"
+#include "../../datatypes/headers/DtComentario.h"
 #include "../../datatypes/headers/DtCine.h"
 #include "../headers/Puntaje.h"
 
@@ -28,7 +30,8 @@ public:
 	void EliminarFunciones();
     void puntuarPelicula(int puntaje, Usuario* user);
     ICollection* ListarFunciones(int IdCine);
-	ICollection* getCines();
+    ICollection* getComentarios();
+    ICollection* getCines();
 	~Pelicula();
 
 private:
@@ -38,6 +41,7 @@ private:
 	float puntaje;
 	ColFunciones funciones;
 	ColPuntajes puntajes;
+    ColComentarios comentarios;
 };
 
 #endif	/* PELICULA_H */

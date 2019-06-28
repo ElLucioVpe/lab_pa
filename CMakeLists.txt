@@ -55,4 +55,4 @@ add_executable(lab_pa
         interfaces/IKey.h
         interfaces/OrderedKey.cpp
         interfaces/OrderedKey.h
-        main.cpp)
+        main.cpp datatypes/headers/DtComentario.h datatypes/sources/DtComentario.cpp)

@@ -7,6 +7,8 @@ Pelicula::Pelicula(string titulo, string poster, string sinopsis, float puntaje)
   this->puntaje=puntaje;
   this->puntajes= new *ColPuntajes;
   this->funciones= new *ColFunciones;
+   this->comentarios = new *ColComentarios;
+
 }
 string Pelicula::getTitulo(){
     return this->titulo;
@@ -101,6 +103,19 @@ ICollection* Pelicula::getCines()
 	}
 
 	return dts;
+}
+
+ICollection* Pelicula::getComentarios()
+{
+   ICollection* dts = new List();
+   ComentarioIterator it = comentarios.getIterator();
+   while (it.hasCurrent()) {
+      Comentario* c = it.getCurrent();
+      dts->add(new DtComentario(c->getId(), c->getTexto()));
+      it.next();
+   }
+
+   return dts;
 }
 
 Pelicula::~Pelicula() {
