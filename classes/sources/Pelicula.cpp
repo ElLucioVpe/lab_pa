@@ -104,10 +104,10 @@ ICollection* Pelicula::getCines()
 	return dts;
 }
 
-void Pelicula::agregarComentario(string _comentario)
+void Pelicula::agregarComentario(string _comentario, Usuario* autor)
 {
    int _number = comentarios->getSize() + 1;
-   Comentario* _com = new Comentario(_number, _comentario);
+   Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
 }
 

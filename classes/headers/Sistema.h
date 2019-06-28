@@ -21,6 +21,7 @@ class Sistema : public ISistema {
 		void AltaCine(string dir);
 		void AltaSala(int idCine, int cantAsientos);
 		void AltaFuncion(string titulo, string horario, int idCine, int idSala);
+		void AltaComentario(string texto, string pelicula, string autor);
         DtUsuario* iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera);
 		ICollection* ListarTitulos();

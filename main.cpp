@@ -324,20 +324,39 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
     }
 }
 
-void OpcionComentarPelicula()
+void OpcionComentarPelicula(DtUsuario* usuarioActual)
 {
    ISistema* sistema = Sistema::getInstance();
 
    string _nombre;
    string _comentario;
 
-   cout << "Nombre de pelicula: " << endl;
-   cin >> _nombre;
+   cout << "Ingrese el nombre de una pelicula: " << endl;
+   cin.ignore();
+   getline(cin, _nombre);
 
-   cout << "Comentario: " << endl;
-   cin >> _comentario;
+   //Listar comentarios de la pelicula
+   while (DeseaContinuar("Desea ingresar un comentario? (Si/No): "))
+   {
+	   if(DeseaContinuar("Desea comentar un comentario ya existente? (Si/No): ")) {
+		   cout << "Ingrese su comentario: " << endl;
+		   cin.ignore();
+		   getline(cin, _comentario);
+	   }
+	   else {
+		   cout << "Ingrese su comentario: " << endl;
+		   cin.ignore();
+		   getline(cin, _comentario);
+	   }
+	   
+   }
 
-   ICollection* _peliculas = sistema->ListarFunciones();
+   //Reparaciones
+   sistema->AltaComentario(_comentario, _nombre, usuarioActual->getNickName())
+
+   //Esto no deberia hacerse en el main, ni se puede tampoco
+
+   /*ICollection* _peliculas = sistema->ListarFunciones();
    IIterator* _iterator = _peliculas->getIterator();
 
    while (_iterator->hasCurrent()) {
@@ -348,7 +367,7 @@ void OpcionComentarPelicula()
       }
 
       _iterator->next();
-   }
+   }*/
 }
 
 void OpcionVerComentariosyPuntajes()
