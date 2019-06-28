@@ -73,9 +73,12 @@ void Pelicula::EliminarFunciones()
 	}
 }
 
-void Pelicula::AltaFuncion(string titulo, string horario, int idCine, int idSala) {
+void Pelicula::AltaFuncion(string horario, Cine* cin, Sala* sal) {
 
-Fine* f-> new Funcion(id,titulo,horario,idCine,idSala);
+int id = funciones->getSize() + 1;
+KeyInteger* k = new KeyInteger(id);
+
+Funcion* f-> new Funcion(k,horario,cin,sal);
 funciones->add(k,f)
 
 

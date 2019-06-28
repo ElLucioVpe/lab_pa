@@ -57,12 +57,18 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+	
 
 	Cine* c = cines->find(new KeyInteger(idCine));
 
 	if (c == NULL) throw std::invalid_argument("El cine no existe");
 
-	p->AltaFuncion(titulo,horario,idCine,idSala);
+
+	Sala* s = c->GetUnaSala(idSala);
+
+	if (s == NULL) throw std::invalid_argument("La sala no existe");
+
+	p->AltaFuncion(horario,c,s);
 }
 void Sistema::AltaPuntaje(int _puntaje, DtUsuario *user) {
     Pelicula* p = peliculas->find(new KeyString(pelicula));
