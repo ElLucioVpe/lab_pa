@@ -318,7 +318,7 @@ void OpcionesAdministrativas() {
 			break;
 		}
 		case 3:
-			//s->AltaFuncion();
+			OpcionAltaFuncion();
 			break;
 		case 4: {
 			string t;
@@ -363,4 +363,127 @@ void OpcionAltaCine() {
 	for (auto i = cantAsientos.begin(); i != cantAsientos.end(); i++) {
 		//s->AltaSala(*i);
 	}
+}
+
+
+void OpcionAltaFuncion(){
+ISistema* sistema = Sistema::getInstance(); //Obtengo la instancia de Sistema
+
+	//Lista Films
+	cout << "\n\tCatalogo de Peliculas" << endl << endl;
+	ICollection* t = sistema->ListarTitulos();
+	IIterator* it = t->getIterator();
+	while (it->hasCurrent()) {
+		cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
+		it->next();
+	}
+
+	//Selecciona Films
+	cout << "Ingrese el titulo de la pelicula que desee: ";
+	cin.ignore();
+	getline(cin, titulo);
+
+
+	//Listar Cines
+	ICollection* c = sistema->ListarCines();
+	it = c->getIterator();
+	while (it->hasCurrent()) {
+		DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
+		cout << "Cine " + c->getIdCine() << endl; 
+		cout << "Direccion :"+c->getDireccion() << endl;
+		it->next();
+	}
+	
+	//Selecciona Cine
+	cout << "Ingrese el numero del cine que desee: ";
+	cin >> idCine;
+
+
+	cout << "Ingrese Fecha y hora de la funcion: ";
+	cin >> fechaFun;
+
+	//Conversion de string a time_t
+	time_t horario;
+	int yy, month, dd, hh, mm, ss;
+	struct tm horariotm = { 0 };
+
+	sscanf(fechaFun.c_str(), "%d/%d/%d %d:%d:%d", &yy, &month, &dd, &hh, &mm, &ss);
+	horariotm.tm_year = yy - 1900;
+	horariotm.tm_mon = month - 1;
+	horariotm.tm_mday = dd;
+	horariotm.tm_hour = hh;
+	horariotm.tm_min = mm;
+	horariotm.tm_sec = ss;
+	horariotm.tm_isdst = -1;
+
+	horario = mktime(&horariotm);
+	//
+	vector<int> SalasOcupadas;
+
+
+	//Lista Salas - Mostrar Ocupadas y Disponibles
+	//Voy por todas las pelis
+	ICollection* t = sistema->ListarTitulos();
+	IIterator* it = t->getIterator();
+
+	
+	while (it->hasCurrent()) {
+
+		//Voy por todas las funciones de todas las pelis de el cine seleccionado por el user
+		ICollection* f = sistema->ListarFunciones(idCine, dynamic_cast<KeyString*>(it->getCurrent())->getValue());
+		it2 = f->getIterator();
+
+		while (it2->hasCurrent()) {
+
+			DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
+			
+			time_t h = f->getHorario();
+			//Me fijo si dicha funcion + 3 horas esta en el rango de la hora y fecha que el user puso
+			//No me salio ese if xD
+			if(horario<h+3){
+			//En el caso de ser asi, es porque esta ocupada esa sala entonces la pusheo dentro del vector dinamico
+			SalasOcupadas.push_back(f->getIdSala) 
+
+			}
+
+			it->next();
+
+		}
+
+
+		it->next();
+	}
+
+	//Mostramos las salas
+
+	ICollection* s = sistema->ListarSalas(idCine);
+	it = s->getIterator();
+	while (it->hasCurrent()) {
+		DtSala* s = dynamic_cast<DtSala*>(it->getCurrent());
+		cout << "IdSala " + s->getIdSala() << endl; 
+		cout << "cantAsientos :"+s->getCantAsientos() << endl;
+		//Comparamos si esta en la lista de no disponibles para este cine a esa hora
+		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala) != SalasOcupadas.end()) {
+	    cout << "Ocupado"
+		} else {
+	    cout << "Disponible"
+		}
+			it->next();
+	}
+
+
+	//Selecionar Sala
+	cout << "Ingrese el numero de sala que desee: ";
+	cin >> idSala;
+
+	//Crear Reserva
+		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), idSala) != SalasOcupadas.end()) {
+	    cout << "Esta Seleccionando una sala que esta ocupada"
+		} else {
+	 	sistema->AltaFucnion(titulo,fechaFun,idCine,idSala);
+		}
+
+
+
+
 }
