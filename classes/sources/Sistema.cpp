@@ -53,12 +53,8 @@ DtUsuario* Sistema::iniciarSesion(string user, string pass) {
     return new DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin());
 }
 
-void Sistema::AltaFuncion(string titulo, string horario) {
-	Pelicula* p = peliculas->find(new KeyString(titulo));
+void Sistema::AltaFuncion(string titulo, string horario,int idCine, int idSala) {
 
-	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
-
-	return p->AltaFuncion();
 }
 
 ICollection* Sistema::ListarSalas(int idCine) {
