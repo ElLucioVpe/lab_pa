@@ -1,27 +1,26 @@
 #ifndef COLPUNTAJES_H
 #define	COLPUNTAJES_H
 
-#include "../interfaces/ICollection.h"
-#include "FuncionIterator.h"
+#include <iostream>
+#include <string>
 #include "../classes/headers/Puntaje.h"
-#include "OrderedDictionary.h"
+#include "../interfaces/ICollection.h"
+#include "PuntajeIterator.h"
 #include "List.h"
-#include "../KeyString.h"
 
-
-class ColPuntajes_H {
-private:
-    IDictionary* puntajes
-  public:
+class ColPuntajes {
+    private:
+        ICollection* puntajes;
+    public:
       ColPuntajes();
       ~ColPuntajes();
-      void add(KeyString * k,Puntaje * p);
-      void remove(KeyString * k);
-      bool member(KeyString * k);
-      Puntaje* find(KeyString* k);
+
+      void add(Puntaje * p);
+      void remove(Puntaje * p);
+      bool member(Puntaje * p);
       bool isEmpty() const;
       int getSize() const;
-      ComentarioIterator getIterator();
+      PuntajeIterator getIterator();
   };
 
   #endif	/* COLPUNTAJES_H */

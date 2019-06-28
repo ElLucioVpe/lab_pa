@@ -13,8 +13,8 @@ public:
   void next();
   ~PuntajeIterator();
 
-Private:
-IIterator* it;
+private:
+    IIterator* it;
 };
 
 #endif	/* PUNTAJEITERATOR_H */

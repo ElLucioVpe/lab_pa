@@ -5,8 +5,11 @@
 #include <set>
 #include "../../interfaces/ICollectible.h"
 #include "../../collections/ColFunciones.h"
+#include "../../collections/ColPuntajes.h"
 #include "../../datatypes/headers/DtFuncion.h"
 #include "../../datatypes/headers/DtCine.h"
+#include "../headers/Puntaje.h"
+
 using namespace std;
 
 class Pelicula : public ICollectible {
@@ -20,11 +23,11 @@ public:
 	void setTitulo(string titulo);
 	void setPoster(string poster);
 	void setSinopsis(string sinopsis);
-	void setPuntaje(float puntaje);
 
-	void CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera);
+    void CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera);
 	void EliminarFunciones();
-	ICollection* ListarFunciones(int IdCine);
+    void puntuarPelicula(int puntaje, Usuario* user);
+    ICollection* ListarFunciones(int IdCine);
 	ICollection* getCines();
 	~Pelicula();
 

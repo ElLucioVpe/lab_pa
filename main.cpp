@@ -102,7 +102,7 @@ int main() {
 						OpcionVerInfoPelicula();
 						break;
 					case 3:
-						OpcionPuntuarPelicula();
+						OpcionPuntuarPelicula(usuarioActual);
 						break;
 					case 4:
 						OpcionComentarPelicula();
@@ -264,8 +264,34 @@ void OpcionVerInfoPelicula()
 {
 }
 
-void OpcionPuntuarPelicula()
-{
+void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
+    ISistema* sistema = Sistema::getInstance();
+
+    string _nombre;
+    int _puntuacion;
+
+    cout << "Nombre de pelicula: " << endl;
+    cin >> _nombre;
+
+    cout << "Puntuacion (1/5): " << endl;
+    cin >> _puntuacion;
+
+    if(_puntuacion < 1 || _puntuacion > 5) {
+        cout << "Puntuacion incorrecta." << endl;
+    } else {
+        ICollection* _peliculas = sistema->ListarFunciones();
+        IIterator* _iterator = _peliculas->getIterator();
+
+        while (_iterator->hasCurrent()) {
+            Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
+
+            if(p->getTitulo() == _nombre) {
+                p->puntuarPelicula(_puntuacion, usuarioActual);
+            }
+
+            _iterator->next();
+        }
+    }
 }
 
 void OpcionComentarPelicula()

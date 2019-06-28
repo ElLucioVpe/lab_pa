@@ -1,6 +1,5 @@
 #include "../headers/Pelicula.h"
 
-
 Pelicula::Pelicula(string titulo, string poster, string sinopsis, float puntaje){
   this->titulo=titulo;
   this->poster=poster;
@@ -16,9 +15,29 @@ string Pelicula::getPoster(){
 string Pelicula::getSinopsis(){
     return this->sinopsis;
 }
+
 float Pelicula::getPuntaje(){
-    return this->puntaje;
+    float _puntajeTotal = 0;
+    int _contador = 0;
+
+    PuntajeIterator _iterator = this->puntajes.getIterator();
+
+    while (_iterator.hasCurrent()) {
+        Puntaje* p = dynamic_cast<Puntaje*>(_iterator.getCurrent());
+
+        _puntajeTotal += p->getValor();
+        _contador++;
+
+        _iterator.next();
+    }
+
+    if(_contador > 0) {
+         return _puntajeTotal / _contador;
+    } else {
+        return _puntajeTotal;
+    }
 }
+
 void Pelicula::setTitulo(string titulo){
 	this->titulo=titulo;
 }
@@ -28,8 +47,11 @@ void Pelicula::setPoster(string Poster) {
 void Pelicula::setSinopsis(string sinopsis){
 	this->sinopsis=sinopsis;
 }
-void Pelicula::setPuntaje(float puntaje){
-	this->puntaje=puntaje;
+
+void Pelicula::puntuarPelicula(int valorPuntaje, DtUsuario* user) {
+    Puntaje* puntajeNuevo;
+    puntajeNuevo = new Puntaje(valorPuntaje, *this, user);
+    this->puntajes.add(puntajeNuevo);
 }
 
 void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera)
