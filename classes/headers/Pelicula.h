@@ -34,6 +34,7 @@ private:
 	string sinopsis;
 	float puntaje;
 	ColFunciones funciones;
+	ColPuntajes puntajes;
 };
 
 #endif	/* PELICULA_H */
