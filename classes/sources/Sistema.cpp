@@ -64,7 +64,15 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 
 	p->AltaFuncion(titulo,horario,idCine,idSala);
 }
+void Sistema::AltaPuntaje(int _puntaje, DtUsuario *user) {
+    Pelicula* p = peliculas->find(new KeyString(pelicula));
+    Usuario* u = usuarios->find(new KeyString(autor));
 
+    if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+    if (u == NULL) throw std::invalid_argument("El usuario no existe");
+
+    p->agregarPuntaje(texto, u);
+}
 void Sistema::AltaComentario(string texto, string pelicula, string autor)
 {
 	Pelicula* p = peliculas->find(new KeyString(pelicula));
@@ -191,9 +199,4 @@ int Sistema::DarUltimoCine()
 		it.next();
 	}
 	return previous->getIdCine();
-}
-Usuario * Sistema::ListarUsuario(DtUsuario * user){
-     Usuario * User = usuarios->find(new KeyString(user->getNickName()));
-    return User;
-
 }

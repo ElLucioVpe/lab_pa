@@ -307,19 +307,7 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
     if(_puntuacion < 1 || _puntuacion > 5) {
         cout << "Puntuacion incorrecta." << endl;
     } else {
-		//Esto ya deberia ser dentro de sistema, sino no puedes obtener la pelicula
-
-        ICollection* _peliculas = sistema->ListarFunciones();
-        IIterator* _iterator = _peliculas->getIterator();
-		//Una funcion auxiliar sistema->getUsuario(); podria ayudar
-        while (_iterator->hasCurrent()) {
-            Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
-
-            if(p->getTitulo() == _nombre) {
-                p->puntuarPelicula(_puntuacion, usuarioActual);
-            }
-
-            _iterator->next();
+		sistema->AltaPuntaje(_puntuacion,usuarioActual);
         }
     }
 }

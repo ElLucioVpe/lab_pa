@@ -4,9 +4,10 @@ DtFuncion::DtFuncion(){
 
 }
 
-DtFuncion::DtFuncion(int idFuncion, time_t horario) {
+DtFuncion::DtFuncion(int idFuncion, time_t horario, int idSala) {
     this->idFuncion = idFuncion;
     this->horario = horario;
+	this->idSala = idSala;
 }
 
 int DtFuncion::getIdFuncion() const {
@@ -15,6 +16,11 @@ int DtFuncion::getIdFuncion() const {
 
 time_t DtFuncion::getHorario() const {
     return this->horario;
+}
+
+int DtFuncion::getIdSala()
+{
+	return this->idSala;
 }
 
 bool DtFuncion::operator<(const DtFuncion& f) const

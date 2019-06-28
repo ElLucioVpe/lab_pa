@@ -13,8 +13,10 @@ public:
 	Comentario(int id, string Texto, Usuario* autor);
 	int getId();
 	string getTexto();
+	Usuario GetUsuario();
 	void setId(int _id);
 	void setTexto(string t);
+	void setUsuario(string u);
 	void agregarHijo(Comentario* c);
 	~Comentario();
 private:

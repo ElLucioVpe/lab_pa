@@ -36,6 +36,10 @@ time_t Funcion::getHorario(){
 Cine* Funcion::getCines(){
 	return this->_cine;
 }
+Sala* Funcion::getSala()
+{
+	return this->_sala;
+}
 void Funcion::setIdfuncion(int IdFuncion){
 	this->IdFuncion= IdFuncion;
 }

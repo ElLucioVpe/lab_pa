@@ -22,6 +22,7 @@ class Sistema : public ISistema {
 		void AltaSala(int idCine, int cantAsientos);
 		void AltaFuncion(string titulo, string horario, int idCine, int idSala);
 		void AltaComentario(string texto, string pelicula, string autor);
+		void AltaPuntaje(int _puntaje, DtUsuario * user);
         DtUsuario* iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera);
 		ICollection* ListarTitulos();
@@ -33,5 +34,4 @@ class Sistema : public ISistema {
 		ICollection* ListarFunciones(int idCine, string tituloPelicula);
 		ICollection* ListarSalas(int idCine);
 		int DarUltimoCine();
-        Usuario * ListarUsuario(DtUsuario * user);
 };
