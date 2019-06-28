@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "../../interfaces/ICollectible.h"
-#include "../../collections/ColComentarios.h"
+//#include "../../collections/ColComentarios.h"
 
 using namespace std;
 

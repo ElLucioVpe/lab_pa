@@ -53,8 +53,7 @@ void Pelicula::setSinopsis(string sinopsis){
 }
 
 void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
-    Puntaje* puntajeNuevo;
-    puntajeNuevo = new Puntaje(valorPuntaje, this, user);
+	Puntaje* puntajeNuevo = new Puntaje(valorPuntaje, this, user);
     puntajes->add(puntajeNuevo);
 }
 

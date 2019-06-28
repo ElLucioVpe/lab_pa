@@ -10,11 +10,8 @@
 #include "../../datatypes/headers/DtFuncion.h"
 #include "../../datatypes/headers/DtComentario.h"
 #include "../../datatypes/headers/DtCine.h"
-#include "../headers/Puntaje.h"
 
 using namespace std;
-
-class ColPuntajes;
 
 class Pelicula : public ICollectible {
 public:

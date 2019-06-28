@@ -6,9 +6,10 @@
 
 #include <iostream>
 #include "../../classes/headers/Comentario.h"
+#include "../../interfaces/ICollectible.h"
 using namespace std;
 
-class DtComentario {
+class DtComentario : public ICollectible {
 public:
     DtComentario();
     DtComentario(int, string);

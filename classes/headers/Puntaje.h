@@ -4,7 +4,7 @@
 #include <iostream>
 #include "../../interfaces/ICollectible.h"
 #include "Usuario.h"
-#include "Pelicula.h"
+//#include "Pelicula.h"
 
 class Pelicula;
 
