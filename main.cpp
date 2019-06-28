@@ -352,7 +352,7 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
    }
 
    //Reparaciones
-   sistema->AltaComentario(_comentario, _nombre, usuarioActual->getNickName())
+   sistema->AltaComentario(_comentario, _nombre, usuarioActual->getNickName());
 
    //Esto no deberia hacerse en el main, ni se puede tampoco
 
