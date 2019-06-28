@@ -192,8 +192,3 @@ int Sistema::DarUltimoCine()
 	}
 	return previous->getIdCine();
 }
-Usuario * Sistema::ListarUsuario(DtUsuario * user){
-     Usuario * User = usuarios->find(new KeyString(user->getNickName()));
-    return User;
-
-}
