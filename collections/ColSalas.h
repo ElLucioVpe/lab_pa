@@ -5,7 +5,7 @@
 #include "SalaIterator.h"
 #include "../classes/headers/Sala.h"
 #include "OrderedDictionary.h"
-#include "List.h"
+#include "../KeyInteger.h"
 
 class ColSalas {
 private:
@@ -15,10 +15,10 @@ public:
     ColSalas();
     ~ColSalas();
 
-    void add(String *k, Sala * c);
-    void remove(String *k);
-    bool member(String *k);
-    Cines * find(String *k);
+    void add(KeyInteger* k, Sala * c);
+    void remove(KeyInteger* k);
+    bool member(KeyInteger*k);
+    Sala* find(KeyInteger*k);
     bool isEmpty() const;
     int getSize() const;
     SalaIterator getIterator();

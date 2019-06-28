@@ -5,6 +5,7 @@
 #include "../../interfaces/ICollectible.h"
 #include "../../collections/ColSalas.h"
 #include "../../datatypes/headers/DtSala.h"
+#include "../..//collections/List.h"
 #include <string>
 
 using namespace std;
@@ -17,13 +18,14 @@ public:
 	//DtCine getDatacine();
 	void setIdCine(int idCine);
 	void setDireccion(string Direccion);
+	void AltaSala(int cantAsientos);
 	ICollection* ListarSalas();
 	~Cine();
 
 private:
 	string Direccion;
 	int IdCine;
-	ColSalas salas;
+	ColSalas* salas;
 };
 
 #endif /* CINE_H */

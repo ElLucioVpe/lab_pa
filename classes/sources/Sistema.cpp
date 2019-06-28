@@ -17,10 +17,10 @@ Sistema* Sistema::getInstance()
 	return instance;
 }
 
-void Sistema::AltaUsuario(string nick, string img, string contra)
+void Sistema::AltaUsuario(string nick, string img, string contra, bool admin)
 {
 	KeyString* k = new KeyString(nick);
-	Usuario* u = new Usuario(nick, img, contra);
+	Usuario* u = new Usuario(nick, img, contra, admin);
 	usuarios->add(k, u);
 }
 
@@ -39,13 +39,30 @@ void Sistema::AltaCine(string dir)
 	cines->add(k, c);
 }
 
+void Sistema::AltaSala(int idCine, int cantAsientos)
+{
+	cines->find(new KeyInteger(idCine))->AltaSala(cantAsientos);
+}
+
 DtUsuario* Sistema::iniciarSesion(string user, string pass) {
 	Usuario* u = usuarios->find(new KeyString(user));
 
 	if (u == NULL) throw std::invalid_argument("No existe dicho usuario");
 	if (u->contraCorrecta(pass) == false) throw std::invalid_argument("Constrasenia incorrecta");
 
-    return new DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia());
+    return new DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin());
+}
+
+void Sistema::AltaFuncion(string titulo, string horario,int idCine, int idSala) {
+
+}
+
+ICollection* Sistema::ListarSalas(int idCine) {
+	Cine* c = cines->find(new KeyInteger(idCine));
+
+	if (c == NULL) throw std::invalid_argument("El cine no existe");
+
+	return c->ListarSalas();
 }
 
 void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idFuncion, string usuario, string banco, string financiera) {
@@ -93,14 +110,6 @@ void Sistema::VerInfoPelicula(string titulo) {
 	cout << "Puntaje: " << p->getPuntaje() << endl;
 }
 
-void Sistema::AltaFuncion(string horario){
-	Pelicula* p = peliculas->find(new KeyString(tituloPelicula));
-
-	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
-
-	return p->ListarFunciones(idCine);
-}
-
 ICollection* Sistema::ListarCines() {
 	ICollection* ids = new List();
     CineIterator it = cines->getIterator();
@@ -128,14 +137,6 @@ ICollection* Sistema::ListarFunciones(int idCine, string tituloPelicula) {
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 
 	return p->ListarFunciones(idCine);
-}
-
-ICollection* Sistema::ListarSalas(int idCine) {
-	Cine* c = cines->find(new KeyString(idCine));
-
-	if (c == NULL) throw std::invalid_argument("El cine no existe");
-
-	return c->ListarSalas();
 }
 
 Sistema::~Sistema() {
