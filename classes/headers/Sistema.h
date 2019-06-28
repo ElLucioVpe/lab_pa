@@ -32,4 +32,5 @@ class Sistema : public ISistema {
 		ICollection* ListarFunciones(int idCine, string tituloPelicula);
 		ICollection* ListarSalas(int idCine);
 		int DarUltimoCine();
+        Usuario * ListarUsuario(DtUsuario * user);
 };

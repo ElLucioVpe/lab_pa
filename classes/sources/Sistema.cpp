@@ -98,10 +98,20 @@ DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
 
 	return new DtPelicula(p->getTitulo(), p->getPoster(), p->getSinopsis(), p->getPuntaje());
 }
+void Sistema::ListarComentariosypuntajes(string titulo){
 
+
+Pelicula* p = peliculas->find(new  KeyString(titulo));
+cout << "\n\tComentarios de: " + p->getTitulo() << endl << endl;
+cout << "Su puntaje es: " + p->getPuntaje()<< endl;
+
+return p->ListarComentarios();
+
+}
 void Sistema::EliminarPelicula(string titulo) {
 
 }
+
 
 void Sistema::VerInfoPelicula(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
@@ -164,4 +174,9 @@ int Sistema::DarUltimoCine()
 		it.next();
 	}
 	return previous->getIdCine();
+}
+Usuario * Sistema::ListarUsuario(DtUsuario * user){
+     Usuario * User = usuarios->find(new KeyString(user->getNickName()));
+    return User;
+
 }

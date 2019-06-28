@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 #include "classes/headers/Sistema.h"
@@ -106,7 +106,7 @@ int main() {
 						OpcionPuntuarPelicula(usuarioActual);
 						break;
 					case 4:
-						OpcionComentarPelicula();
+						OpcionComentarPelicula(usuarioActual);
 						break;
 					case 5:
 						OpcionVerComentariosyPuntajes();
@@ -299,7 +299,7 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
     }
 }
 
-void OpcionComentarPelicula()
+void OpcionComentarPelicula(DtUsuario* usuarioActual)
 {
    ISistema* sistema = Sistema::getInstance();
 
@@ -319,7 +319,9 @@ void OpcionComentarPelicula()
       Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
 
       if(p->getTitulo() == _nombre) {
-         p->agregarComentario(_comentario);
+          Usuario* _Usuario = sistema->ListarUsuario(usuarioActual);
+
+          p->agregarComentario(_comentario, _Usuario);
       }
 
       _iterator->next();
@@ -328,6 +330,27 @@ void OpcionComentarPelicula()
 
 void OpcionVerComentariosyPuntajes()
 {
+    ISistema* sistema = Sistema::getInstance(); //Obtengo la instancia de Sistema
+
+    //Lista Films
+    cout << "\n\tCatalogo de Peliculas" << endl << endl;
+    ICollection* t = sistema->ListarTitulos();
+    IIterator* it = t->getIterator();
+    while (it->hasCurrent()) {
+        cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
+        it->next();
+    }
+
+    //Selecciona Films
+    cout << "Ingrese el titulo de la pelicula que desee: ";
+    cin.ignore();
+    getline(cin, titulo);
+
+    sistema->VerInfoPelicula(titulo);
+    sistema->ListarComentarios(titulo);
+
+
+
 }
 
 void OpcionesAdministrativas() {

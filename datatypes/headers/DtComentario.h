@@ -8,7 +8,7 @@
 #include "../../classes/headers/Comentario.h"
 using namespace std;
 
-class DtComentario {
+class DtComentario: public ICollectible {
 public:
     DtComentario();
     DtComentario(int, string);
