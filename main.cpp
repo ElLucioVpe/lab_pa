@@ -518,7 +518,8 @@ void OpcionAltaFuncion(){
 			time_t h = f->getHorario();
 			//Me fijo si dicha funcion + 3 horas esta en el rango de la hora y fecha que el user puso
 			//No me salio ese if xD
-			if(horario<h+3){
+			DiffSeconds = difftime(horario,h);
+			if(DiffSeconds<10800){
 			//En el caso de ser asi, es porque esta ocupada esa sala entonces la pusheo dentro del vector dinamico
 				SalasOcupadas.push_back(f->getIdSala()); //Crear getIdSala
 
@@ -533,7 +534,6 @@ void OpcionAltaFuncion(){
 	}
 
 	//Mostramos las salas
-
 	ICollection* s = sistema->ListarSalas(idCine);
 	it = s->getIterator();
 	while (it->hasCurrent()) {
@@ -552,15 +552,43 @@ void OpcionAltaFuncion(){
 
 	//Selecionar Sala
 	int idSala;
+	bool existeSala=false;
 	cout << "Ingrese el numero de sala que desee: ";
 	cin >> idSala;
 
-	//Crear Reserva
+
+	//La llamo otra vez porque soy tonto
+	ICollection* s2 = sistema->ListarSalas(idCine);
+	it = s2->getIterator();
+
+	while (it->hasCurrent()) {
+		DtSala* s = dynamic_cast<DtSala*>(it->getCurrent());
+		if(it->getIdSala==idSala) {
+			existeSala=true;
+		} else {
+
+		}
+			it->next();
+	}
+
+	//Si termino el while y la encontro Existe
+	if(existeSala==true){
+		//Ahora veremos si esta ocupada o no
 		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), idSala) != SalasOcupadas.end()) {
 			cout << "Esta Seleccionando una sala que esta ocupada" << endl;
 		} else {
+			//Todo bien, hagamos el alta.
 	 		sistema->AltaFuncion(titulo,fechaFun,idCine,idSala);
 		}
+
+	}else{
+
+		cout << "La sala que selecciono no existe" << endl;
+	}
+
+	//Crear Reserva
+
+
 }
 
 void OpcionEliminarPelicula()

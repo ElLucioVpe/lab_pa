@@ -73,6 +73,14 @@ void Pelicula::EliminarFunciones()
 	}
 }
 
+void Pelicula::AltaFuncion(string titulo, string horario, int idCine, int idSala) {
+
+Fine* f-> new Funcion(id,titulo,horario,idCine,idSala);
+funciones->add(k,f)
+
+
+}
+
 ICollection* Pelicula::ListarFunciones(int idCine)
 {
 	ICollection* dts = new List();

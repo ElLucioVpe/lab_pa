@@ -58,7 +58,11 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 
-	//p->AltaFuncion();
+	Cine* c = cines->find(new KeyInteger(idCine));
+
+	if (c == NULL) throw std::invalid_argument("El cine no existe");
+
+	p->AltaFuncion(titulo,horario,idCine,idSala);
 }
 
 ICollection* Sistema::ListarSalas(int idCine) {
