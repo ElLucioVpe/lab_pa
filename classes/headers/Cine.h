@@ -19,6 +19,7 @@ public:
 	void setIdCine(int idCine);
 	void setDireccion(string Direccion);
 	void AltaSala(int cantAsientos);
+	Sala GetUnaSala(int _idSala);
 	ICollection* ListarSalas();
 	~Cine();
 
