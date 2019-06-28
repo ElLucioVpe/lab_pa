@@ -23,6 +23,7 @@ public:
 	void EliminarReservas();
 	bool EsDeCine(int IdCine);
 	void ReservarFuncion(int, float, string, string, string);
+	int AsientosReservados();
 	~Funcion();
 
 private: 

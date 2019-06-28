@@ -61,6 +61,19 @@ void Funcion::ReservarFuncion(int cantAsientos, float costo, string usuario, str
 	//se deberia agregar un parametro Usuario a Reserva o alguna otra forma de saber quien la reservo
 }
 
+int Funcion::AsientosReservados()
+{
+	int cant = 0;
+	ReservaIterator it = reservas->getIterator();
+	while (it.hasCurrent()) {
+		Reserva* r = it.getCurrent();
+		cant += r->getCantidadAsientos();
+		it.next();
+	}
+
+	return cant;
+}
+
 Funcion::~Funcion()
 {
 	EliminarReservas();
