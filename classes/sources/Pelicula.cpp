@@ -78,7 +78,7 @@ void Pelicula::AltaFuncion(string horario, Cine* cin, Sala* sal) {
 int id = funciones->getSize() + 1;
 KeyInteger* k = new KeyInteger(id);
 
-Funcion* f-> new Funcion(k,horario,cin,sal);
+Funcion* f = new Funcion(id,horario,cin,sal);
 funciones->add(k,f)
 
 
