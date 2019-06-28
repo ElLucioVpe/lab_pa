@@ -1,8 +1,7 @@
 #include "../headers/Puntaje.h"
 
-Puntaje::Puntaje(int Valor,Pelicula* peli,Usuario* user){
+Puntaje::Puntaje(int Valor, Usuario* user){
 	this->Valor= Valor;
-  this->_pelicula=peli;
   this->_usuario=user;
 }
 
