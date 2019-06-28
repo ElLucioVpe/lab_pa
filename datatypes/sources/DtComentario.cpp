@@ -3,7 +3,6 @@
 //
 
 #include "../headers/DtComentario.h"
-#include <cstdlib>
 
 DtComentario::DtComentario(){
 }
@@ -13,14 +12,14 @@ DtComentario::DtComentario(int _id, string _texto){
    this->texto=_texto;
 }
 
-string DtPelicula::getId(){
+int DtComentario::getId(){
    return this->id;
 }
 
-string DtPelicula::getTexto(){
+string DtComentario::getTexto(){
    return this->texto;
 }
 
-DtPelicula::~DtPelicula()
+DtComentario::~DtComentario()
 {
 }

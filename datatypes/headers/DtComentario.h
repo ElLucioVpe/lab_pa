@@ -5,6 +5,7 @@
 #ifndef DTCOMENTARIO_H
 
 #include <iostream>
+#include "../../classes/headers/Comentario.h"
 using namespace std;
 
 class DtComentario {
@@ -13,7 +14,7 @@ public:
     DtComentario(int, string);
     string getTexto();
     int getId();
-    virtual ~DtPelicula();
+    virtual ~DtComentario();
 private:
     int id;
     string texto;

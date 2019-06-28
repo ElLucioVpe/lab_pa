@@ -7,9 +7,11 @@
 
 using namespace std;
 
+class ColComentarios;
+
 class Comentario : public ICollectible {
 public:
-	Comentario(string Texto);
+	Comentario(int id, string Texto);
 	int getId();
 	string getTexto();
 	void setId(int _id);

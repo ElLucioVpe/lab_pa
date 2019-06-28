@@ -10,7 +10,7 @@ int Puntaje::getValor(){
 	return this->Valor;
 }
 
-void Puntaje::setValor(String v){
+void Puntaje::setValor(int v){
 	this->Valor= v;
 }
 

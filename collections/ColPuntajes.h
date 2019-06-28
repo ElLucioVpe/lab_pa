@@ -10,7 +10,7 @@
 
 class ColPuntajes {
     private:
-        ICollection* puntajes;
+		ICollection* puntajes;
     public:
       ColPuntajes();
       ~ColPuntajes();

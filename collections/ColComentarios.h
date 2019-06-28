@@ -5,8 +5,7 @@
 #include "ComentarioIterator.h"
 #include "../classes/headers/Comentario.h"
 #include "OrderedDictionary.h"
-#include "List.h"
-#include "../KeyString.h"
+#include "../KeyInteger.h"
 
 
 class ColComentarios {
@@ -15,10 +14,10 @@ private:
   public:
 	  ColComentarios();
       ~ColComentarios();
-      void add(KeyString * k,Comentario * c);
-      void remove(KeyString * k);
-      bool member(KeyString * k);
-      Comentario* find(KeyString* k);
+      void add(KeyInteger* k,Comentario * c);
+      void remove(KeyInteger* k);
+      bool member(KeyInteger* k);
+      Comentario* find(KeyInteger* k);
       bool isEmpty() const;
       int getSize() const;
       ComentarioIterator getIterator();

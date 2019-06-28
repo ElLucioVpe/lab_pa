@@ -6,6 +6,8 @@
 #include "Usuario.h"
 #include "Pelicula.h"
 
+class Pelicula;
+
 using namespace std;
 class Puntaje : public ICollectible {
 public:

@@ -14,6 +14,8 @@
 
 using namespace std;
 
+class ColPuntajes;
+
 class Pelicula : public ICollectible {
 public:
 	Pelicula(string titulo, string poster, string sinopsis, float puntaje);
@@ -40,9 +42,9 @@ private:
 	string poster;
 	string sinopsis;
 	float puntaje;
-	ColFunciones funciones;
-	ColPuntajes puntajes;
-    ColComentarios comentarios;
+	ColFunciones* funciones;
+	ColPuntajes* puntajes;
+    ColComentarios* comentarios;
 };
 
 #endif	/* PELICULA_H */

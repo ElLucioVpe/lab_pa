@@ -13,7 +13,7 @@ void ColPuntajes::remove(Puntaje* p) {
 }
 
 bool ColPuntajes::member(Puntaje* p) {
-    return comentarios->member(p);
+    return puntajes->member(p);
 }
 
 int ColPuntajes::getSize() const {

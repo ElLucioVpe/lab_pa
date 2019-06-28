@@ -53,8 +53,12 @@ DtUsuario* Sistema::iniciarSesion(string user, string pass) {
     return new DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin());
 }
 
-void Sistema::AltaFuncion(string titulo, string horario,int idCine, int idSala) {
+void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala) {
+	Pelicula* p = peliculas->find(new KeyString(titulo));
 
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
+	//p->AltaFuncion();
 }
 
 ICollection* Sistema::ListarSalas(int idCine) {
@@ -146,4 +150,18 @@ Sistema::~Sistema() {
 	delete peliculas;
     cines->~ColCines();
 	delete cines;
+}
+
+int Sistema::DarUltimoCine()
+{
+	CineIterator it = cines->getIterator();
+	Cine* current = NULL;
+	Cine* previous = NULL;
+
+	while (it.hasCurrent()) {
+		current = it.getCurrent();
+		previous = current;
+		it.next();
+	}
+	return previous->getIdCine();
 }

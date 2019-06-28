@@ -4,19 +4,19 @@ ColComentarios::ColComentarios() {
     comentarios = new OrderedDictionary();
 }
 
-void ColComentarios::add(KeyString* k,Comentario* c) {
+void ColComentarios::add(KeyInteger* k,Comentario* c) {
 	comentarios->add(k,c);
 }
 
-void ColComentarios::remove(KeyString* k) {
+void ColComentarios::remove(KeyInteger* k) {
     comentarios->remove(k);
 }
 
-bool ColComentarios::member(KeyString* k) {
+bool ColComentarios::member(KeyInteger* k) {
     return comentarios->member(k);
 }
 
-Comentario* ColComentarios::find(KeyString* k)
+Comentario* ColComentarios::find(KeyInteger* k)
 {
 	return dynamic_cast<Comentario*>(comentarios->find(k));
 }
