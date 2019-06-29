@@ -57,12 +57,18 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+	
 
 	Cine* c = cines->find(new KeyInteger(idCine));
 
 	if (c == NULL) throw std::invalid_argument("El cine no existe");
 
-	p->AltaFuncion(titulo,horario,idCine,idSala);
+
+	Sala* s = c->GetUnaSala(idSala);
+
+	if (s == NULL) throw std::invalid_argument("La sala no existe");
+
+	p->AltaFuncion(horario,c,s);
 }
 void Sistema::AltaPuntaje(int _puntaje, DtUsuario *user) {
     Pelicula* p = peliculas->find(new KeyString(pelicula));
@@ -96,6 +102,16 @@ void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idF
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+	
+	Funcion* f = p->getFuncion(idFuncion);
+
+	if (f == NULL) throw std::invalid_argument("La funcion no existe");
+
+	int disponibles, asientosSala;
+	asientosSala = f->getSala()->getCantAsientos();
+	disponibles = asientosSala - f->AsientosReservados();
+
+	if ( (disponibles + cantAsientos) > asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
 	
 	p->CrearReserva(cantAsientos, costo, idFuncion, usuario, banco, financiera);
 }

@@ -17,11 +17,13 @@ public:
 	int getIdFuncion();
 	time_t getHorario();
 	Cine* getCines();
+	Sala* getSala();
 	void setIdfuncion(int IdFuncion);
 	void setHorario(time_t h);
 	void EliminarReservas();
 	bool EsDeCine(int IdCine);
 	void ReservarFuncion(int, float, string, string, string);
+	int AsientosReservados();
 	~Funcion();
 
 private: 
