@@ -149,6 +149,11 @@ ICollection* Pelicula::getComentarios()
    return dts;
 }
 
+Funcion* Pelicula::getFuncion(int idFuncion)
+{
+	return funciones->find(new KeyInteger(idFuncion));
+}
+
 Pelicula::~Pelicula() {
 	delete funciones; //el destructor de cada funcion ya se encarga de eliminar las reservas en dicha funcion 
 	delete puntajes;

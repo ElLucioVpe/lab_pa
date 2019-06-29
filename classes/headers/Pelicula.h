@@ -33,6 +33,7 @@ public:
     ICollection* ListarFunciones(int IdCine);
     ICollection* getComentarios();
     ICollection* getCines();
+	Funcion* getFuncion(int idFuncion); //Auxiliar para luego hacer getSala() y testear cantAsientos
 	~Pelicula();
 
 private:
