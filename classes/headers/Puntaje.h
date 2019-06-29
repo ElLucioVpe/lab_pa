@@ -15,7 +15,7 @@ public:
 
 	int getValor();
 	void setValor( int Valor );
-	Usuario getUsuario();
+	Usuario* getUsuario();
 	~Puntaje();
 
   private:

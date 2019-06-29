@@ -32,6 +32,7 @@ public:
     void puntuarPelicula(int puntaje, Usuario* user);
     ICollection* ListarFunciones(int IdCine);
     ICollection* ListarComentarios();
+    ICollection* ListarPuntajes();
     ICollection* getCines();
 	~Pelicula();
 

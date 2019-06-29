@@ -123,6 +123,18 @@ ICollection* Pelicula::ListarComentarios() {
 
 	return dts;
 }
+ICollection* Pelicula::ListarPuntajes(){
+    ICollection* dts = new List();
+    PuntajeIterator it = puntajes->getIterator();
+    while (it.hasCurrent()) {
+        Puntaje* c = it.getCurrent();
+        Usuario* u = c->getUsuario();
+        dts->add(new DtPuntaje(c->getValor(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+        it.next();
+    }
+
+    return dts;
+}
 
 ICollection* Pelicula::getCines()
 {
