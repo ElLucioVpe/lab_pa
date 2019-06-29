@@ -29,6 +29,8 @@ class ISistema {
         virtual ICollection* ListarCinesPorTitulo(string) = 0;
         virtual ICollection* ListarFunciones(int, string) = 0;
 		virtual ICollection* ListarSalas(int idCine) = 0;
+        void ListarComentarios(string titulo)= 0;
+        void ListarPuntajes(string titulo) = 0;
 		virtual int DarUltimoCine() = 0;
         virtual ~ISistema();
 };

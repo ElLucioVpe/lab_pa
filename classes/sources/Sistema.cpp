@@ -163,7 +163,6 @@ void Sistema::VerComentariosyPuntajes(string titulo) {
 	cout << "\n\tComentarios de: " + p->getTitulo() << endl << endl;
 	cout << "Su puntaje es: " << p->getPuntaje()<< endl;
 
-	p->ListarComentarios();
 }
 void Sistema::EliminarPelicula(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
@@ -233,6 +232,20 @@ int Sistema::DarUltimoCine()
 		it.next();
 	}
 	return previous->getIdCine();
+}
+void Sistema::ListarComentarios(string titulo){
+    Pelicula* p = peliculas->find(new KeyString(titulo));
+
+    if (p == NULL) throw std::invalid_argument("La pelicula no existe")<< endl;
+    ICollection* c= new List();
+    c=p->getComentarios();
+    ComentarioIterator it=c->getIterator();
+    while (it.hasCurrent()) {
+        Comentario* c = it.getCurrent();
+        cout<< "<"<< c->GetUsuario()<<">"<<":"<<"   "<<c->getTexto() << endl;
+        it.next();
+    }
+
 }
 void Sistema::ListarPuntajes(string titulo){
     Pelicula* p = peliculas->find(new KeyString(titulo));

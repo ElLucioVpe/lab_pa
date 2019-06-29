@@ -368,6 +368,8 @@ void OpcionVerComentariosyPuntajes()
 
     sistema->VerInfoPelicula(titulo);
     sistema->VerComentariosyPuntajes(titulo);
+    sistema->ListarComentarios(titulo);
+    sistema->ListarPuntajes(titulo);
 }
 
 void OpcionesAdministrativas() {
