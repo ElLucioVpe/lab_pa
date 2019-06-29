@@ -40,6 +40,12 @@ ICollection* Cine::ListarSalas()
 }
 
 
+Sala Cine::GetUnaSala(int _idSala)
+{
+	SalaIterator it = salas->getIterator();
+	return it->find(new KeyInteger(_idSala));
+}
+
 Cine::~Cine()
 {
 

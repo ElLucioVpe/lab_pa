@@ -307,7 +307,19 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
     if(_puntuacion < 1 || _puntuacion > 5) {
         cout << "Puntuacion incorrecta." << endl;
     } else {
-		sistema->AltaPuntaje(_puntuacion,usuarioActual);
+		//Esto ya deberia ser dentro de sistema, sino no puedes obtener la pelicula
+
+        ICollection* _peliculas = sistema->ListarFunciones();
+        IIterator* _iterator = _peliculas->getIterator();
+		//Una funcion auxiliar sistema->getUsuario(); podria ayudar
+        while (_iterator->hasCurrent()) {
+            Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
+
+            if(p->getTitulo() == _nombre) {
+                p->puntuarPelicula(_puntuacion, usuarioActual);
+            }
+
+            _iterator->next();
         }
     }
 }
@@ -585,24 +597,8 @@ void OpcionAltaFuncion(){
 	bool existeSala=false;
 	cout << "Ingrese el numero de sala que desee: ";
 	cin >> idSala;
+	
 
-
-	//La llamo otra vez porque soy tonto
-	ICollection* s2 = sistema->ListarSalas(idCine);
-	it = s2->getIterator();
-
-	while (it->hasCurrent()) {
-		DtSala* s = dynamic_cast<DtSala*>(it->getCurrent());
-		if(it->getIdSala==idSala) {
-			existeSala=true;
-		} else {
-
-		}
-			it->next();
-	}
-
-	//Si termino el while y la encontro Existe
-	if(existeSala==true){
 		//Ahora veremos si esta ocupada o no
 		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), idSala) != SalasOcupadas.end()) {
 			cout << "Esta Seleccionando una sala que esta ocupada" << endl;
@@ -610,11 +606,6 @@ void OpcionAltaFuncion(){
 			//Todo bien, hagamos el alta.
 	 		sistema->AltaFuncion(titulo,fechaFun,idCine,idSala);
 		}
-
-	}else{
-
-		cout << "La sala que selecciono no existe" << endl;
-	}
 
 	//Crear Reserva
 

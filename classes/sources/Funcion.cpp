@@ -36,6 +36,10 @@ time_t Funcion::getHorario(){
 Cine* Funcion::getCines(){
 	return this->_cine;
 }
+Sala* Funcion::getSala()
+{
+	return this->_sala;
+}
 void Funcion::setIdfuncion(int IdFuncion){
 	this->IdFuncion= IdFuncion;
 }
@@ -55,6 +59,19 @@ void Funcion::ReservarFuncion(int cantAsientos, float costo, string usuario, str
 	else reservas->add(new TarjetaDeDebito(banco, costo, cantAsientos));
 
 	//se deberia agregar un parametro Usuario a Reserva o alguna otra forma de saber quien la reservo
+}
+
+int Funcion::AsientosReservados()
+{
+	int cant = 0;
+	ReservaIterator it = reservas->getIterator();
+	while (it.hasCurrent()) {
+		Reserva* r = it.getCurrent();
+		cant += r->getCantidadAsientos();
+		it.next();
+	}
+
+	return cant;
 }
 
 Funcion::~Funcion()

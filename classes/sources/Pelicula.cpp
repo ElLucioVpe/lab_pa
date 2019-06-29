@@ -73,10 +73,13 @@ void Pelicula::EliminarFunciones()
 	}
 }
 
-void Pelicula::AltaFuncion(string titulo, string horario, int idCine, int idSala) {
+void Pelicula::AltaFuncion(string horario, Cine* cin, Sala* sal) {
 
-Cine* f = new Funcion(id,titulo,horario,idCine,idSala);
-funciones->add(k,f);
+int id = funciones->getSize() + 1;
+KeyInteger* k = new KeyInteger(id);
+
+Funcion* f = new Funcion(id,horario,cin,sal);
+funciones->add(k,f)
 
 
 }
@@ -140,6 +143,11 @@ ICollection* Pelicula::getComentarios()
    }
 
    return dts;
+}
+
+Funcion* Pelicula::getFuncion(int idFuncion)
+{
+	return funciones->find(new KeyInteger(idFuncion));
 }
 
 Pelicula::~Pelicula() {
