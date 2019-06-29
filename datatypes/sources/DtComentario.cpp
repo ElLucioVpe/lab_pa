@@ -21,7 +21,7 @@ string DtComentario::getTexto(){
    return this->texto;
 }
 
-DtUsuario Dtcomentario::getDtUsuario(){
+DtUsuario DtComentario::getDtUsuario(){
    return this->DtUsuario;
 }
 

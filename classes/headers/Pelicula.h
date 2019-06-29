@@ -32,6 +32,7 @@ public:
     void puntuarPelicula(int puntaje, Usuario* user);
     ICollection* ListarFunciones(int IdCine);
     ICollection* getComentarios();
+    ICollection* ListarComentarios(DtUsuario user);
     ICollection* getCines();
 	Funcion* getFuncion(int idFuncion); //Auxiliar para luego hacer getSala() y testear cantAsientos
 	~Pelicula();

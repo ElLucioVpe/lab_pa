@@ -79,7 +79,7 @@ int id = funciones->getSize() + 1;
 KeyInteger* k = new KeyInteger(id);
 
 Funcion* f = new Funcion(id,horario,cin,sal);
-funciones->add(k,f)
+funciones->add(k,f);
 
 
 }
@@ -94,7 +94,7 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();
-		if (f->EsDeCine(idCine) && f->getHorario() < tiempoActual) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario()));
+		if (f->EsDeCine(idCine) && f->getHorario() < tiempoActual) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario(), f->getSala()->getIdSala()));
 
 		it.next();
 	}
@@ -102,12 +102,12 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 	return dts;
 }
 
-Icollection* Pelicula::ListarComentarios(){
+ICollection* Pelicula::ListarComentarios(){
     ICollection* dts = new List();
     ComentarioIterator it = comentarios->getIterator();
     while (it.hasCurrent()){
         Comentario * c = it.getCurrent();
-        dts->add(new DtComentario(c->getId(), c->getTexto()));
+        dts->add(new DtComentario(c->getId(), c->getTexto(), c->GetUsuario()));
     }
 }
 ICollection* Pelicula::getCines()
@@ -138,7 +138,7 @@ ICollection* Pelicula::getComentarios()
    ComentarioIterator it = comentarios->getIterator();
    while (it.hasCurrent()) {
       Comentario* c = it.getCurrent();
-      dts->add(new DtComentario(c->getId(), c->getTexto()));
+      dts->add(new DtComentario(c->getId(), c->getTexto(), c->get));
       it.next();
    }
 
