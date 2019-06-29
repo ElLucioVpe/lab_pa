@@ -5,6 +5,7 @@
 #include "../../interfaces/ICollectible.h"
 #include "../../collections/ColComentarios.h"
 #include "../../classes/headers/Usuario.h"
+#include "../../datatypes/headers/DtComentario.h"
 
 class ColComentarios;
 
