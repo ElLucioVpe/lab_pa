@@ -21,6 +21,7 @@ class ISistema {
         virtual void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string usuario, string banco, string financiera) = 0;
         virtual ICollection* ListarTitulos() = 0;
         virtual DtPelicula* SeleccionarPelicula(string) = 0;
+		virtual void VerComentariosyPuntajes(string titulo) = 0;
         virtual void EliminarPelicula(string) = 0;
         virtual void VerInfoPelicula(string) = 0;
         virtual ICollection* ListarCines() = 0;

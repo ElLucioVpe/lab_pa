@@ -60,6 +60,15 @@ void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
 void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera)
 {
 	Funcion* f = funciones->find(new KeyInteger(idFuncion));
+
+	if (f == NULL) throw std::invalid_argument("La funcion no existe");
+
+	int disponibles, asientosSala;
+	asientosSala = f->getSala()->getCantAsientos();
+	disponibles = asientosSala - f->AsientosReservados();
+
+	if ((disponibles + cantAsientos) > asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
+
 	f->ReservarFuncion(cantAsientos, costo, usuario, banco, financiera);
 }
 
@@ -102,14 +111,19 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 	return dts;
 }
 
-ICollection* Pelicula::ListarComentarios(){
-    ICollection* dts = new List();
-    ComentarioIterator it = comentarios->getIterator();
-    while (it.hasCurrent()){
-        Comentario * c = it.getCurrent();
-        dts->add(new DtComentario(c->getId(), c->getTexto(), c->GetUsuario()));
-    }
+ICollection* Pelicula::ListarComentarios() {
+	ICollection* dts = new List();
+	ComentarioIterator it = comentarios->getIterator();
+	while (it.hasCurrent()) {
+		Comentario* c = it.getCurrent();
+		Usuario* u = c->getAutor();
+		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+		it.next();
+	}
+
+	return dts;
 }
+
 ICollection* Pelicula::getCines()
 {
 	ICollection* dts = new List();
@@ -129,25 +143,6 @@ void Pelicula::agregarComentario(string _comentario, Usuario* autor)
    int _number = comentarios->getSize() + 1;
    Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
-}
-
-
-ICollection* Pelicula::getComentarios()
-{
-   ICollection* dts = new List();
-   ComentarioIterator it = comentarios->getIterator();
-   while (it.hasCurrent()) {
-      Comentario* c = it.getCurrent();
-      dts->add(new DtComentario(c->getId(), c->getTexto(), c->get));
-      it.next();
-   }
-
-   return dts;
-}
-
-Funcion* Pelicula::getFuncion(int idFuncion)
-{
-	return funciones->find(new KeyInteger(idFuncion));
 }
 
 Pelicula::~Pelicula() {

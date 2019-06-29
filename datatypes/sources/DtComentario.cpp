@@ -7,10 +7,10 @@
 DtComentario::DtComentario(){
 }
 
-DtComentario::DtComentario(int _id, string _texto, dtUsuario _user){
+DtComentario::DtComentario(int _id, string _texto, DtUsuario _user){
    this->id=_id;
    this->texto=_texto;
-   this->DtUsuario=_user
+   this->user = _user
 }
 
 int DtComentario::getId(){
@@ -22,7 +22,7 @@ string DtComentario::getTexto(){
 }
 
 DtUsuario DtComentario::getDtUsuario(){
-   return this->DtUsuario;
+   return this->user;
 }
 
 DtComentario::~DtComentario()

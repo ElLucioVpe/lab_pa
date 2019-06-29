@@ -27,6 +27,7 @@ class Sistema : public ISistema {
         void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera);
 		ICollection* ListarTitulos();
         DtPelicula* SeleccionarPelicula(string titulo);
+		void VerComentariosyPuntajes(string titulo);
         void EliminarPelicula(string titulo);
         void VerInfoPelicula(string titulo);
 		ICollection* ListarCines();

@@ -12,7 +12,7 @@ bool DeseaContinuar(string msg);
 void OpcionCrearReserva(DtUsuario* usuarioActual);
 void OpcionVerInfoPelicula();
 void OpcionPuntuarPelicula(DtUsuario* usuarioActual);
-void OpcionComentarPelicula();
+void OpcionComentarPelicula(DtUsuario* usuarioActual);
 void OpcionVerComentariosyPuntajes();
 void OpcionesAdministrativas();
 void OpcionAltaCine();
