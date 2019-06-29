@@ -20,6 +20,7 @@ public:
 	void setTexto(string t);
 	void setUsuario(string u);
 	void agregarHijo(Comentario* c);
+	Icollection * ListarHijos(string c);
 	~Comentario();
 private:
 	int Id;

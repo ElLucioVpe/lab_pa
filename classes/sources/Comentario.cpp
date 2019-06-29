@@ -30,12 +30,25 @@ void Comentario::setTexto(string t){
 }
 
 void Comentario::setUsuario(string u){
-	this->Usuario= u;
+	this->Autor= u;
 }
 
 void Comentario::agregarHijo(Comentario* c)
 {
 	hijos->add(new KeyInteger(c->Id), c);
+}
+
+ICollection* Comentario::ListarHijos(string c) {
+    ICollection* dts = new List();
+    ComentarioIterator it = hijos->getIterator();
+    while (it.hasCurrent()) {
+        Comentario* c = it.getCurrent();
+        Usuario* u = c->getAutor();
+        dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+        it.next();
+    }
+
+    return dts;
 }
 
 Comentario::~Comentario()
