@@ -60,6 +60,15 @@ void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
 void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera)
 {
 	Funcion* f = funciones->find(new KeyInteger(idFuncion));
+
+	if (f == NULL) throw std::invalid_argument("La funcion no existe");
+
+	int disponibles, asientosSala;
+	asientosSala = f->getSala()->getCantAsientos();
+	disponibles = asientosSala - f->AsientosReservados();
+
+	if ((disponibles + cantAsientos) > asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
+
 	f->ReservarFuncion(cantAsientos, costo, usuario, banco, financiera);
 }
 
@@ -79,7 +88,7 @@ int id = funciones->getSize() + 1;
 KeyInteger* k = new KeyInteger(id);
 
 Funcion* f = new Funcion(id,horario,cin,sal);
-funciones->add(k,f)
+funciones->add(k,f);
 
 
 }
@@ -94,7 +103,7 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();
-		if (f->EsDeCine(idCine) && f->getHorario() < tiempoActual) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario()));
+		if (f->EsDeCine(idCine) && f->getHorario() < tiempoActual) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario(), f->getSala()->getIdSala()));
 
 		it.next();
 	}
@@ -102,14 +111,19 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 	return dts;
 }
 
-Icollection* Pelicula::ListarComentarios(){
-    ICollection* dts = new List();
-    ComentarioIterator it = comentarios->getIterator();
-    while (it.hasCurrent()){
-        Comentario * c = it.getCurrent();
-        dts->add(new DtComentario(c->getId(), c->getTexto()));
-    }
+ICollection* Pelicula::ListarComentarios() {
+	ICollection* dts = new List();
+	ComentarioIterator it = comentarios->getIterator();
+	while (it.hasCurrent()) {
+		Comentario* c = it.getCurrent();
+		Usuario* u = c->getAutor();
+		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+		it.next();
+	}
+
+	return dts;
 }
+
 ICollection* Pelicula::getCines()
 {
 	ICollection* dts = new List();
@@ -129,25 +143,6 @@ void Pelicula::agregarComentario(string _comentario, Usuario* autor)
    int _number = comentarios->getSize() + 1;
    Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
-}
-
-
-ICollection* Pelicula::getComentarios()
-{
-   ICollection* dts = new List();
-   ComentarioIterator it = comentarios->getIterator();
-   while (it.hasCurrent()) {
-      Comentario* c = it.getCurrent();
-      dts->add(new DtComentario(c->getId(), c->getTexto()));
-      it.next();
-   }
-
-   return dts;
-}
-
-Funcion* Pelicula::getFuncion(int idFuncion)
-{
-	return funciones->find(new KeyInteger(idFuncion));
 }
 
 Pelicula::~Pelicula() {

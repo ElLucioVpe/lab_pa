@@ -103,16 +103,6 @@ void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idF
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 	
-	Funcion* f = p->getFuncion(idFuncion);
-
-	if (f == NULL) throw std::invalid_argument("La funcion no existe");
-
-	int disponibles, asientosSala;
-	asientosSala = f->getSala()->getCantAsientos();
-	disponibles = asientosSala - f->AsientosReservados();
-
-	if ( (disponibles + cantAsientos) > asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
-	
 	p->CrearReserva(cantAsientos, costo, idFuncion, usuario, banco, financiera);
 }
 
@@ -137,15 +127,12 @@ DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
 
 	return new DtPelicula(p->getTitulo(), p->getPoster(), p->getSinopsis(), p->getPuntaje());
 }
-void Sistema::ListarComentariosypuntajes(string titulo){
+void Sistema::VerComentariosyPuntajes(string titulo) {
+	Pelicula* p = peliculas->find(new  KeyString(titulo));
+	cout << "\n\tComentarios de: " + p->getTitulo() << endl << endl;
+	cout << "Su puntaje es: " << p->getPuntaje()<< endl;
 
-
-Pelicula* p = peliculas->find(new  KeyString(titulo));
-cout << "\n\tComentarios de: " + p->getTitulo() << endl << endl;
-cout << "Su puntaje es: " + p->getPuntaje()<< endl;
-
-return p->ListarComentarios();
-
+	p->ListarComentarios();
 }
 void Sistema::EliminarPelicula(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));

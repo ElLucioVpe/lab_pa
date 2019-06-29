@@ -16,7 +16,7 @@ string Comentario::getTexto(){
 	return this->Texto;
 }
 
-Usuario* Comentario::GetUsuario(){
+Usuario* Comentario::getAutor(){
 	return this->Autor;
 }
 
