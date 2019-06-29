@@ -11,6 +11,7 @@ private:
 	std::string Contrasenia;
 	bool Admin;
 public:
+	DtUsuario();
 	DtUsuario(std::string _nickname, std::string _img, std::string _contra, bool admin);
 	std::string getNickName();
 	std::string getImgPerfil();

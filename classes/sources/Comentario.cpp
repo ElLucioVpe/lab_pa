@@ -4,7 +4,7 @@ Comentario::Comentario(int id, string Texto, Usuario* autor){
 	this->Id = id;
 	this->Texto = Texto;
 	this->Autor = autor;
-	hijos = new ColComentarios();
+	hijos = new OrderedDictionary();
 }
 
 int Comentario::getId()
@@ -29,8 +29,8 @@ void Comentario::setTexto(string t){
 	this->Texto= t;
 }
 
-void Comentario::setUsuario(string u){
-	this->Usuario= u;
+void Comentario::setUsuario(Usuario* u){
+	this->Autor = u;
 }
 
 void Comentario::agregarHijo(Comentario* c)

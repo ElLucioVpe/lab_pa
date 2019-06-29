@@ -289,6 +289,8 @@ void OpcionVerInfoPelicula()
 	getline(cin, titulo);
 
 	s->VerInfoPelicula(titulo);
+	s->ListarComentarios(titulo);
+	s->ListarPuntajes(titulo);
 }
 
 void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
@@ -368,8 +370,6 @@ void OpcionVerComentariosyPuntajes()
 
     sistema->VerInfoPelicula(titulo);
     sistema->VerComentariosyPuntajes(titulo);
-    sistema->ListarComentarios(titulo);
-    sistema->ListarPuntajes(titulo);
 }
 
 void OpcionesAdministrativas() {
@@ -518,8 +518,8 @@ void OpcionAltaFuncion(){
 
 	//Lista Salas - Mostrar Ocupadas y Disponibles
 	//Voy por todas las pelis
-	ICollection* t = sistema->ListarTitulos();
-	IIterator* it = t->getIterator();
+	t = sistema->ListarTitulos();
+	it = t->getIterator();
 
 	
 	while (it->hasCurrent()) {
@@ -535,7 +535,7 @@ void OpcionAltaFuncion(){
 			time_t h = f->getHorario();
 			//Me fijo si dicha funcion + 3 horas esta en el rango de la hora y fecha que el user puso
 			//No me salio ese if xD
-			DiffSeconds = difftime(horario,h);
+			double DiffSeconds = difftime(horario,h);
 			if(DiffSeconds<10800){
 			//En el caso de ser asi, es porque esta ocupada esa sala entonces la pusheo dentro del vector dinamico
 				SalasOcupadas.push_back(f->getIdSala()); //Crear getIdSala
@@ -558,7 +558,7 @@ void OpcionAltaFuncion(){
 		cout << "IdSala " + s->getIdSala() << endl; 
 		cout << "cantAsientos :"+s->getCantAsientos() << endl;
 		//Comparamos si esta en la lista de no disponibles para este cine a esa hora
-		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala) != SalasOcupadas.end()) {
+		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala()) != SalasOcupadas.end()) {
 			cout << "Ocupada" << endl;
 		} else {
 			cout << "Disponible" << endl;
@@ -576,7 +576,7 @@ void OpcionAltaFuncion(){
 
 		//Ahora veremos si esta ocupada o no
 		if(std::find(SalasOcupadas.begin(), SalasOcupadas.end(), idSala) != SalasOcupadas.end()) {
-			cout << "Esta Seleccionando una sala que esta ocupada" << endl;
+			cout << "Esta seleccionando una sala que esta ocupada" << endl;
 		} else {
 			//Todo bien, hagamos el alta.
 	 		sistema->AltaFuncion(titulo,fechaFun,idCine,idSala);

@@ -111,7 +111,7 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 	return dts;
 }
 
-ICollection* Pelicula::ListarComentarios(string titulo) {
+ICollection* Pelicula::ListarComentarios() {
 	ICollection* dts = new List();
 	ComentarioIterator it = comentarios->getIterator();
 	while (it.hasCurrent()) {

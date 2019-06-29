@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include "../../interfaces/ICollectible.h"
-#include "../../collections/ColComentarios.h"
 #include "../../classes/headers/Usuario.h"
+//#include "../../collections/ColComentarios.h"
+#include "../../collections/OrderedDictionary.h"
+#include "../../KeyInteger.h"
 
-class ColComentarios;
+//class ColComentarios;
 
 using namespace std;
 
@@ -18,14 +20,14 @@ public:
 	Usuario* getAutor();
 	void setId(int _id);
 	void setTexto(string t);
-	void setUsuario(string u);
+	void setUsuario(Usuario* u);
 	void agregarHijo(Comentario* c);
 	~Comentario();
 private:
 	int Id;
 	string Texto;
 	Usuario* Autor;
-	ColComentarios* hijos;
+	IDictionary* hijos;
 };
 
 #endif /* COMENTARIO_H */

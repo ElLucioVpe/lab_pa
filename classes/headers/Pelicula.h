@@ -10,6 +10,8 @@
 #include "../../datatypes/headers/DtFuncion.h"
 #include "../../datatypes/headers/DtComentario.h"
 #include "../../datatypes/headers/DtCine.h"
+#include "../../datatypes/headers/DtPuntaje.h"
+
 
 using namespace std;
 
@@ -31,7 +33,7 @@ public:
 	void AltaFuncion(string horario, Cine* cin, Sala* sal);
     void puntuarPelicula(int puntaje, Usuario* user);
     ICollection* ListarFunciones(int IdCine);
-    ICollection* ListarComentarios(string titulo);
+    ICollection* ListarComentarios();
     ICollection* getCines();
     ICollection* ListarPuntajes();
 	int YaPuntuo(string user);

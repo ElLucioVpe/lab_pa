@@ -4,11 +4,12 @@
 #include "../headers/DtPuntaje.h"
 
 DtPuntaje::DtPuntaje(){
+
 }
 
 DtPuntaje::DtPuntaje(int _valor, DtUsuario _user){
     this->Valor=_valor;
-    this->user = _user
+	this->user = _user;
 }
 
 int DtPuntaje::getValor(){

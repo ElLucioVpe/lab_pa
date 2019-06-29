@@ -15,7 +15,6 @@ public:
 	Cine(int, string);
 	int getIdCine();
 	string getDireccion();
-	//DtCine getDatacine();
 	void setIdCine(int idCine);
 	void setDireccion(string Direccion);
 	void AltaSala(int cantAsientos);
