@@ -22,6 +22,7 @@ public:
 	void setTexto(string t);
 	void setUsuario(Usuario* u);
 	void agregarHijo(Comentario* c);
+	Icollection * ListarHijos(string c);
 	~Comentario();
 private:
 	int Id;
