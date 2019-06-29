@@ -33,6 +33,7 @@ public:
     ICollection* ListarFunciones(int IdCine);
     ICollection* ListarComentarios(string titulo);
     ICollection* getCines();
+    ICollection* ListarPuntajes();
 	int YaPuntuo(string user);
 	~Pelicula();
 
