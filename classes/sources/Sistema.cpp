@@ -103,6 +103,16 @@ void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idF
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 	
+	Funcion* f = p->getFuncion(idFuncion);
+
+	if (f == NULL) throw std::invalid_argument("La funcion no existe");
+
+	int disponibles, asientosSala;
+	asientosSala = f->getSala()->getCantAsientos();
+	disponibles = asientosSala - f->AsientosReservados();
+
+	if ( (disponibles + cantAsientos) > asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
+	
 	p->CrearReserva(cantAsientos, costo, idFuncion, usuario, banco, financiera);
 }
 
