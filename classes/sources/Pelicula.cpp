@@ -145,6 +145,25 @@ void Pelicula::agregarComentario(string _comentario, Usuario* autor)
    comentarios->add(new KeyInteger(_number), _com);
 }
 
+
+ICollection* Pelicula::getComentarios()
+{
+   ICollection* dts = new List();
+   ComentarioIterator it = comentarios->getIterator();
+   while (it.hasCurrent()) {
+      Comentario* c = it.getCurrent();
+      dts->add(new DtComentario(c->getId(), c->getTexto()));
+      it.next();
+   }
+
+   return dts;
+}
+
+Funcion* Pelicula::getFuncion(int idFuncion)
+{
+	return funciones->find(new KeyInteger(idFuncion));
+}
+
 Pelicula::~Pelicula() {
 	delete funciones; //el destructor de cada funcion ya se encarga de eliminar las reservas en dicha funcion 
 	delete puntajes;

@@ -203,3 +203,18 @@ int Sistema::DarUltimoCine()
 	}
 	return previous->getIdCine();
 }
+
+void Sistema::getComentarios(string titulo){
+    Pelicula* p = peliculas->find(new KeyString(titulo));
+
+    if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+    ICollection* c= new List();
+    c=p->getComentarios();
+    ComentarioIterator it=c->getIterator();
+    while (it.hasCurrent()) {
+        Comentario* c = it.getCurrent();
+        cout<< "<"<< c->GetUsuario()<<">"<<":"<<"   "<<c->getTexto();
+        it.next();
+    }
+
+}

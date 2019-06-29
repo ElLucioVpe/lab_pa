@@ -391,10 +391,8 @@ void OpcionVerComentariosyPuntajes()
     getline(cin, titulo);
 
     sistema->VerInfoPelicula(titulo);
-    sistema->ListarComentarios(titulo);
 
-
-
+    ICollection* c = sistema->ListarComentarios(titulo);
 }
 
 void OpcionesAdministrativas() {
