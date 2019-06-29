@@ -7,6 +7,8 @@
 #include <iostream>
 #include "../../classes/headers/Comentario.h"
 #include "../../interfaces/ICollectible.h"
+#include "DtUsuario.h"
+
 using namespace std;
 
 class DtComentario : public ICollectible {
@@ -20,7 +22,7 @@ public:
 private:
     int id;
     string texto;
-     DtUsuario user;
+    DtUsuario user;
 };
 
 #define DTCOMENTARIO_H

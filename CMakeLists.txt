@@ -9,20 +9,24 @@ include_directories(datatypes/headers)
 include_directories(interfaces)
 
 add_executable(lab_pa
-        classes/headers/cine.h
-        classes/headers/funcion.h
-        classes/headers/pelicula.h
+        classes/headers/Cine.h
+        classes/headers/Funcion.h
+        classes/headers/Pelicula.h
         classes/headers/Reserva.h
+        classes/headers/Puntaje.h
+        classes/headers/Sala.h
         classes/headers/TarjetaDeCredito.h
         classes/headers/TarjetaDeDebito.h
         classes/headers/Usuario.h
-        classes/sources/cine.cpp
-        classes/sources/funcion.cpp
+        classes/sources/Cine.cpp
+        classes/sources/Funcion.cpp
         classes/sources/Pelicula.cpp
+        classes/sources/Puntaje.cpp
         classes/sources/Reserva.cpp
         classes/sources/TarjetaDeCredito.cpp
         classes/sources/TarjetaDeDebito.cpp
         classes/sources/Usuario.cpp
+        classes/sources/Sala.cpp
         collections/ColReservas.h
         collections/ColReservas.cpp
         collections/List.cpp
@@ -35,14 +39,53 @@ add_executable(lab_pa
         collections/OrderedDictionary.h
         collections/OrderedDictionaryEntry.cpp
         collections/OrderedDictionaryEntry.h
+        collections/ComentarioIterator.h
+        collections/ComentarioIterator.cpp
+        collections/ColComentarios.h
+        collections/ColComentarios.cpp
+        collections/CineIterator.cpp
+        collections/CineIterator.h
+        collections/ColCines.h
+        collections/ColCines.cpp
+        collections/ColDtComentario.h
+        collections/ColDtComentario.cpp
+        collections/ColFunciones.h
+        collections/ColFunciones.cpp
+        collections/ColPeliculas.h
+        collections/ColPeliculas.cpp
+        collections/ColCines.h
+        collections/ColPuntajes.h
+        collections/ColPuntajes.cpp
+        collections/ColSalas.h
+        collections/ColSalas.cpp
+        collections/ColUsuarios.h
+        collections/ColUsuarios.cpp
+        collections/DtComentarioIterator.h
+        collections/DtComentarioIterator.cpp
+        collections/FuncionIterator.h
+        collections/FuncionIterator.cpp
+        collections/PeliculaIterator.h
+        collections/PeliculaIterator.cpp
+        collections/PuntajeIterator.h
+        collections/PuntajeIterator.cpp
+        collections/ReservaIterator.h
+        collections/ReservaIterator.cpp
+        collections/SalaIterator.h
+        collections/SalaIterator.cpp
+        collections/UsuarioIterator.h
+        collections/UsuarioIterator.cpp
         datatypes/headers/DtCine.h
         datatypes/headers/DtFuncion.h
         datatypes/headers/DtPelicula.h
         datatypes/headers/DtUsuario.h
+        datatypes/headers/DtSala.h
+        datatypes/headers/DtComentario.h
         datatypes/sources/DtCine.cpp
         datatypes/sources/DtFuncion.cpp
         datatypes/sources/DtPelicula.cpp
         datatypes/sources/DtUsuario.cpp
+        datatypes/sources/DtComentario.cpp
+        datatypes/sources/DtSala.cpp
         interfaces/ICollectible.cpp
         interfaces/ICollectible.h
         interfaces/ICollection.cpp
@@ -55,4 +98,14 @@ add_executable(lab_pa
         interfaces/IKey.h
         interfaces/OrderedKey.cpp
         interfaces/OrderedKey.h
-        main.cpp datatypes/headers/DtComentario.h datatypes/sources/DtComentario.cpp)
+        interfaces/ISistema.h
+        interfaces/ISistema.cpp
+        classes/sources/Comentario.cpp
+        classes/headers/Comentario.h
+        KeyInteger.h
+        KeyInteger.cpp
+        KeyString.h
+        KeyString.cpp
+        String.h
+        String.cpp
+        main.cpp)

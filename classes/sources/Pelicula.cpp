@@ -53,7 +53,7 @@ void Pelicula::setSinopsis(string sinopsis){
 }
 
 void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
-	Puntaje* puntajeNuevo = new Puntaje(valorPuntaje, this, user);
+	Puntaje* puntajeNuevo = new Puntaje(valorPuntaje, user);
     puntajes->add(puntajeNuevo);
 }
 
@@ -75,8 +75,8 @@ void Pelicula::EliminarFunciones()
 
 void Pelicula::AltaFuncion(string titulo, string horario, int idCine, int idSala) {
 
-Fine* f-> new Funcion(id,titulo,horario,idCine,idSala);
-funciones->add(k,f)
+Cine* f = new Funcion(id,titulo,horario,idCine,idSala);
+funciones->add(k,f);
 
 
 }
@@ -127,11 +127,7 @@ void Pelicula::agregarComentario(string _comentario, Usuario* autor)
    Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
 }
-void Pelicula::agregarPuntaje(int _puntaje, Usuario * user){
-    int _number = puntajes->getSize() + 1;
-    Puntaje* _pun = new Puntaje(_puntaje, user);
-    puntajes->add( _pun);
-}
+
 
 ICollection* Pelicula::getComentarios()
 {

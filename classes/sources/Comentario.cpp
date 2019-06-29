@@ -16,8 +16,8 @@ string Comentario::getTexto(){
 	return this->Texto;
 }
 
-Usuario Comentario::getUsuario(){
-	return this->Usuario;
+Usuario* Comentario::GetUsuario(){
+	return this->Autor;
 }
 
 void Comentario::setId(int _id)
