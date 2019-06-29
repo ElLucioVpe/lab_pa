@@ -295,33 +295,21 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
     ISistema* sistema = Sistema::getInstance();
 
     string _nombre;
-    int _puntuacion;
 
-	//Listar peliculas primero
-    cout << "Nombre de pelicula: " << endl;
+	cout << "\n\tCatalogo de Peliculas" << endl << endl;
+	ICollection* t = sistema->ListarTitulos();
+	IIterator* it = t->getIterator();
+	while (it->hasCurrent()) {
+		cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
+		it->next();
+	}
+
+	if (DeseaContinuar("Desea seleccionar una pelicula? (Si/No): ") == false) return;
+
+    cout << "Ingrese el nombre de pelicula: " << endl;
     cin >> _nombre;
 
-    cout << "Puntuacion (1/5): " << endl;
-    cin >> _puntuacion;
-
-    if(_puntuacion < 1 || _puntuacion > 5) {
-        cout << "Puntuacion incorrecta." << endl;
-    } else {
-		//Esto ya deberia ser dentro de sistema, sino no puedes obtener la pelicula
-
-        ICollection* _peliculas = sistema->ListarFunciones();
-        IIterator* _iterator = _peliculas->getIterator();
-		//Una funcion auxiliar sistema->getUsuario(); podria ayudar
-        while (_iterator->hasCurrent()) {
-            Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
-
-            if(p->getTitulo() == _nombre) {
-                p->puntuarPelicula(_puntuacion, usuarioActual);
-            }
-
-            _iterator->next();
-        }
-    }
+	sistema->AltaPuntaje(_nombre, usuarioActual->getNickName());
 }
 
 void OpcionComentarPelicula(DtUsuario* usuarioActual)
@@ -339,6 +327,10 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
    while (DeseaContinuar("Desea ingresar un comentario? (Si/No): "))
    {
 	   if(DeseaContinuar("Desea comentar un comentario ya existente? (Si/No): ")) {
+		   int id_comentario;
+		   cout << "Ingrese la id del comentario que desea responder: ";
+		   cin >> id_comentario;
+
 		   cout << "Ingrese su comentario: " << endl;
 		   cin.ignore();
 		   getline(cin, _comentario);
@@ -351,30 +343,14 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
 	   
    }
 
-   //Reparaciones
    sistema->AltaComentario(_comentario, _nombre, usuarioActual->getNickName());
-
-   //Esto no deberia hacerse en el main, ni se puede tampoco
-
-   /*ICollection* _peliculas = sistema->ListarFunciones();
-   IIterator* _iterator = _peliculas->getIterator();
-
-   while (_iterator->hasCurrent()) {
-      Pelicula* p = dynamic_cast<Pelicula*>(_iterator->getCurrent());
-
-      if(p->getTitulo() == _nombre) {
-          Usuario* _Usuario = sistema->ListarUsuario(usuarioActual);
-
-          p->agregarComentario(_comentario, _Usuario);
-      }
-
-      _iterator->next();
-   }*/
 }
 
 void OpcionVerComentariosyPuntajes()
 {
     ISistema* sistema = Sistema::getInstance(); //Obtengo la instancia de Sistema
+
+	string titulo;
 
     //Lista Films
     cout << "\n\tCatalogo de Peliculas" << endl << endl;
@@ -391,8 +367,7 @@ void OpcionVerComentariosyPuntajes()
     getline(cin, titulo);
 
     sistema->VerInfoPelicula(titulo);
-
-    ICollection* c = sistema->ListarComentarios(titulo);
+    sistema->VerComentariosyPuntajes(titulo);
 }
 
 void OpcionesAdministrativas() {

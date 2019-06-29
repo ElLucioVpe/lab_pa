@@ -111,7 +111,7 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 	return dts;
 }
 
-ICollection* Pelicula::ListarComentarios() {
+ICollection* Pelicula::ListarComentarios(string titulo) {
 	ICollection* dts = new List();
 	ComentarioIterator it = comentarios->getIterator();
 	while (it.hasCurrent()) {
@@ -137,31 +137,23 @@ ICollection* Pelicula::getCines()
 	return dts;
 }
 
+int Pelicula::YaPuntuo(string user)
+{
+	PuntajeIterator it = puntajes->getIterator();
+	while (it.hasCurrent()) {
+		Puntaje* p = it.getCurrent();
+		if (p->getUsuario()->getNickName() == user) return p->getValor();
+		it.next();
+	}
+	return 0; //Si no existe puntuacion del usuario
+}
+
 void Pelicula::agregarComentario(string _comentario, Usuario* autor)
 {
 
    int _number = comentarios->getSize() + 1;
    Comentario* _com = new Comentario(_number, _comentario, autor);
    comentarios->add(new KeyInteger(_number), _com);
-}
-
-
-ICollection* Pelicula::getComentarios()
-{
-   ICollection* dts = new List();
-   ComentarioIterator it = comentarios->getIterator();
-   while (it.hasCurrent()) {
-      Comentario* c = it.getCurrent();
-      dts->add(new DtComentario(c->getId(), c->getTexto()));
-      it.next();
-   }
-
-   return dts;
-}
-
-Funcion* Pelicula::getFuncion(int idFuncion)
-{
-	return funciones->find(new KeyInteger(idFuncion));
 }
 
 Pelicula::~Pelicula() {

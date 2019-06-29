@@ -31,8 +31,9 @@ public:
 	void AltaFuncion(string horario, Cine* cin, Sala* sal);
     void puntuarPelicula(int puntaje, Usuario* user);
     ICollection* ListarFunciones(int IdCine);
-    ICollection* ListarComentarios();
+    ICollection* ListarComentarios(string titulo);
     ICollection* getCines();
+	int YaPuntuo(string user);
 	~Pelicula();
 
 private:
