@@ -204,16 +204,31 @@ int Sistema::DarUltimoCine()
 	return previous->getIdCine();
 }
 
-void Sistema::getComentarios(string titulo){
+void Sistema::ListarComentarios(string titulo){
     Pelicula* p = peliculas->find(new KeyString(titulo));
 
-    if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+    if (p == NULL) throw std::invalid_argument("La pelicula no existe")<< endl;
     ICollection* c= new List();
     c=p->getComentarios();
     ComentarioIterator it=c->getIterator();
     while (it.hasCurrent()) {
         Comentario* c = it.getCurrent();
-        cout<< "<"<< c->GetUsuario()<<">"<<":"<<"   "<<c->getTexto();
+        cout<< "<"<< c->GetUsuario()<<">"<<":"<<"   "<<c->getTexto() << endl;
+        it.next();
+    }
+
+}
+void Sistema::ListarPuntajes(string titulo){
+    Pelicula* p = peliculas->find(new KeyString(titulo));
+
+    if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+    ICollection* Pun= new List();
+    Pun=p->ListarPuntajes();
+    PuntajeIterator it=Pun->getIterator();
+    while (it.hasCurrent()) {
+        Puntaje* pu = it.getCurrent();
+        cout <<"Puntajes: "<< endl;
+        cout << "<"<< pu->getUsuario()<<">"<<":"<<"   "<<pu->getValor()<< endl;
         it.next();
     }
 
