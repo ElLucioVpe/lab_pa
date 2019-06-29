@@ -13,6 +13,10 @@ void Puntaje::setValor(int v){
 	this->Valor= v;
 }
 
+Usuario Puntaje::getUsuario(){
+    return this->user;
+}
+
 Puntaje::~Puntaje()
 {
 
