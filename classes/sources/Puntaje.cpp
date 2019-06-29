@@ -13,8 +13,9 @@ void Puntaje::setValor(int v){
 	this->Valor= v;
 }
 
-Usuario * Puntaje::getUsuario(){
-    return this->_usuario;
+Usuario* Puntaje::getUsuario()
+{
+	return _usuario;
 }
 
 Puntaje::~Puntaje()

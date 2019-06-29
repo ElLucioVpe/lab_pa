@@ -70,14 +70,45 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 
 	p->AltaFuncion(horario,c,s);
 }
-void Sistema::AltaPuntaje(int _puntaje, DtUsuario *user) {
+void Sistema::AltaPuntaje(string pelicula, string usuario) {
     Pelicula* p = peliculas->find(new KeyString(pelicula));
-    Usuario* u = usuarios->find(new KeyString(autor));
+    Usuario* u = usuarios->find(new KeyString(usuario));
 
     if (p == NULL) throw std::invalid_argument("La pelicula no existe");
     if (u == NULL) throw std::invalid_argument("El usuario no existe");
 
-    p->agregarPuntaje(texto, u);
+	int puntajeAnterior = p->YaPuntuo(usuario);
+	int _puntuacion;
+
+	if (puntajeAnterior = 0) {
+		cout << "Puntuacion Anterior: " << puntajeAnterior << endl << endl;
+		cout << "Desea modificarla? (Si/No): ";
+		string elegir;
+		bool seguir = true;
+
+		while (seguir) {
+			cin >> elegir;
+			if (elegir == "Si" || elegir == "si") {
+				seguir = false;
+			}
+			else {
+				if (elegir == "No" || elegir == "no") {
+					cout << "Se cancela la operacion" << endl;
+					return;
+				}
+				else {
+					cout << "Error: La opcion ingresada no es valida" << endl;
+				}
+			}
+		}
+	}
+
+	cout << "Puntuacion (1/5): " << endl;
+	cin >> _puntuacion;
+
+	if (_puntuacion < 1 || _puntuacion > 5) throw std::invalid_argument("Puntuacion incorrecta.");
+
+    p->puntuarPelicula(_puntuacion, u);
 }
 void Sistema::AltaComentario(string texto, string pelicula, string autor)
 {
@@ -202,34 +233,4 @@ int Sistema::DarUltimoCine()
 		it.next();
 	}
 	return previous->getIdCine();
-}
-
-void Sistema::ListarComentarios(string titulo){
-    Pelicula* p = peliculas->find(new KeyString(titulo));
-
-    if (p == NULL) throw std::invalid_argument("La pelicula no existe")<< endl;
-    ICollection* c= new List();
-    c=p->getComentarios();
-    ComentarioIterator it=c->getIterator();
-    while (it.hasCurrent()) {
-        Comentario* c = it.getCurrent();
-        cout<< "<"<< c->GetUsuario()<<">"<<":"<<"   "<<c->getTexto() << endl;
-        it.next();
-    }
-
-}
-void Sistema::ListarPuntajes(string titulo){
-    Pelicula* p = peliculas->find(new KeyString(titulo));
-
-    if (p == NULL) throw std::invalid_argument("La pelicula no existe");
-    ICollection* Pun= new List();
-    Pun=p->ListarPuntajes();
-    PuntajeIterator it=Pun->getIterator();
-    while (it.hasCurrent()) {
-        Puntaje* pu = it.getCurrent();
-        cout <<"Puntajes: "<< endl;
-        cout << "<"<< pu->getUsuario()<<">"<<":"<<"   "<<pu->getValor()<< endl;
-        it.next();
-    }
-
 }
