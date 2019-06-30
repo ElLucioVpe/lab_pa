@@ -46,9 +46,7 @@ add_executable(lab_pa
         collections/CineIterator.cpp
         collections/CineIterator.h
         collections/ColCines.h
-        collections/ColCines.cpp
-        collections/ColDtComentario.h
-        collections/ColDtComentario.cpp
+        collections/ColCines.cpp  
         collections/ColFunciones.h
         collections/ColFunciones.cpp
         collections/ColPeliculas.h
@@ -60,8 +58,6 @@ add_executable(lab_pa
         collections/ColSalas.cpp
         collections/ColUsuarios.h
         collections/ColUsuarios.cpp
-        collections/DtComentarioIterator.h
-        collections/DtComentarioIterator.cpp
         collections/FuncionIterator.h
         collections/FuncionIterator.cpp
         collections/PeliculaIterator.h
