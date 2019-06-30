@@ -6,7 +6,9 @@
 #include "../../classes/headers/Usuario.h"
 //#include "../../collections/ColComentarios.h"
 #include "../../collections/OrderedDictionary.h"
+#include "../../collections/List.h"
 #include "../../KeyInteger.h"
+#include "../../datatypes/headers/DtComentario.h"
 
 //class ColComentarios;
 
@@ -22,7 +24,7 @@ public:
 	void setTexto(string t);
 	void setUsuario(Usuario* u);
 	void agregarHijo(Comentario* c);
-	Icollection * ListarHijos(string c);
+	ICollection * ListarHijos(string c);
 	~Comentario();
 private:
 	int Id;

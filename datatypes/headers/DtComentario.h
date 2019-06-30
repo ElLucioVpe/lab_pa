@@ -3,7 +3,7 @@
 //
 
 #ifndef DTCOMENTARIO_H
-
+#define DTCOMENTARIO_H
 
 #include <iostream>
 #include "../../classes/headers/Comentario.h"
@@ -25,7 +25,5 @@ private:
     string texto;
     DtUsuario user;
 };
-
-#define DTCOMENTARIO_H
 
 #endif //DTCOMENTARIO_H

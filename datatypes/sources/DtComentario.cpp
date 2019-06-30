@@ -10,7 +10,7 @@ DtComentario::DtComentario(){
 DtComentario::DtComentario(int _id, string _texto, DtUsuario _user){
    this->id=_id;
    this->texto=_texto;
-   this->user = _user
+   this->user = _user;
 }
 
 int DtComentario::getId(){
