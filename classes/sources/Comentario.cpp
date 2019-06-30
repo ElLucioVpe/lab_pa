@@ -4,7 +4,7 @@ Comentario::Comentario(int id, string Texto, Usuario* autor){
 	this->Id = id;
 	this->Texto = Texto;
 	this->Autor = autor;
-	hijos = new ColComentarios();
+	hijos = new OrderedDictionary();
 }
 
 int Comentario::getId()
@@ -29,13 +29,26 @@ void Comentario::setTexto(string t){
 	this->Texto= t;
 }
 
-void Comentario::setUsuario(string u){
-	this->Usuario= u;
+void Comentario::setUsuario(Usuario* u){
+	this->Autor = u;
 }
 
 void Comentario::agregarHijo(Comentario* c)
 {
 	hijos->add(new KeyInteger(c->Id), c);
+}
+
+ICollection* Comentario::ListarHijos(string c) {
+    ICollection* dts = new List();
+    ComentarioIterator it = hijos->getIterator();
+    while (it.hasCurrent()) {
+        Comentario* c = it.getCurrent();
+        Usuario* u = c->getAutor();
+        dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+        it.next();
+    }
+
+    return dts;
 }
 
 Comentario::~Comentario()

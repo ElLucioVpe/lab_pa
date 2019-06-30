@@ -17,7 +17,7 @@ public:
     DtPuntaje(int, DtUsuario);
     int getValor();
     DtUsuario getDtUsuario();
-    virtual ~DtComentario();
+    virtual ~DtPuntaje();
 private:
     int Valor;
     DtUsuario user;

@@ -1,5 +1,9 @@
 #include "../headers/DtUsuario.h"
 
+DtUsuario::DtUsuario()
+{
+}
+
 DtUsuario::DtUsuario(std::string _nickname, std::string _img, std::string _contra, bool _admin) {
     this->NickName = _nickname;
     this->ImgPerfil = _img;
