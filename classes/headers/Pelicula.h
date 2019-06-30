@@ -23,6 +23,7 @@ public:
 	string getPoster();
 	string getSinopsis();
 	float getPuntaje();
+	int getCantPuntajes();
 	void setTitulo(string titulo);
 	void setPoster(string poster);
 	void setSinopsis(string sinopsis);

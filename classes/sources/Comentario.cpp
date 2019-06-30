@@ -38,7 +38,7 @@ void Comentario::agregarHijo(Comentario* c)
 	hijos->add(new KeyInteger(c->Id), c);
 }
 
-ICollection* Comentario::ListarHijos(string c) {
+ICollection* Comentario::ListarHijos() {
     ICollection* dts = new List();
     IIterator* it = hijos->getIterator();
     while (it->hasCurrent()) {

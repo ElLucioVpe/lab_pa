@@ -70,45 +70,14 @@ void Sistema::AltaFuncion(string titulo, string horario, int idCine, int idSala)
 
 	p->AltaFuncion(horario,c,s);
 }
-void Sistema::AltaPuntaje(string pelicula, string usuario) {
+void Sistema::AltaPuntaje(int puntuacion, string pelicula, string usuario) {
     Pelicula* p = peliculas->find(new KeyString(pelicula));
     Usuario* u = usuarios->find(new KeyString(usuario));
 
     if (p == NULL) throw std::invalid_argument("La pelicula no existe");
     if (u == NULL) throw std::invalid_argument("El usuario no existe");
 
-	int puntajeAnterior = p->YaPuntuo(usuario);
-	int _puntuacion;
-
-	if (puntajeAnterior = 0) {
-		cout << "Puntuacion Anterior: " << puntajeAnterior << endl << endl;
-		cout << "Desea modificarla? (Si/No): ";
-		string elegir;
-		bool seguir = true;
-
-		while (seguir) {
-			cin >> elegir;
-			if (elegir == "Si" || elegir == "si") {
-				seguir = false;
-			}
-			else {
-				if (elegir == "No" || elegir == "no") {
-					cout << "Se cancela la operacion" << endl;
-					return;
-				}
-				else {
-					cout << "Error: La opcion ingresada no es valida" << endl;
-				}
-			}
-		}
-	}
-
-	cout << "Puntuacion (1/5): " << endl;
-	cin >> _puntuacion;
-
-	if (_puntuacion < 1 || _puntuacion > 5) throw std::invalid_argument("Puntuacion incorrecta.");
-
-    p->puntuarPelicula(_puntuacion, u);
+    p->puntuarPelicula(puntuacion, u);
 }
 void Sistema::AltaComentario(string texto, string pelicula, string autor)
 {
@@ -137,6 +106,32 @@ void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idF
 	p->CrearReserva(cantAsientos, costo, idFuncion, usuario, banco, financiera);
 }
 
+int Sistema::ObtenerDescuentoFinanciera(string financiera)
+{
+	int res;
+	Financiera f;
+	if (financiera == "Bacacay") f = Bacacay;
+	if (financiera == "Banco Hipotecario") f = Banco_Hipotecario;
+	if (financiera == "Cambio Maiorano") f = Cambio_Maiorano;
+
+	switch (f)
+	{
+	case Bacacay:
+		res = 20;
+		break;
+	case Banco_Hipotecario:
+		res = 15;
+		break;
+	case Cambio_Maiorano:
+		res = 10;
+		break;
+	default:
+		res = 0;
+		break;
+	}
+	return res;
+}
+
 ICollection* Sistema::ListarTitulos() {
 	ICollection* titulos = new List();
     PeliculaIterator it = peliculas->getIterator();
@@ -158,13 +153,16 @@ DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
 
 	return new DtPelicula(p->getTitulo(), p->getPoster(), p->getSinopsis(), p->getPuntaje());
 }
+
 void Sistema::VerComentariosyPuntajes(string titulo) {
 	Pelicula* p = peliculas->find(new  KeyString(titulo));
-	cout << "\n\tComentarios de: " + p->getTitulo() << endl << endl;
-	cout << "Su puntaje es: " << p->getPuntaje()<< endl;
+	cout << p->getTitulo() << endl << endl;
+	cout << "Puntaje promedio: " << p->getPuntaje() << "(" << p->getCantPuntajes() << "usuarios)"<< endl;
 
-	p->ListarComentarios();
+	ListarComentarios(titulo);
+	ListarPuntajes(titulo);
 }
+
 void Sistema::EliminarPelicula(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 	peliculas->remove(new KeyString(p->getTitulo())); //Remuevo la pelicula de la coleccion
@@ -235,17 +233,28 @@ int Sistema::DarUltimoCine()
 	return previous->getIdCine();
 }
 
+int Sistema::YaPuntuo(string pelicula, string usuario) {
+	Pelicula* p = peliculas->find(new KeyString(pelicula));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
+	return p->YaPuntuo(usuario);
+}
+
 void Sistema::ListarComentarios(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 	ICollection* c = new List();
 	c = p->ListarComentarios();
-	ComentarioIterator it = c->getIterator();
-	while (it.hasCurrent()) {
-		Comentario* c = it.getCurrent();
-		cout << "<" << c->getAutor() << ">" << ":" << "   " << c->getTexto() << endl;
-		it.next();
+	IIterator* it = c->getIterator();
+	cout << "Comentarios" << endl;
+	while (it->hasCurrent()) {
+		DtComentario* c = dynamic_cast<DtComentario*>(it->getCurrent());
+		cout << "<" << c->getDtUsuario().getNickName() << ">" << ":" << "   " << c->getTexto() << endl;
+		//c->ListarHijos();
+		//Veo venir recursividad en ListarHijos
+		it->next();
 	}
 
 }
@@ -257,11 +266,10 @@ void Sistema::ListarPuntajes(string titulo){
     ICollection* Pun= new List();
     Pun=p->ListarPuntajes();
     PuntajeIterator it=Pun->getIterator();
+	cout << "Puntajes" << endl;
     while (it.hasCurrent()) {
         Puntaje* pu = it.getCurrent();
-        cout <<"Puntajes: "<< endl;
         cout << "<"<< pu->getUsuario()<<">"<<":"<<"   "<<pu->getValor()<< endl;
         it.next();
     }
-
 }

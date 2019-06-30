@@ -2,6 +2,7 @@
 #include "../../collections/ColUsuarios.h"
 #include "../../collections/ColPeliculas.h"
 #include "../../collections/ColCines.h"
+#include "Financiera.h"
 
 class Sistema : public ISistema {
 	private:
@@ -22,9 +23,10 @@ class Sistema : public ISistema {
 		void AltaSala(int idCine, int cantAsientos);
 		void AltaFuncion(string titulo, string horario, int idCine, int idSala);
 		void AltaComentario(string texto, string pelicula, string autor);
-		void AltaPuntaje(string pelicula, string usuario);
+		void AltaPuntaje(int puntuacion, string pelicula, string usuario);
         DtUsuario* iniciarSesion(string user, string pass);
         void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera);
+		int ObtenerDescuentoFinanciera(string financiera);
 		ICollection* ListarTitulos();
         DtPelicula* SeleccionarPelicula(string titulo);
 		void VerComentariosyPuntajes(string titulo);
@@ -37,4 +39,5 @@ class Sistema : public ISistema {
 		void ListarComentarios(string titulo);
         void ListarPuntajes(string titulo);
 		int DarUltimoCine();
+		int YaPuntuo(string pelicula, string usuario);
 };

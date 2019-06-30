@@ -42,6 +42,10 @@ float Pelicula::getPuntaje(){
     }
 }
 
+int Pelicula::getCantPuntajes() {
+	return puntajes->getSize();
+}
+
 void Pelicula::setTitulo(string titulo){
 	this->titulo=titulo;
 }
@@ -84,13 +88,11 @@ void Pelicula::EliminarFunciones()
 
 void Pelicula::AltaFuncion(string horario, Cine* cin, Sala* sal) {
 
-int id = funciones->getSize() + 1;
-KeyInteger* k = new KeyInteger(id);
+	int id = funciones->getSize() + 1;
+	KeyInteger* k = new KeyInteger(id);
 
-Funcion* f = new Funcion(id,horario,cin,sal);
-funciones->add(k,f);
-
-
+	Funcion* f = new Funcion(id,horario,cin,sal);
+	funciones->add(k,f);
 }
 
 ICollection* Pelicula::ListarFunciones(int idCine)
