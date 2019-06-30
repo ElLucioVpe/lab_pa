@@ -7,7 +7,7 @@
 //#include "../../collections/ColComentarios.h"
 #include "../../collections/OrderedDictionary.h"
 #include "../../KeyInteger.h"
-
+#include "../../datatypes/headers/DtComentario.h"
 //class ColComentarios;
 
 using namespace std;
