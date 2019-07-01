@@ -27,7 +27,7 @@ void Sistema::AltaUsuario(string nick, string img, string contra, bool admin)
 void Sistema::AltaPelicula(string titulo, string poster, string sinopsis)
 {
 	KeyString* k = new KeyString(titulo);
-	Pelicula* p = new Pelicula(titulo, poster, sinopsis, 0);
+	Pelicula* p = new Pelicula(titulo, poster, sinopsis, NULL);
 	peliculas->add(k, p);
 }
 
@@ -184,14 +184,17 @@ void Sistema::VerInfoPelicula(string titulo) {
 ICollection* Sistema::ListarCines() {
 	ICollection* ids = new List();
     CineIterator it = cines->getIterator();
-    Cine* c = NULL;
+    //Cine* c = NULL;
     while (it.hasCurrent()) {
-		c = it.getCurrent();
-        ids->add(new KeyInteger(c->getIdCine()));
+		//c = it.getCurrent();
+		Cine* c = it.getCurrent();
+       // ids->add(new KeyInteger(c->getIdCine()));
+        ids->add(new DtCine(c->getIdCine(), c->getDireccion()));
         it.next();
     }
 
 	return ids;
+	
 }
 
 ICollection* Sistema::ListarCinesPorTitulo(string tituloPelicula) {
