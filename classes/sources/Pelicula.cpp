@@ -112,6 +112,8 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 
 	return dts;
 }
+ICollection* getComentario();
+
 
 ICollection* Pelicula::ListarComentarios() {
 	ICollection* dts = new List();
@@ -119,7 +121,7 @@ ICollection* Pelicula::ListarComentarios() {
 	while (it.hasCurrent()) {
 		Comentario* c = it.getCurrent();
 		Usuario* u = c->getAutor();
-		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin(), DtComentario(c->ListarHijos(c->)))));
 		it.next();
 	}
 

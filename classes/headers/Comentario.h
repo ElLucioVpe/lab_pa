@@ -23,6 +23,8 @@ public:
 	void setTexto(string t);
 	void setUsuario(Usuario* u);
 	void agregarHijo(Comentario* c);
+    ICollection * getComentario(IDictionary* hijo);
+    IDictionary* getHijos();
 	ICollection * ListarHijos();
 	~Comentario();
 private:

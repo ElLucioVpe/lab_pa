@@ -15,7 +15,7 @@ using namespace std;
 class DtComentario : public ICollectible {
 public:
     DtComentario();
-    DtComentario(int, string, DtUsuario);
+    DtComentario(int, string, DtUsuario, ICollection*);
     string getTexto();
     int getId();
     DtUsuario getDtUsuario();
@@ -24,6 +24,7 @@ private:
     int id;
     string texto;
     DtUsuario user;
+    ICollection * hijos;
 };
 
 #endif //DTCOMENTARIO_H

@@ -24,6 +24,7 @@ public:
 	string getSinopsis();
 	float getPuntaje();
 	int getCantPuntajes();
+	ICollection* getComentario();
 	void setTitulo(string titulo);
 	void setPoster(string poster);
 	void setSinopsis(string sinopsis);

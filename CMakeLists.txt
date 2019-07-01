@@ -18,6 +18,7 @@ add_executable(lab_pa
         classes/headers/TarjetaDeCredito.h
         classes/headers/TarjetaDeDebito.h
         classes/headers/Usuario.h
+        classes/headers/Comentario.h
         classes/sources/Cine.cpp
         classes/sources/Funcion.cpp
         classes/sources/Pelicula.cpp
@@ -27,6 +28,7 @@ add_executable(lab_pa
         classes/sources/TarjetaDeDebito.cpp
         classes/sources/Usuario.cpp
         classes/sources/Sala.cpp
+        classes/sources/Comentario.cpp
         collections/ColReservas.h
         collections/ColReservas.cpp
         collections/List.cpp
