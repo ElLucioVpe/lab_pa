@@ -19,6 +19,7 @@ public:
     string getTexto();
     int getId();
     DtUsuario getDtUsuario();
+	ICollection* getHijos();
     virtual ~DtComentario();
 private:
     int id;

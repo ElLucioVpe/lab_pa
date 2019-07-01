@@ -26,6 +26,11 @@ DtUsuario DtComentario::getDtUsuario(){
    return this->user;
 }
 
+ICollection* DtComentario::getHijos()
+{
+	return this->hijos;
+}
+
 DtComentario::~DtComentario()
 {
 }

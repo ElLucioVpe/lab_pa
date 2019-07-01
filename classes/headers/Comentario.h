@@ -2,6 +2,7 @@
 #define COMENTARIO_H
 
 #include <iostream>
+#include <vector>
 #include "../../interfaces/ICollectible.h"
 #include "../../classes/headers/Usuario.h"
 //#include "../../collections/ColComentarios.h"
@@ -22,7 +23,7 @@ public:
 	void setId(int _id);
 	void setTexto(string t);
 	void setUsuario(Usuario* u);
-	void agregarHijo(Comentario* c);
+	void agregarHijo(vector<int> padres, Comentario* c);
     ICollection * getComentario(IDictionary* hijo);
     IDictionary* getHijos();
 	ICollection * ListarHijos();

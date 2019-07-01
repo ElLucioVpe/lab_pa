@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <set>
+#include <vector>
 #include "../classes/headers/Usuario.h"
 #include "../datatypes/headers/DtPelicula.h"
 #include "../datatypes/headers/DtCine.h"
@@ -16,7 +17,7 @@ class ISistema {
 		virtual void AltaCine(string dir) = 0;
 		virtual void AltaSala(int idCine, int cantAsientos) = 0;
 		virtual void AltaFuncion(string titulo, string horario, int idCine, int idSala) = 0;
-		virtual void AltaComentario(string texto, string pelicula, string autor) = 0;
+		virtual void AltaComentario(vector<int> padres, string texto, string pelicula, string autor) = 0;
 		virtual void AltaPuntaje(int puntuacion, string pelicula, string usuario) = 0;
         virtual DtUsuario* iniciarSesion(string , string) = 0;
         virtual void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string usuario, string banco, string financiera) = 0;

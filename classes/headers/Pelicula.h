@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <set>
+#include <vector>
 #include "../../interfaces/ICollectible.h"
 #include "../../collections/ColFunciones.h"
 #include "../../collections/ColPuntajes.h"
@@ -30,7 +31,7 @@ public:
 	void setSinopsis(string sinopsis);
 
     void CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera);
-	void agregarComentario(string _comentario, Usuario* autor);
+	void agregarComentario(vector<int> padres,string _comentario, Usuario* autor);
     void EliminarFunciones();
 	void AltaFuncion(string horario, Cine* cin, Sala* sal);
     void puntuarPelicula(int puntaje, Usuario* user);

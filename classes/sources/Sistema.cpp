@@ -79,7 +79,7 @@ void Sistema::AltaPuntaje(int puntuacion, string pelicula, string usuario) {
 
     p->puntuarPelicula(puntuacion, u);
 }
-void Sistema::AltaComentario(string texto, string pelicula, string autor)
+void Sistema::AltaComentario(vector<int> padres, string texto, string pelicula, string autor)
 {
 	Pelicula* p = peliculas->find(new KeyString(pelicula));
 	Usuario* u = usuarios->find(new KeyString(autor));
@@ -87,7 +87,7 @@ void Sistema::AltaComentario(string texto, string pelicula, string autor)
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 	if (u == NULL) throw std::invalid_argument("El usuario no existe");
 
-	p->agregarComentario(texto, u);
+	p->agregarComentario(padres, texto, u);
 }
 
 ICollection* Sistema::ListarSalas(int idCine) {
@@ -159,7 +159,7 @@ void Sistema::VerComentariosyPuntajes(string titulo) {
 	cout << p->getTitulo() << endl << endl;
 	cout << "Puntaje promedio: " << p->getPuntaje() << "(" << p->getCantPuntajes() << "usuarios)"<< endl;
 
-	ListarComentarios(p->getC);
+	ListarComentarios(titulo);
 	ListarPuntajes(titulo);
 }
 
@@ -245,31 +245,39 @@ void Sistema::ListarComentarios(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
-	ICollection* c = new List();
+	ICollection* com = new List();
 	com = p->ListarComentarios();
 	IIterator* it = com->getIterator();
 	cout << "Comentarios" << endl;
 	while (it->hasCurrent()) {
 		DtComentario* c = dynamic_cast<DtComentario*>(it->getCurrent());
 		cout << "<" << c->getDtUsuario().getNickName() << ">" << ":" << "   " << c->getTexto() << endl;
-		this->DesarmarComentario(com);
-		//c->ListarHijos();
-		//Veo venir recursividad en ListarHijos
+		MostrarHijosComentario(c, 1);
 		it->next();
 	}
 
 }
-List Sistema::DesarmarComentario(ICollection * com){
-   if (hijo->isEmpty()) return nullptr;
-   IIterator* it = com->getIterator();
-   while (it->hasCurrent()) {
-      DtComentario* c = dynamic_cast<DtComentario*>(it->getCurrent());
-      cout << "<" << c->getDtUsuario().getNickName() << ">" << ":" << "   " << c->getTexto() << endl;
-      this->DesarmarComentario(com);
-      //c->ListarHijos();
-      //Veo venir recursividad en ListarHijos
-      it->next();
-   }
+void Sistema::MostrarHijosComentario(DtComentario* com, int cantE) {
+	ICollection* hijos = com->getHijos();
+
+	if (hijos->isEmpty()) {
+		//Termina la operacion
+	}
+	else {
+		string espacios = "";
+		for (int i = 0; i < cantE; i++)
+		{
+			espacios += "  "; //Simplemente espacios para diferenciar entre respuestas y comentarios base
+		}
+
+		IIterator* it = hijos->getIterator();
+		while (it->hasCurrent()) {
+			DtComentario* c = dynamic_cast<DtComentario*>(it->getCurrent());
+			cout << espacios << "<" << c->getDtUsuario().getNickName() << ">" << ":" << "   " << c->getTexto() << endl;
+			MostrarHijosComentario(c, cantE+1);
+			it->next();
+		}
+	}
 }
 void Sistema::ListarPuntajes(string titulo){
     Pelicula* p = peliculas->find(new KeyString(titulo));
@@ -281,7 +289,7 @@ void Sistema::ListarPuntajes(string titulo){
 	cout << "Puntajes" << endl;
     while (it.hasCurrent()) {
         Puntaje* pu = it.getCurrent();
-        cout << "<"<< pu->getUsuario()<<">"<<":"<<"   "<<pu->getValor()<< endl;
+        cout << "<"<< pu->getUsuario()<<">"<<":"<< "<" <<pu->getValor()<< ">" << endl;
         it.next();
     }
 }

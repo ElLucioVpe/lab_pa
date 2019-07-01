@@ -45,7 +45,6 @@ int main() {
 					cin.ignore();
 					getline(cin, user);
 					cout << "Ingrese su contrasenia: ";
-					cin.ignore();
 					getline(cin, pass);
 
 					usuarioActual = sistema->iniciarSesion(user, pass);
@@ -58,14 +57,14 @@ int main() {
 					cin.ignore();
 					getline(cin, user);
 					cout << "Ingrese su contrasenia: ";
-					cin.ignore();
 					getline(cin, pass);
 					cout << "Agregue una imagen de perfil (URL): ";
 					cin.ignore();
 					getline(cin, img);
+					cout << img;
 
 					sistema->AltaUsuario(user, img, pass, false);
-					usuarioActual = new DtUsuario(user, img, pass, false);
+					//usuarioActual = new DtUsuario(user, img, pass, false);
 					break;
 				}
 				default:
@@ -77,27 +76,28 @@ int main() {
 			cout << "\nError: " << e.what() << endl;
 		}
 
-		
+		if (usuarioActual != NULL) //Prohibe la entrada sin iniciar sesion
+		{
+			while (op != 0) {
+				//Menu de opciones
+				cout << "\n\tMenu\n" << endl;
+				cout << "1 - Hacer una reserva" << endl;
+				cout << "2 - Ver la informacion de una pelicula" << endl;
+				cout << "3 - Puntuar una Pelicula" << endl;
+				cout << "4 - Comentar pelicula" << endl;
+				cout << "5 - Ver comentarios y puntajes" << endl;
+				cout << "6 - Opciones Administrativas" << endl;
+				cout << "0 - Cerrar Sesion" << endl;
+				cin >> op;
 
-		while (op != 0) {
-			//Menu de opciones
-			cout << "\n\tMenu\n" << endl;
-			cout << "1 - Hacer una reserva" << endl;
-			cout << "2 - Ver la informacion de una pelicula" << endl;
-			cout << "3 - Puntuar una Pelicula" << endl;
-			cout << "4 - Comentar pelicula" << endl;
-			cout << "5 - Ver comentarios y puntajes" << endl;
-			cout << "6 - Opciones Administrativas" << endl;
-			cout << "0 - Cerrar Sesion" << endl;
-			cin >> op;
+				//Switch de opciones
+				//Agregar posibles errores con stdexcept en cada case
+				try {
 
-			//Switch de opciones
-			//Agregar posibles errores con stdexcept en cada case
-			try {
-
-				switch (op)
-				{
+					switch (op)
+					{
 					case 0:
+						usuarioActual = NULL;
 						break;
 					case 1:
 						OpcionCrearReserva(usuarioActual);
@@ -117,22 +117,23 @@ int main() {
 					case 6:
 						if (usuarioActual->getAdmin()) OpcionesAdministrativas();
 						else throw std::invalid_argument("No tiene permitido el acceso");
-						
+
 						break;
 					default:
 						throw std::invalid_argument("La opcion ingresada no es valida");
+					}
+
+				}
+				catch (std::invalid_argument& e) {
+					cout << "\nError: " << e.what() << endl;
 				}
 
-			}
-			catch (std::invalid_argument& e) {
-				cout << "\nError: " << e.what() << endl;
-			}
-
-			if (op != 0) {
-				//cin.ignore();
-				cout << "\nPresione ENTER para continuar...";
-				cin.get();
-				cout << endl;
+				if (op != 0) {
+					//cin.ignore();
+					cout << "\nPresione ENTER para continuar...";
+					cin.get();
+					cout << endl;
+				}
 			}
 		}
 	}
@@ -165,10 +166,17 @@ void DatosTesteo() {
 	s->AltaPuntaje(5, "Jhon Whick 3", "user3"); 
 
 	//Comentarios
-	s->AltaComentario("10/10", "Avengers: Endgame", "user1");
-	s->AltaComentario("10/10 x2", "Avengers: Endgame", "user1");
-	s->AltaComentario("Yo hice la pusieran en el cine by El Admin", "Jhon Whick 3", "admin");
-	s->AltaComentario("Ni la vi", "Jhon Whick 3", "user2");
+	vector<int> padresComentarios;
+	s->AltaComentario(padresComentarios, "10/10", "Avengers: Endgame", "user1");
+	s->AltaComentario(padresComentarios, "10/10 x2", "Avengers: Endgame", "user1");
+	s->AltaComentario(padresComentarios, "Yo hice la pusieran en el cine by El Admin", "Jhon Whick 3", "admin");
+	s->AltaComentario(padresComentarios, "Ni la vi", "Jhon Whick 3", "user2");
+
+	//Respuestas de comentarios
+	padresComentarios.push_back(1);
+	s->AltaComentario(padresComentarios, "Gracias admin", "Jhon Whick 3", "user1");
+	padresComentarios.push_back(1);
+	s->AltaComentario(padresComentarios, "Denada user1, me voy a asegurar este la 4", "Jhon Whick 3", "admin");
 
 	//Cines
 	s->AltaCine("Calle 1 Nro. 1");
@@ -422,6 +430,7 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
 
    string _nombre;
    string _comentario;
+   vector<int> padres;
 
    cout << "Ingrese el nombre de una pelicula: " << endl;
    cin.ignore();
@@ -435,8 +444,15 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
    {
 	   if(DeseaContinuar("Desea comentar un comentario ya existente? (Si/No): ")) {
 		   int id_comentario;
-		   cout << "Ingrese la id del comentario que desea responder: ";
-		   cin >> id_comentario;
+		   bool seguir = true;
+
+		   while (seguir) {
+			   cout << "Ingrese la id del comentario que desea responder \n(Si es respuesta de otro, ingrese primero la id de ese): ";
+			   cin >> id_comentario;
+			   padres.push_back(id_comentario);
+
+			   seguir = ("Desea ingresar otra id (Si/No): ");
+		   }
 
 		   cout << "Ingrese su comentario: " << endl;
 		   cin.ignore();
@@ -446,11 +462,11 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
 		   cout << "Ingrese su comentario: " << endl;
 		   cin.ignore();
 		   getline(cin, _comentario);
+		   padres.push_back(0);
 	   }
-	   
    }
 
-   sistema->AltaComentario(_comentario, _nombre, usuarioActual->getNickName()); //agregar parametro int padre, si no es respuesta padre = 0
+   sistema->AltaComentario(padres, _comentario, _nombre, usuarioActual->getNickName()); //agregar parametro int padre, si no es respuesta padre = 0
 }
 
 void OpcionVerComentariosyPuntajes()

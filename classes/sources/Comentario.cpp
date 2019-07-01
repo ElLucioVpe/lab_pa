@@ -38,9 +38,19 @@ void Comentario::setUsuario(Usuario* u){
 	this->Autor = u;
 }
 
-void Comentario::agregarHijo(Comentario* c)
+void Comentario::agregarHijo(vector<int> padres, Comentario* c)
 {
-	hijos->add(new KeyInteger(c->Id), c);
+	//padres existe por si es hijo de otro hijo
+	if (padres.size() == 0) { 
+		//Es simplemente un hijo
+		c->setId(hijos->getSize()+1); //Reemplazo el 0 por la id correspondiente
+		hijos->add(new KeyInteger(c->getId()), c);
+	}
+	else {
+		Comentario* c = dynamic_cast<Comentario*>(hijos->find(new KeyInteger(padres[0])));
+		padres.erase(padres.begin());
+		c->agregarHijo(padres, c);
+	}
 }
 
 ICollection * Comentario::getComentario(IDictionary* hijo){
@@ -64,7 +74,7 @@ ICollection* Comentario::ListarHijos() {
     while (it->hasCurrent()) {
         Comentario* c = dynamic_cast<Comentario*>(it->getCurrent());
         Usuario* u = c->getAutor();
-        dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin()), c->getComentario(c->getHijos())));
+        dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin()), c->ListarHijos()));
         it->next();
     }
 

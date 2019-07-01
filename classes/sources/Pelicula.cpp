@@ -121,7 +121,7 @@ ICollection* Pelicula::ListarComentarios() {
 	while (it.hasCurrent()) {
 		Comentario* c = it.getCurrent();
 		Usuario* u = c->getAutor();
-		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin(), DtComentario(c->ListarHijos(c->)))));
+		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin()), c->ListarHijos()));
 		it.next();
 	}
 
@@ -163,12 +163,20 @@ int Pelicula::YaPuntuo(string user)
 	return 0; //Si no existe puntuacion del usuario
 }
 
-void Pelicula::agregarComentario(string _comentario, Usuario* autor)
+void Pelicula::agregarComentario(vector<int> padres,string _comentario, Usuario* autor)
 {
-
-   int _number = comentarios->getSize() + 1;
-   Comentario* _com = new Comentario(_number, _comentario, autor);
-   comentarios->add(new KeyInteger(_number), _com);
+	Comentario* _com = new Comentario(0, _comentario, autor); //Asigno 0 para luego cambiarlo mediante un set
+	if (padres.size() == 0) {
+		int _number = comentarios->getSize() + 1;
+		_com->setId(_number);
+		comentarios->add(new KeyInteger(_number), _com);
+	}
+	else {
+		//Si es una respuesta
+		Comentario* cpadre = comentarios->find(new KeyInteger(padres[0]));
+		padres.erase(padres.begin());
+		cpadre->agregarHijo(padres, _com);
+	}
 }
 
 Pelicula::~Pelicula() {
