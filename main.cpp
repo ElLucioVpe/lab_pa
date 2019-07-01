@@ -1,5 +1,7 @@
 #include <iostream>
+#include <string>
 #include <stdexcept>
+#include <algorithm> //Inlcude necesario en dev-c++s
 #include <vector>
 #include "classes/headers/Sistema.h"
 #include "datatypes/headers/DtUsuario.h"
@@ -587,7 +589,13 @@ void OpcionAltaFuncion(){
 	string titulo, fechaFun;
 
 
-	//Lista Films
+	
+	vector<int> SalasOcupadas;
+	bool deseaIngresar = true;
+
+	while (deseaIngresar) {
+		
+		//Lista Films
 	cout << "\n\tCatalogo de Peliculas" << endl << endl;
 	ICollection* t = sistema->ListarTitulos();
 	IIterator* it = t->getIterator();
@@ -638,10 +646,7 @@ void OpcionAltaFuncion(){
 
 	horario = mktime(&horariotm);
 	//
-	vector<int> SalasOcupadas;
-	bool deseaIngresar = true;
-
-	while (deseaIngresar) {
+		
 		//Lista Salas - Mostrar Ocupadas y Disponibles
 		//Voy por todas las pelis
 		t = sistema->ListarTitulos();
@@ -684,12 +689,14 @@ void OpcionAltaFuncion(){
 			cout << "IdSala " + s->getIdSala() << endl;
 			cout << "cantAsientos :" + s->getCantAsientos() << endl;
 			//Comparamos si esta en la lista de no disponibles para este cine a esa hora
+			
 			if (std::find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala()) != SalasOcupadas.end()) {
 				cout << "Ocupada" << endl;
 			}
 			else {
 				cout << "Disponible" << endl;
 			}
+			
 			it->next();
 		}
 
@@ -702,6 +709,7 @@ void OpcionAltaFuncion(){
 
 
 		//Ahora veremos si esta ocupada o no
+		
 		if (std::find(SalasOcupadas.begin(), SalasOcupadas.end(), idSala) != SalasOcupadas.end()) {
 			cout << "Esta seleccionando una sala que esta ocupada" << endl;
 		}
@@ -709,6 +717,7 @@ void OpcionAltaFuncion(){
 			//Todo bien, hagamos el alta.
 			sistema->AltaFuncion(titulo, fechaFun, idCine, idSala);
 		}
+		
 
 		deseaIngresar = DeseaContinuar("Desea ingresar otra funcion para esta pelicula? (Si/No): ");
 	}
