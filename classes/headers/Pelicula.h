@@ -1,7 +1,9 @@
 #ifndef PELICULA_H
 #define PELICULA_H
 
+
 #include <iostream>
+#include <stdexcept> //stdexcept en pelicula wacho
 #include <set>
 #include <vector>
 #include "../../interfaces/ICollectible.h"
