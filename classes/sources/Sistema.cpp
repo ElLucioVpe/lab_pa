@@ -27,7 +27,7 @@ void Sistema::AltaUsuario(string nick, string img, string contra, bool admin)
 void Sistema::AltaPelicula(string titulo, string poster, string sinopsis)
 {
 	KeyString* k = new KeyString(titulo);
-	Pelicula* p = new Pelicula(titulo, poster, sinopsis, NULL);
+	Pelicula* p = new Pelicula(titulo, poster, sinopsis, 0);
 	peliculas->add(k, p);
 }
 
