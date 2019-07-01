@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <algorithm> //Inlcude necesario en dev-c++s
 #include <vector>
+#include <algorithm>
 #include "classes/headers/Sistema.h"
 #include "datatypes/headers/DtUsuario.h"
 
@@ -689,8 +690,7 @@ void OpcionAltaFuncion(){
 			cout << "IdSala " + s->getIdSala() << endl;
 			cout << "cantAsientos :" + s->getCantAsientos() << endl;
 			//Comparamos si esta en la lista de no disponibles para este cine a esa hora
-			
-			if (std::find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala()) != SalasOcupadas.end()) {
+			if (find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala()) != SalasOcupadas.end()) {
 				cout << "Ocupada" << endl;
 			}
 			else {

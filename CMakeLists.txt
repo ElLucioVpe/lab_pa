@@ -19,6 +19,7 @@ add_executable(lab_pa
         classes/headers/TarjetaDeDebito.h
         classes/headers/Usuario.h
         classes/headers/Comentario.h
+        classes/headers/Sistema.h
         classes/sources/Cine.cpp
         classes/sources/Funcion.cpp
         classes/sources/Pelicula.cpp
@@ -29,6 +30,7 @@ add_executable(lab_pa
         classes/sources/Usuario.cpp
         classes/sources/Sala.cpp
         classes/sources/Comentario.cpp
+        classes/sources/Sistema.cpp
         collections/ColReservas.h
         collections/ColReservas.cpp
         collections/List.cpp
@@ -78,12 +80,14 @@ add_executable(lab_pa
         datatypes/headers/DtUsuario.h
         datatypes/headers/DtSala.h
         datatypes/headers/DtComentario.h
+        datatypes/headers/DtPuntaje.h
         datatypes/sources/DtCine.cpp
         datatypes/sources/DtFuncion.cpp
         datatypes/sources/DtPelicula.cpp
         datatypes/sources/DtUsuario.cpp
         datatypes/sources/DtComentario.cpp
         datatypes/sources/DtSala.cpp
+        datatypes/sources/DtPuntaje.cpp
         interfaces/ICollectible.cpp
         interfaces/ICollectible.h
         interfaces/ICollection.cpp
