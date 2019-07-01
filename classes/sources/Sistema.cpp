@@ -245,14 +245,14 @@ void Sistema::ListarComentarios(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
-	ICollection* c = new List();
+	ICollection* com = new List(); //le pasa esta coleccion  de tipo list a desarmar comentario
 	com = p->ListarComentarios();
 	IIterator* it = com->getIterator();
 	cout << "Comentarios" << endl;
 	while (it->hasCurrent()) {
 		DtComentario* c = dynamic_cast<DtComentario*>(it->getCurrent());
 		cout << "<" << c->getDtUsuario().getNickName() << ">" << ":" << "   " << c->getTexto() << endl;
-		this->DesarmarComentario(com);
+		this->DesarmarComentario(com);//se la pasa aca
 		//c->ListarHijos();
 		//Veo venir recursividad en ListarHijos
 		it->next();
