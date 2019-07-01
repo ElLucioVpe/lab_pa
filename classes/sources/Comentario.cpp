@@ -74,7 +74,7 @@ ICollection* Comentario::ListarHijos() {
     while (it->hasCurrent()) {
         Comentario* c = dynamic_cast<Comentario*>(it->getCurrent());
         Usuario* u = c->getAutor();
-        dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin()), c->ListarHijos()));
+        dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin()), c->getComentario(c->getHijos())));
         it->next();
     }
 
