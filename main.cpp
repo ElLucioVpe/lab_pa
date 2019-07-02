@@ -433,6 +433,8 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
    string _comentario;
    vector<int> padres;
 
+   //cout << "probando xd" << padres.size() << endl;
+
    cout << "Ingrese el nombre de una pelicula: " << endl;
    cin.ignore();
    getline(cin, _nombre);
@@ -463,7 +465,7 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
 		   cout << "Ingrese su comentario: " << endl;
 		   cin.ignore();
 		   getline(cin, _comentario);
-		   padres.push_back(0);
+		   //padres.push_back(0);
 	   }
    }
 
