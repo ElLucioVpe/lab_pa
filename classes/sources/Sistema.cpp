@@ -157,7 +157,7 @@ DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
 void Sistema::VerComentariosyPuntajes(string titulo) {
 	Pelicula* p = peliculas->find(new  KeyString(titulo));
 	cout << p->getTitulo() << endl << endl;
-	cout << "Puntaje promedio: " << p->getPuntaje() << " (" << p->getCantPuntajes() << " usuarios)"<< endl;
+	cout << "Puntaje promedio: " << p->getPuntaje() << " (" << p->getCantPuntajes() << " usuarios)"<< endl << endl;
 
 	ListarComentarios(titulo);
 	cout << endl;
@@ -252,6 +252,8 @@ void Sistema::ListarComentarios(string titulo) {
 	ICollection* com = p->ListarComentarios();
 	IIterator* it = com->getIterator();
 	cout << "Comentarios" << endl;
+	if (com->isEmpty()) cout << "No hay comentarios" << endl;
+
 	while (it->hasCurrent()) {
 		DtComentario* c = dynamic_cast<DtComentario*>(it->getCurrent());
 		cout << "<" << c->getDtUsuario().getNickName() << ">" << ":" << "   " << c->getTexto() << endl;
@@ -290,6 +292,8 @@ void Sistema::ListarPuntajes(string titulo){
     Pun=p->ListarPuntajes();
     IIterator* it = Pun->getIterator();
 	cout << "Puntajes" << endl;
+	if (Pun->isEmpty()) cout << "No hay puntajes" << endl;
+
     while (it->hasCurrent()) {
         DtPuntaje* pu = dynamic_cast<DtPuntaje*>(it->getCurrent());
         cout << "<"<< pu->getDtUsuario().getNickName() <<">"<<":"<< "<" <<pu->getValor()<< ">" << endl;

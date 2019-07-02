@@ -220,7 +220,7 @@ bool DeseaContinuar(string msg) {
 		else {
 			if (elegir == "No" || elegir == "no") {
 				//El usuario saldra de la operacion actual
-				cout << "Se cancela la operacion" << endl;
+				//cout << "Se cancela la operacion" << endl;
 				return false;
 			}
 			else {
@@ -256,12 +256,15 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 
 	if (DeseaContinuar("Desea ver informacion adicional? (Si/No): ") == false) return;
 	
+	cout << "\n\Cines" << endl << endl;
 	ICollection* c = sistema->ListarCinesPorTitulo(titulo);
 	it = c->getIterator();
+	if (c->isEmpty()) throw invalid_argument("No hay cines que den esta pelicula");
+
 	while (it->hasCurrent()) {
 		DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
 		cout << "Cine " + std::to_string(c->getIdCine()) << endl;
-		cout << "Direccion :"+c->getDireccion() << endl;
+		cout << "Direccion: "+c->getDireccion() << endl;
 		it->next();
 	}
 
@@ -272,6 +275,8 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 
 	ICollection* f = sistema->ListarFunciones(idCine, titulo);
 	it = f->getIterator();
+	if (f->isEmpty()) throw std::invalid_argument("No hay funciones para esta pelicula actualmente");
+
 	while (it->hasCurrent()) {
 		DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
 		cout << "Funcion " + std::to_string(f->getIdFuncion()) << endl;
@@ -343,6 +348,7 @@ void OpcionVerInfoPelicula()
 
 		if (DeseaContinuar("Desea ver informacion adicional? (Si/No): ") == false) return;
 
+		cout << "\n\Cines" << endl << endl;
 		ICollection* c = sistema->ListarCinesPorTitulo(titulo);
 		it = c->getIterator();
 		while (it->hasCurrent()) {
@@ -359,6 +365,8 @@ void OpcionVerInfoPelicula()
 
 		ICollection* f = sistema->ListarFunciones(idCine, titulo);
 		it = f->getIterator();
+		if (f->isEmpty()) cout << "Actualmente no hay funciones en este cine para esta pelicula" << endl;
+
 		while (it->hasCurrent()) {
 			DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
 			cout << "Funcion " + std::to_string(f->getIdFuncion()) << endl;
@@ -386,8 +394,9 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
 
 	if (DeseaContinuar("Desea seleccionar una pelicula? (Si/No): ") == false) return;
 
-    cout << "Ingrese el nombre de pelicula: " << endl;
-    cin >> _nombre;
+    cout << "\nIngrese el nombre de pelicula: " << endl;
+	cin.ignore();
+	getline(cin, _nombre);
 
 	int puntajeAnterior = sistema->YaPuntuo(_nombre, usuarioActual->getNickName());
 	int _puntuacion;
@@ -431,12 +440,19 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
    string _comentario;
    vector<int> padres;
 
-   cout << "Ingrese el nombre de una pelicula: " << endl;
+   cout << "\n\tCatalogo de Peliculas" << endl << endl;
+   ICollection* t = sistema->ListarTitulos();
+   IIterator* it = t->getIterator();
+   while (it->hasCurrent()) {
+	   cout << dynamic_cast<KeyString*>(it->getCurrent())->getValue() << endl;
+	   it->next();
+   }
+
+   cout << "\nIngrese el nombre de una pelicula: ";
    cin.ignore();
    getline(cin, _nombre);
 
    //Listar comentarios de la pelicula
-   cout << "Comentarios:" << endl;
    sistema->ListarComentarios(_nombre);
 
    while (DeseaContinuar("Desea ingresar un comentario? (Si/No): "))
@@ -453,18 +469,20 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
 			   seguir = DeseaContinuar("Desea ingresar otra id (Si/No): ");
 		   }
 
-		   cout << "Ingrese su comentario: " << endl;
+		   cout << "Ingrese su comentario: ";
 		   cin.ignore();
 		   getline(cin, _comentario);
 	   }
 	   else {
-		   cout << "Ingrese su comentario: " << endl;
+		   cout << "Ingrese su comentario: ";
 		   cin.ignore();
 		   getline(cin, _comentario);
 	   }
-   }
 
-   sistema->AltaComentario(padres, _comentario, _nombre, usuarioActual->getNickName());
+	   sistema->AltaComentario(padres, _comentario, _nombre, usuarioActual->getNickName());
+	   cout << "\nComentario guardado" << endl;
+   }
+   cin.ignore(); //Para evitar que el enter del while salte la pausa del main
 }
 
 void OpcionVerComentariosyPuntajes()

@@ -116,7 +116,7 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();
-		if (f->EsDeCine(idCine) && f->getHorario() < tiempoActual) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario(), f->getSala()->getIdSala()));
+		if (f->EsDeCine(idCine) && (f->getHorario() >= tiempoActual)) dts->add(new DtFuncion(f->getIdFuncion(), f->getHorario(), f->getSala()->getIdSala()));
 
 		it.next();
 	}
