@@ -58,6 +58,17 @@ void Pelicula::setSinopsis(string sinopsis){
 
 void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
 	Puntaje* puntajeNuevo = new Puntaje(valorPuntaje, user);
+
+	PuntajeIterator it = puntajes->getIterator();
+	while (it.hasCurrent()) {
+		Puntaje* p = it.getCurrent();
+		if (p->getUsuario() == user) {
+			p->setValor(valorPuntaje);
+			return;
+		}
+		it.next();
+	}
+
     puntajes->add(puntajeNuevo);
 }
 

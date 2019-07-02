@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include <algorithm> //Inlcude necesario en dev-c++s
 #include <vector>
-#include <algorithm>
 #include "classes/headers/Sistema.h"
 #include "datatypes/headers/DtUsuario.h"
 
@@ -65,7 +64,6 @@ int main() {
 					getline(cin, img);
 
 					sistema->AltaUsuario(user, img, pass, false);
-					//usuarioActual = new DtUsuario(user, img, pass, false);
 					break;
 				}
 				default:
@@ -433,8 +431,6 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
    string _comentario;
    vector<int> padres;
 
-   //cout << "probando xd" << padres.size() << endl;
-
    cout << "Ingrese el nombre de una pelicula: " << endl;
    cin.ignore();
    getline(cin, _nombre);
@@ -465,11 +461,10 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
 		   cout << "Ingrese su comentario: " << endl;
 		   cin.ignore();
 		   getline(cin, _comentario);
-		   //padres.push_back(0);
 	   }
    }
 
-   sistema->AltaComentario(padres, _comentario, _nombre, usuarioActual->getNickName()); //agregar parametro int padre, si no es respuesta padre = 0
+   sistema->AltaComentario(padres, _comentario, _nombre, usuarioActual->getNickName());
 }
 
 void OpcionVerComentariosyPuntajes()
@@ -488,7 +483,7 @@ void OpcionVerComentariosyPuntajes()
     }
 
     //Selecciona Films
-    cout << "Ingrese el titulo de la pelicula que desee: ";
+    cout << "\nIngrese el titulo de la pelicula que desee: ";
     cin.ignore();
     getline(cin, titulo);
 

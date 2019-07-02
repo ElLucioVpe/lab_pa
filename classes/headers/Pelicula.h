@@ -42,6 +42,7 @@ public:
     ICollection* ListarPuntajes();
 	int YaPuntuo(string user);
 	~Pelicula();
+
 private:
 	string titulo;
 	string poster;
