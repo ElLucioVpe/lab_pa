@@ -27,7 +27,6 @@ public:
 	string getSinopsis();
 	float getPuntaje();
 	int getCantPuntajes();
-	ICollection* getComentario();
 	void setTitulo(string titulo);
 	void setPoster(string poster);
 	void setSinopsis(string sinopsis);
@@ -43,7 +42,6 @@ public:
     ICollection* ListarPuntajes();
 	int YaPuntuo(string user);
 	~Pelicula();
-
 private:
 	string titulo;
 	string poster;

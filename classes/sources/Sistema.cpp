@@ -157,9 +157,10 @@ DtPelicula* Sistema::SeleccionarPelicula(string titulo) {
 void Sistema::VerComentariosyPuntajes(string titulo) {
 	Pelicula* p = peliculas->find(new  KeyString(titulo));
 	cout << p->getTitulo() << endl << endl;
-	cout << "Puntaje promedio: " << p->getPuntaje() << "(" << p->getCantPuntajes() << "usuarios)"<< endl;
+	cout << "Puntaje promedio: " << p->getPuntaje() << " (" << p->getCantPuntajes() << " usuarios)"<< endl;
 
 	ListarComentarios(titulo);
+	cout << endl;
 	ListarPuntajes(titulo);
 }
 
@@ -248,8 +249,7 @@ void Sistema::ListarComentarios(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
-	ICollection* com = new List();
-	com = p->ListarComentarios();
+	ICollection* com = p->ListarComentarios();
 	IIterator* it = com->getIterator();
 	cout << "Comentarios" << endl;
 	while (it->hasCurrent()) {
@@ -288,11 +288,11 @@ void Sistema::ListarPuntajes(string titulo){
     if (p == NULL) throw std::invalid_argument("La pelicula no existe");
     ICollection* Pun= new List();
     Pun=p->ListarPuntajes();
-    PuntajeIterator it=Pun->getIterator();
+    IIterator* it = Pun->getIterator();
 	cout << "Puntajes" << endl;
-    while (it.hasCurrent()) {
-        Puntaje* pu = it.getCurrent();
-        cout << "<"<< pu->getUsuario()<<">"<<":"<< "<" <<pu->getValor()<< ">" << endl;
-        it.next();
+    while (it->hasCurrent()) {
+        DtPuntaje* pu = dynamic_cast<DtPuntaje*>(it->getCurrent());
+        cout << "<"<< pu->getDtUsuario().getNickName() <<">"<<":"<< "<" <<pu->getValor()<< ">" << endl;
+        it->next();
     }
 }
