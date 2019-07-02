@@ -112,8 +112,6 @@ ICollection* Pelicula::ListarFunciones(int idCine)
 
 	return dts;
 }
-ICollection* getComentario();
-
 
 ICollection* Pelicula::ListarComentarios() {
 	ICollection* dts = new List();
@@ -121,7 +119,8 @@ ICollection* Pelicula::ListarComentarios() {
 	while (it.hasCurrent()) {
 		Comentario* c = it.getCurrent();
 		Usuario* u = c->getAutor();
-		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin()), c->ListarHijos()));
+		ICollection* hijosdt = c->ListarHijos();
+		dts->add(new DtComentario(c->getId(), c->getTexto(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin()), hijosdt));
 		it.next();
 	}
 
@@ -174,6 +173,9 @@ void Pelicula::agregarComentario(vector<int> padres,string _comentario, Usuario*
 	else {
 		//Si es una respuesta
 		Comentario* cpadre = comentarios->find(new KeyInteger(padres[0]));
+
+		if (cpadre == NULL) throw std::invalid_argument("El comentario no existe");
+
 		padres.erase(padres.begin());
 		cpadre->agregarHijo(padres, _com);
 	}

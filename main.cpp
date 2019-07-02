@@ -51,7 +51,7 @@ int main() {
 					getline(cin, pass);
 
 					usuarioActual = sistema->iniciarSesion(user, pass);
-					cout << "Ha iniciado sesion con exito" << endl;
+					cout << "\nHa iniciado sesion con exito" << endl;
 					break;
 				}	
 				case 2: {
@@ -62,9 +62,7 @@ int main() {
 					cout << "Ingrese su contrasenia: ";
 					getline(cin, pass);
 					cout << "Agregue una imagen de perfil (URL): ";
-					cin.ignore();
 					getline(cin, img);
-					cout << img;
 
 					sistema->AltaUsuario(user, img, pass, false);
 					//usuarioActual = new DtUsuario(user, img, pass, false);
@@ -495,6 +493,7 @@ void OpcionVerComentariosyPuntajes()
     getline(cin, titulo);
 
     sistema->VerInfoPelicula(titulo);
+	cout << endl;
     sistema->VerComentariosyPuntajes(titulo);
 }
 

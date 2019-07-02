@@ -5,12 +5,10 @@
 #include <vector>
 #include "../../interfaces/ICollectible.h"
 #include "../../classes/headers/Usuario.h"
-//#include "../../collections/ColComentarios.h"
 #include "../../collections/OrderedDictionary.h"
 #include "../../collections/List.h"
 #include "../../KeyInteger.h"
 #include "../../datatypes/headers/DtComentario.h"
-//class ColComentarios;
 
 using namespace std;
 
@@ -24,8 +22,6 @@ public:
 	void setTexto(string t);
 	void setUsuario(Usuario* u);
 	void agregarHijo(vector<int> padres, Comentario* c);
-    ICollection * getComentario(IDictionary* hijo);
-    IDictionary* getHijos();
 	ICollection * ListarHijos();
 	~Comentario();
 private:
