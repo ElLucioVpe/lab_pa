@@ -264,7 +264,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	it = c->getIterator();
 	while (it->hasCurrent()) {
 		DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
-		cout << "Cine " + c->getIdCine() << endl; 
+		cout << "Cine " + std::to_string(c->getIdCine()) << endl;
 		cout << "Direccion :"+c->getDireccion() << endl;
 		it->next();
 	}
@@ -278,7 +278,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	it = f->getIterator();
 	while (it->hasCurrent()) {
 		DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
-		cout << "Funcion " + f->getIdFuncion() << endl;
+		cout << "Funcion " + std::to_string(f->getIdFuncion()) << endl;
 		time_t h = f->getHorario();
 		cout << "Horario :" << ctime(&h) << endl;
 		it->next();
@@ -307,7 +307,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 				cin.ignore();
 				getline(cin, financiera);
 				descuento = sistema->ObtenerDescuentoFinanciera(financiera);
-				if (descuento != 0) cout << "Descuento por financiera: " << descuento << "%" << endl;
+				if (descuento != 0) cout << "Descuento por financiera: " << std::to_string(descuento) << "%" << endl;
 			}
 			else cout << "Error: La opcion ingresada no es valida";
 		}
@@ -315,7 +315,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	
 	costo = (float)(cantAsientos * 299.99);
 	costo -= (costo * (descuento/100));
-	cout << "Usted pagara: " << costo << endl;
+	cout << "Usted pagara: " << std::to_string(costo) << endl;
 	if (DeseaContinuar("Continuar con la reserva? (Si/No): ") == false) return;
 	sistema->CrearReserva(cantAsientos, costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera);
 }
@@ -351,7 +351,7 @@ void OpcionVerInfoPelicula()
 		it = c->getIterator();
 		while (it->hasCurrent()) {
 			DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
-			cout << "Cine " + c->getIdCine() << endl;
+			cout << "Cine " + std::to_string(c->getIdCine()) << endl;
 			cout << "Direccion :" + c->getDireccion() << endl;
 			it->next();
 		}
@@ -365,7 +365,7 @@ void OpcionVerInfoPelicula()
 		it = f->getIterator();
 		while (it->hasCurrent()) {
 			DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
-			cout << "Funcion " + f->getIdFuncion() << endl;
+			cout << "Funcion " + std::to_string(f->getIdFuncion()) << endl;
 			time_t h = f->getHorario();
 			cout << "Horario :" << ctime(&h) << endl;
 			it->next();
@@ -397,7 +397,7 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
 	int _puntuacion;
 
 	if (puntajeAnterior = 0) {
-		cout << "Puntuacion Anterior: " << puntajeAnterior << endl << endl;
+		cout << "Puntuacion Anterior: " << std::to_string(puntajeAnterior) << endl << endl;
 		cout << "Desea modificarla? (Si/No): ";
 		string elegir;
 		bool seguir = true;
@@ -616,7 +616,7 @@ void OpcionAltaFuncion(){
 	it = c->getIterator();
 	while (it->hasCurrent()) {
 		DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
-		cout << "Cine " + c->getIdCine() << endl; 
+		cout << "Cine " + std::to_string(c->getIdCine()) << endl;
 		cout << "Direccion :"+c->getDireccion() << endl;
 		it->next();
 	}
@@ -662,7 +662,7 @@ void OpcionAltaFuncion(){
 
 			while (it2->hasCurrent()) {
 
-				DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
+				DtFuncion* f = dynamic_cast<DtFuncion*>(it2->getCurrent());
 
 				time_t h = f->getHorario();
 				//Me fijo si dicha funcion + 3 horas esta en el rango de la hora y fecha que el user puso
@@ -687,8 +687,8 @@ void OpcionAltaFuncion(){
 		it = s->getIterator();
 		while (it->hasCurrent()) {
 			DtSala* s = dynamic_cast<DtSala*>(it->getCurrent());
-			cout << "IdSala " + s->getIdSala() << endl;
-			cout << "cantAsientos :" + s->getCantAsientos() << endl;
+			cout << "IdSala " + std::to_string(s->getIdSala()) << endl;
+			cout << "cantAsientos :" + std::to_string(s->getCantAsientos()) << endl;
 			//Comparamos si esta en la lista de no disponibles para este cine a esa hora
 			if (find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala()) != SalasOcupadas.end()) {
 				cout << "Ocupada" << endl;
