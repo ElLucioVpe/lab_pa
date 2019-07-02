@@ -16,6 +16,7 @@
 #include "../../datatypes/headers/DtPuntaje.h"
 
 
+
 using namespace std;
 
 class Pelicula : public ICollectible {
@@ -31,7 +32,7 @@ public:
 	void setPoster(string poster);
 	void setSinopsis(string sinopsis);
 
-    void CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera);
+    void CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* usuario, string banco, string financiera, int descuento);
 	void agregarComentario(vector<int> padres,string _comentario, Usuario* autor);
     void EliminarFunciones();
 	void AltaFuncion(string horario, Cine* cin, Sala* sal);
@@ -41,6 +42,7 @@ public:
     ICollection* getCines();
     ICollection* ListarPuntajes();
 	int YaPuntuo(string user);
+	void ListarReservas(string user);
 	~Pelicula();
 
 private:

@@ -7,15 +7,15 @@
 class TarjetaDeCredito : public Reserva {
 private:
 	std::string Financiera;
-	float PorcentajeDescuento;
+	int PorcentajeDescuento;
 public:
-	TarjetaDeCredito(std::string _financiera, float _precio, int _cantAsientos);
+	TarjetaDeCredito(std::string _financiera, int _descuento, float _precio, int _cantAsientos, Usuario* _user);
 
 	std::string getFinanciera();
-	float getDescuento();
+	int getDescuento();
 
 	void setFinanciera(std::string f);
-	void setDescuento(float p);
+	void setDescuento(int p);
 
 	~TarjetaDeCredito();
 };

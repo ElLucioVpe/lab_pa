@@ -5,9 +5,10 @@ Reserva::Reserva()
 
 }
 
-Reserva::Reserva(float prec, int cantAsientos){
+Reserva::Reserva(float prec, int cantAsientos, Usuario* user){
     this->precio = prec;
     this->cantidadAsientos = cantAsientos;
+	this->usuario = user;
 }
 
 float Reserva::getPrecio() const {
@@ -16,6 +17,11 @@ float Reserva::getPrecio() const {
 
 int Reserva::getCantidadAsientos() const {
     return this->cantidadAsientos;
+}
+
+Usuario* Reserva::getUsuario()
+{
+	return this->usuario;
 }
 
 Reserva::~Reserva() {

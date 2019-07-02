@@ -72,19 +72,20 @@ void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
     puntajes->add(puntajeNuevo);
 }
 
-void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, string usuario, string banco, string financiera)
+void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* usuario, string banco, string financiera, int descuento)
 {
 	Funcion* f = funciones->find(new KeyInteger(idFuncion));
 
 	if (f == NULL) throw std::invalid_argument("La funcion no existe");
 
 	int disponibles, asientosSala;
-	asientosSala = f->getSala()->getCantAsientos();
+	Sala* s = f->getSala();
+	asientosSala = s->getCantAsientos();
 	disponibles = asientosSala - f->AsientosReservados();
 
-	if ((disponibles + cantAsientos) > asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
+	if ((disponibles + cantAsientos) < asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
 
-	f->ReservarFuncion(cantAsientos, costo, usuario, banco, financiera);
+	f->ReservarFuncion(cantAsientos, costo, usuario, banco, financiera, descuento);
 }
 
 void Pelicula::EliminarFunciones()
@@ -152,13 +153,20 @@ ICollection* Pelicula::ListarPuntajes(){
 ICollection* Pelicula::getCines()
 {
 	ICollection* dts = new List();
+	ICollection* auxCines = new List();
 	FuncionIterator it = funciones->getIterator();
+
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();
-		dts->add(new DtCine(f->getCines()->getIdCine(), f->getCines()->getDireccion()));
+		Cine* c = f->getCines();
+		if (!auxCines->member(c)) { //Para evitar cines repetidos
+			DtCine* dtc = new DtCine(c->getIdCine(), c->getDireccion());
+			dts->add(dtc);
+		}
+		auxCines->add(c);
 		it.next();
 	}
-
+	delete auxCines;
 	return dts;
 }
 
@@ -171,6 +179,40 @@ int Pelicula::YaPuntuo(string user)
 		it.next();
 	}
 	return 0; //Si no existe puntuacion del usuario
+}
+
+void Pelicula::ListarReservas(string user)
+{
+	FuncionIterator it = funciones->getIterator();
+	while (it.hasCurrent()) {
+		Funcion* f = it.getCurrent();
+		ICollection* res = f->ListarReservas(user);
+		IIterator* resit = res->getIterator();
+
+		while (resit->hasCurrent()) {
+			const time_t h = f->getHorario();
+			cout << "---- Reserva ----" << endl;
+			cout << "Pelicula: " << this->titulo << endl;
+			cout << "Funcion: " << to_string(f->getIdFuncion()) << endl;
+			cout << "Fecha y Hora: " << ctime(&h); //hace el << endl solo
+			cout << "Sala: " << to_string(f->getSala()->getIdSala()) << endl;
+			cout << "Cine: " << to_string(f->getCines()->getIdCine()) << endl;
+			DtTarjetaDeCredito* t = dynamic_cast<DtTarjetaDeCredito*>(resit->getCurrent());
+			if (t) {
+				cout << "Tipo de Pago: Tarjeta de Credito" << endl;
+				cout << "Cantidad de Asientos: " << to_string(t->getCantidadAsientos()) << endl;
+				cout << "Costo: " << to_string(t->getPrecio()) << endl << endl;
+			}
+			else {
+				auto d = (DtTarjetaDeDebito*) resit->getCurrent();
+				cout << "Tipo de Pago: Tarjeta de Debito" << endl;
+				cout << "Cantidad de Asientos: " << to_string(d->getCantidadAsientos()) << endl;
+				cout << "Costo: " << to_string(d->getPrecio()) << endl << endl;
+			}
+			resit->next();
+		}
+		it.next();
+	}
 }
 
 void Pelicula::agregarComentario(vector<int> padres,string _comentario, Usuario* autor)

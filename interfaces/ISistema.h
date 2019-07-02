@@ -20,7 +20,7 @@ class ISistema {
 		virtual void AltaComentario(vector<int> padres, string texto, string pelicula, string autor) = 0;
 		virtual void AltaPuntaje(int puntuacion, string pelicula, string usuario) = 0;
         virtual DtUsuario* iniciarSesion(string , string) = 0;
-        virtual void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string usuario, string banco, string financiera) = 0;
+        virtual void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string usuario, string banco, string financiera, int descuento) = 0;
 		virtual int ObtenerDescuentoFinanciera(string financiera) = 0;
         virtual ICollection* ListarTitulos() = 0;
         virtual DtPelicula* SeleccionarPelicula(string) = 0;
@@ -35,6 +35,7 @@ class ISistema {
 		virtual void ListarPuntajes(string titulo) = 0;
 		virtual int DarUltimoCine() = 0;
 		virtual int YaPuntuo(string pelicula, string usuario) = 0;
+		virtual void VerReservasPorUsuario(string) = 0;
         virtual ~ISistema();
 };
 

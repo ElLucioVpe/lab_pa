@@ -98,12 +98,14 @@ ICollection* Sistema::ListarSalas(int idCine) {
 	return c->ListarSalas();
 }
 
-void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idFuncion, string usuario, string banco, string financiera) {
+void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idFuncion, string usuario, string banco, string financiera, int descuento) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
+	Usuario* u = usuarios->find(new KeyString(usuario));
 
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+	if (u == NULL) throw std::invalid_argument("El usuario no existe");
 	
-	p->CrearReserva(cantAsientos, costo, idFuncion, usuario, banco, financiera);
+	p->CrearReserva(cantAsientos, costo, idFuncion, u, banco, financiera, descuento);
 }
 
 int Sistema::ObtenerDescuentoFinanciera(string financiera)
@@ -185,11 +187,8 @@ void Sistema::VerInfoPelicula(string titulo) {
 ICollection* Sistema::ListarCines() {
 	ICollection* ids = new List();
     CineIterator it = cines->getIterator();
-    //Cine* c = NULL;
     while (it.hasCurrent()) {
-		//c = it.getCurrent();
 		Cine* c = it.getCurrent();
-       // ids->add(new KeyInteger(c->getIdCine()));
         ids->add(new DtCine(c->getIdCine(), c->getDireccion()));
         it.next();
     }
@@ -243,6 +242,16 @@ int Sistema::YaPuntuo(string pelicula, string usuario) {
 	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
 
 	return p->YaPuntuo(usuario);
+}
+
+void Sistema::VerReservasPorUsuario(string usuario)
+{
+	PeliculaIterator it = peliculas->getIterator();
+	while (it.hasCurrent()) {
+		Pelicula* p = it.getCurrent();
+		p->ListarReservas(usuario);
+		it.next();
+	}
 }
 
 void Sistema::ListarComentarios(string titulo) {

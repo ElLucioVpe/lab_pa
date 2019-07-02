@@ -8,6 +8,8 @@
 #include "Cine.h"
 #include "Sala.h"
 #include "../../collections/ColReservas.h"
+#include "../../datatypes/headers/DtTarjetaDeCredito.h"
+#include "../../datatypes/headers/DtTarjetaDeDebito.h"
 
 using namespace std;
 
@@ -22,8 +24,9 @@ public:
 	void setHorario(time_t h);
 	void EliminarReservas();
 	bool EsDeCine(int IdCine);
-	void ReservarFuncion(int, float, string, string, string);
+	void ReservarFuncion(int, float, Usuario* , string, string, int);
 	int AsientosReservados();
+	ICollection* ListarReservas(string user);
 	~Funcion();
 
 private: 

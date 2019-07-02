@@ -21,6 +21,7 @@ void OpcionAltaCine();
 void OpcionAltaPelicula();
 void OpcionAltaFuncion();
 void OpcionEliminarPelicula();
+void OpcionVerReservas(DtUsuario* usuarioActual);
 
 int main() {
 	ISistema* sistema = Sistema::getInstance();
@@ -85,7 +86,8 @@ int main() {
 				cout << "3 - Puntuar una Pelicula" << endl;
 				cout << "4 - Comentar pelicula" << endl;
 				cout << "5 - Ver comentarios y puntajes" << endl;
-				cout << "6 - Opciones Administrativas" << endl;
+				cout << "6 - Ver mis reservas" << endl;
+				cout << "7 - Opciones Administrativas" << endl;
 				cout << "0 - Cerrar Sesion" << endl;
 				cin >> op;
 
@@ -114,6 +116,9 @@ int main() {
 						OpcionVerComentariosyPuntajes();
 						break;
 					case 6:
+						OpcionVerReservas(usuarioActual);
+						break;
+					case 7:
 						if (usuarioActual->getAdmin()) OpcionesAdministrativas();
 						else throw std::invalid_argument("No tiene permitido el acceso");
 
@@ -202,6 +207,11 @@ void DatosTesteo() {
 	s->AltaFuncion("Jhon Whick 2", "2019/07/10 20:30:00", 2, 2);
 	s->AltaFuncion("Jhon Whick 3", "2019/07/10 22:30:00", 3, 1);
 	s->AltaFuncion("Jhon Whick 3", "2019/07/11 19:30:00", 1, 3);
+
+	//Reservas
+	s->CrearReserva(4, (float) 959.97, "Jhon Whick 1", 1, "admin", "", "Bacacay", 20); //El admin es re fan de Jhon Whick
+	s->CrearReserva(4, (float) 959.97, "Jhon Whick 2", 1, "admin", "", "Bacacay", 20);
+	s->CrearReserva(4, (float) 959.97, "Jhon Whick 3", 1, "admin", "", "Bacacay", 20);
 }
 
 bool DeseaContinuar(string msg) {
@@ -235,8 +245,8 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	ISistema* sistema = Sistema::getInstance(); //Obtengo la instancia de Sistema
 
 	string titulo, elegir, banco = "", financiera = "";
-	int cantAsientos, idFuncion, idCine, descuento = 0;
-	float costo;
+	int cantAsientos, idFuncion, idCine, descuento;
+	float costo = 0;
 
 	cout << "\n\tCatalogo de Peliculas" << endl << endl;
 	ICollection* t = sistema->ListarTitulos();
@@ -256,7 +266,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 
 	if (DeseaContinuar("Desea ver informacion adicional? (Si/No): ") == false) return;
 	
-	cout << "\n\Cines" << endl << endl;
+	cout << "\n\tCines" << endl << endl;
 	ICollection* c = sistema->ListarCinesPorTitulo(titulo);
 	it = c->getIterator();
 	if (c->isEmpty()) throw invalid_argument("No hay cines que den esta pelicula");
@@ -273,6 +283,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	cout << "Ingrese el numero del cine que desee: ";
 	cin >> idCine;
 
+	cout << "\n\tFunciones" << endl << endl;
 	ICollection* f = sistema->ListarFunciones(idCine, titulo);
 	it = f->getIterator();
 	if (f->isEmpty()) throw std::invalid_argument("No hay funciones para esta pelicula actualmente");
@@ -285,40 +296,41 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 		it->next();
 	}
 
-	if (DeseaContinuar("Desea elegir una funcion? (Si/No)") == false) return;
+	if (DeseaContinuar("Desea elegir una funcion? (Si/No): ") == false) return;
 	cout << "Elija una funcion: ";
 	cin >> idFuncion;
 
-	cout << "Ingrese la cantidad de asientos que desea reservar: ";
+	cout << "\nIngrese la cantidad de asientos que desea reservar: ";
 	cin >> cantAsientos;
 
-	cout << "Elija su tipo de pago (Debito/Credito): ";
-	cin >> elegir;
+	do {
+		cout << "Elija su tipo de pago (Debito/Credito): ";
+		cin.ignore();
+		getline(cin, elegir);
 
-	while (elegir != "Debito" && elegir != "Credito")
-	{
 		if (elegir == "Debito") {
 			cout << "Ingrese su banco: ";
-			cin.ignore();
 			getline(cin, banco);
 		}
 		else {
 			if (elegir == "Credito") {
 				cout << "Ingrese su financiera: ";
-				cin.ignore();
 				getline(cin, financiera);
 				descuento = sistema->ObtenerDescuentoFinanciera(financiera);
+				
 				if (descuento != 0) cout << "Descuento por financiera: " << std::to_string(descuento) << "%" << endl;
 			}
 			else cout << "Error: La opcion ingresada no es valida";
 		}
-	}
+	} 
+	while (elegir != "Debito" && elegir != "Credito");
 	
-	costo = (float)(cantAsientos * 299.99);
-	costo -= (costo * (descuento/100));
+	costo = (float)(cantAsientos * 299.99) * (1 - (descuento / 100));
 	cout << "Usted pagara: " << std::to_string(costo) << endl;
 	if (DeseaContinuar("Continuar con la reserva? (Si/No): ") == false) return;
-	sistema->CrearReserva(cantAsientos, costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera);
+	sistema->CrearReserva(cantAsientos, (float) costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera, descuento);
+	cout << "La reserva se ha realizado con exito" << endl;
+	cin.ignore();
 }
 
 void OpcionVerInfoPelicula()
@@ -348,7 +360,7 @@ void OpcionVerInfoPelicula()
 
 		if (DeseaContinuar("Desea ver informacion adicional? (Si/No): ") == false) return;
 
-		cout << "\n\Cines" << endl << endl;
+		cout << "\n\tCines" << endl << endl;
 		ICollection* c = sistema->ListarCinesPorTitulo(titulo);
 		it = c->getIterator();
 		while (it->hasCurrent()) {
@@ -363,6 +375,7 @@ void OpcionVerInfoPelicula()
 		cout << "Ingrese el numero del cine que desee: ";
 		cin >> idCine;
 
+		cout << "\n\tFunciones" << endl << endl;
 		ICollection* f = sistema->ListarFunciones(idCine, titulo);
 		it = f->getIterator();
 		if (f->isEmpty()) cout << "Actualmente no hay funciones en este cine para esta pelicula" << endl;
@@ -376,6 +389,7 @@ void OpcionVerInfoPelicula()
 		}
 
 		seguir = DeseaContinuar("Desea ver informacion de otra pelicula? (Si/No): ");
+		cin.ignore();
 	}
 }
 
@@ -758,4 +772,13 @@ void OpcionEliminarPelicula()
 
 	s->EliminarPelicula(titulo);
 	cout << "La pelicula " << titulo << " ha sido eliminada" << endl;
+}
+
+void OpcionVerReservas(DtUsuario* usuarioActual)
+{
+	ISistema* sistema = Sistema::getInstance();
+
+	cout << "\tReservas" << endl << endl;
+	sistema->VerReservasPorUsuario(usuarioActual->getNickName());
+	cin.ignore();
 }
