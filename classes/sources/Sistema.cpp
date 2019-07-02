@@ -41,7 +41,11 @@ void Sistema::AltaCine(string dir)
 
 void Sistema::AltaSala(int idCine, int cantAsientos)
 {
-	cines->find(new KeyInteger(idCine))->AltaSala(cantAsientos);
+	Cine* c = cines->find(new KeyInteger(idCine));
+
+	if (c == NULL) throw std::invalid_argument("El cine no existe");
+
+	c->AltaSala(cantAsientos);
 }
 
 DtUsuario* Sistema::iniciarSesion(string user, string pass) {
@@ -168,6 +172,9 @@ void Sistema::VerComentariosyPuntajes(string titulo) {
 
 void Sistema::EliminarPelicula(string titulo) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
+
+	if (p == NULL) throw std::invalid_argument("La pelicula no existe");
+
 	peliculas->remove(new KeyString(p->getTitulo())); //Remuevo la pelicula de la coleccion
 	delete p; //Elimina sus funciones las cuales eliminan sus reservas, ademas de los comentarios y puntajes
 }
@@ -224,16 +231,7 @@ Sistema::~Sistema() {
 
 int Sistema::DarUltimoCine()
 {
-	CineIterator it = cines->getIterator();
-	Cine* current = NULL;
-	Cine* previous = NULL;
-
-	while (it.hasCurrent()) {
-		current = it.getCurrent();
-		previous = current;
-		it.next();
-	}
-	return previous->getIdCine();
+	return cines->getSize();
 }
 
 int Sistema::YaPuntuo(string pelicula, string usuario) {

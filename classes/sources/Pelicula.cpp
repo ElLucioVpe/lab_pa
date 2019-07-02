@@ -5,9 +5,9 @@ Pelicula::Pelicula(string titulo, string poster, string sinopsis, float puntaje)
   this->poster=poster;
   this->sinopsis=sinopsis;
   this->puntaje=puntaje;
-  puntajes= new ColPuntajes;
-  funciones= new ColFunciones;
-  comentarios = new ColComentarios;
+  puntajes= new ColPuntajes();
+  funciones= new ColFunciones();
+  comentarios = new ColComentarios();
 
 }
 string Pelicula::getTitulo(){

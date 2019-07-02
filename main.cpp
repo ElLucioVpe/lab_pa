@@ -120,7 +120,10 @@ int main() {
 						break;
 					case 7:
 						if (usuarioActual->getAdmin()) OpcionesAdministrativas();
-						else throw std::invalid_argument("No tiene permitido el acceso");
+						else { 
+							cin.ignore();
+							throw std::invalid_argument("No tiene permitido el acceso"); 
+						}
 
 						break;
 					default:
@@ -247,7 +250,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	string titulo, elegir, banco = "", financiera = "";
 	int cantAsientos, idFuncion, idCine; 
 	float costo;
-	double descuento;
+	float descuento = 0;
 
 	cout << "\n\tCatalogo de Peliculas" << endl << endl;
 	ICollection* t = sistema->ListarTitulos();
@@ -317,7 +320,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 			if (elegir == "Credito") {
 				cout << "Ingrese su financiera: ";
 				getline(cin, financiera);
-				descuento = sistema->ObtenerDescuentoFinanciera(financiera);
+				descuento = (float) sistema->ObtenerDescuentoFinanciera(financiera);
 				
 				if (descuento != 0) cout << "\nDescuento por financiera: " << std::to_string(descuento*100) << "%" << endl;
 			}
@@ -329,7 +332,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	costo = (float) ((cantAsientos * 299.99) * (1 - descuento));
 	cout << "Usted pagara: " << std::to_string(costo) << endl;
 	if (DeseaContinuar("Continuar con la reserva? (Si/No): ") == false) return;
-	sistema->CrearReserva(cantAsientos, costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera, (float) descuento);
+	sistema->CrearReserva(cantAsientos, costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera, descuento);
 	cout << "La reserva se ha realizado con exito" << endl;
 	cin.ignore();
 }
@@ -364,29 +367,33 @@ void OpcionVerInfoPelicula()
 		cout << "\n\tCines" << endl << endl;
 		ICollection* c = sistema->ListarCinesPorTitulo(titulo);
 		it = c->getIterator();
-		while (it->hasCurrent()) {
-			DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
-			cout << "Cine " + std::to_string(c->getIdCine()) << endl;
-			cout << "Direccion :" + c->getDireccion() << endl;
-			it->next();
-		}
+		if (c->isEmpty()) cout << "No hay cines que den esta pelicula" << endl;
+		else {
+			
+			while (it->hasCurrent()) {
+				DtCine* c = dynamic_cast<DtCine*>(it->getCurrent());
+				cout << "Cine " + std::to_string(c->getIdCine()) << endl;
+				cout << "Direccion :" + c->getDireccion() << endl;
+				it->next();
+			}
 
-		if (DeseaContinuar("Desea elegir un cine? (Si/No): ") == false) return;
+			if (DeseaContinuar("Desea elegir un cine? (Si/No): ") == false) return;
 
-		cout << "Ingrese el numero del cine que desee: ";
-		cin >> idCine;
+			cout << "Ingrese el numero del cine que desee: ";
+			cin >> idCine;
 
-		cout << "\n\tFunciones" << endl << endl;
-		ICollection* f = sistema->ListarFunciones(idCine, titulo);
-		it = f->getIterator();
-		if (f->isEmpty()) cout << "Actualmente no hay funciones en este cine para esta pelicula" << endl;
+			cout << "\n\tFunciones" << endl << endl;
+			ICollection* f = sistema->ListarFunciones(idCine, titulo);
+			it = f->getIterator();
+			if (f->isEmpty()) cout << "Actualmente no hay funciones en este cine para esta pelicula" << endl;
 
-		while (it->hasCurrent()) {
-			DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
-			cout << "Funcion " + std::to_string(f->getIdFuncion()) << endl;
-			time_t h = f->getHorario();
-			cout << "Horario :" << ctime(&h) << endl;
-			it->next();
+			while (it->hasCurrent()) {
+				DtFuncion* f = dynamic_cast<DtFuncion*>(it->getCurrent());
+				cout << "Funcion " + std::to_string(f->getIdFuncion()) << endl;
+				time_t h = f->getHorario();
+				cout << "Horario :" << ctime(&h) << endl;
+				it->next();
+			}
 		}
 
 		seguir = DeseaContinuar("Desea ver informacion de otra pelicula? (Si/No): ");
@@ -559,7 +566,7 @@ void OpcionesAdministrativas() {
 		}
 
 		if (op != 0) {
-			cin.ignore();
+			//cin.ignore();
 			cout << "\nPresione ENTER para continuar...";
 			cin.get();
 			cout << endl;
@@ -586,11 +593,13 @@ void OpcionAltaCine() {
 
 	if (DeseaContinuar("Desea completar la operacion? (Si/No): ") == false) return;
 	s->AltaCine(dir);
+
 	idCine = s->DarUltimoCine();
 
 	for (auto i = cantAsientos.begin(); i != cantAsientos.end(); i++) {
 		s->AltaSala(idCine, *i);
 	}
+	cin.ignore();
 }
 
 void OpcionAltaPelicula()
@@ -603,11 +612,9 @@ void OpcionAltaPelicula()
 	getline(cin, titulo);
 
 	cout << "Ingrese el url del poster: ";
-	cin.ignore();
 	getline(cin, img);
 
 	cout << "Ingrese la sinopsis: ";
-	cin.ignore();
 	getline(cin, sinopsis);
 
 	s->AltaPelicula(titulo, img, sinopsis);
@@ -635,12 +642,13 @@ void OpcionAltaFuncion(){
 	}
 
 	//Selecciona Films
-	cout << "Ingrese el titulo de la pelicula que desee: ";
+	cout << "\nIngrese el titulo de la pelicula que desee: ";
 	cin.ignore();
 	getline(cin, titulo);
 
 
 	//Listar Cines
+	cout << "\n\tCines" << endl << endl;
 	ICollection* c = sistema->ListarCines();
 	it = c->getIterator();
 	while (it->hasCurrent()) {
@@ -652,7 +660,7 @@ void OpcionAltaFuncion(){
 	
 	//Selecciona Cine
 	int idCine;
-	cout << "Ingrese el numero del cine que desee: ";
+	cout << "\nIngrese el numero del cine que desee: ";
 	cin >> idCine;
 
 
@@ -712,12 +720,14 @@ void OpcionAltaFuncion(){
 		}
 
 		//Mostramos las salas
+		cout << "\n\tSalas" << endl << endl;
 		ICollection* s = sistema->ListarSalas(idCine);
+
 		it = s->getIterator();
 		while (it->hasCurrent()) {
 			DtSala* s = dynamic_cast<DtSala*>(it->getCurrent());
-			cout << "IdSala " + std::to_string(s->getIdSala()) << endl;
-			cout << "cantAsientos :" + std::to_string(s->getCantAsientos()) << endl;
+			cout << "Sala " + std::to_string(s->getIdSala()) << endl;
+			cout << "Cantidad de asientos: " + std::to_string(s->getCantAsientos()) << endl;
 			//Comparamos si esta en la lista de no disponibles para este cine a esa hora
 			if (find(SalasOcupadas.begin(), SalasOcupadas.end(), s->getIdSala()) != SalasOcupadas.end()) {
 				cout << "Ocupada" << endl;
@@ -733,7 +743,7 @@ void OpcionAltaFuncion(){
 		//Selecionar Sala
 		int idSala;
 		bool existeSala = false;
-		cout << "Ingrese el numero de sala que desee: ";
+		cout << "\nIngrese el numero de sala que desee: ";
 		cin >> idSala;
 
 
@@ -750,6 +760,7 @@ void OpcionAltaFuncion(){
 
 		deseaIngresar = DeseaContinuar("Desea ingresar otra funcion para esta pelicula? (Si/No): ");
 	}
+	cin.ignore();
 }
 
 void OpcionEliminarPelicula()
