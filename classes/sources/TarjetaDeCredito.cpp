@@ -1,6 +1,6 @@
 #include "../headers/TarjetaDeCredito.h"
 
-TarjetaDeCredito::TarjetaDeCredito(std::string _financiera, int _descuento, float _precio, int _cantAsientos, Usuario* _user) : Reserva(_precio, _cantAsientos, _user) {
+TarjetaDeCredito::TarjetaDeCredito(std::string _financiera, float _descuento, float _precio, int _cantAsientos, Usuario* _user) : Reserva(_precio, _cantAsientos, _user) {
 	this->Financiera = _financiera;
 	this->PorcentajeDescuento = _descuento;
 }
@@ -9,7 +9,7 @@ std::string TarjetaDeCredito::getFinanciera() {
 	return this->Financiera;
 }
 
-int TarjetaDeCredito::getDescuento() {
+float TarjetaDeCredito::getDescuento() {
 	return this->PorcentajeDescuento;
 }
 		

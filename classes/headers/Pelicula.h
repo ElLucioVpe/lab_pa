@@ -32,7 +32,7 @@ public:
 	void setPoster(string poster);
 	void setSinopsis(string sinopsis);
 
-    void CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* usuario, string banco, string financiera, int descuento);
+    void CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* usuario, string banco, string financiera, float descuento);
 	void agregarComentario(vector<int> padres,string _comentario, Usuario* autor);
     void EliminarFunciones();
 	void AltaFuncion(string horario, Cine* cin, Sala* sal);

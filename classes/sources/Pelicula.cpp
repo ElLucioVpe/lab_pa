@@ -72,7 +72,7 @@ void Pelicula::puntuarPelicula(int valorPuntaje, Usuario* user) {
     puntajes->add(puntajeNuevo);
 }
 
-void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* usuario, string banco, string financiera, int descuento)
+void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuario* usuario, string banco, string financiera, float descuento)
 {
 	Funcion* f = funciones->find(new KeyInteger(idFuncion));
 

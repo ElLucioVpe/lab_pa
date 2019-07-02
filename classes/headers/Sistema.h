@@ -25,8 +25,8 @@ class Sistema : public ISistema {
 		void AltaComentario(vector<int> padres, string texto, string pelicula, string autor);
 		void AltaPuntaje(int puntuacion, string pelicula, string usuario);
         DtUsuario* iniciarSesion(string user, string pass);
-        void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera, int descuento);
-		int ObtenerDescuentoFinanciera(string financiera);
+        void CrearReserva(int cantAsientos, float costo, string titulo, int IdFuncion, string u, string banco, string financiera, float descuento);
+		double ObtenerDescuentoFinanciera(string financiera);
 		ICollection* ListarTitulos();
         DtPelicula* SeleccionarPelicula(string titulo);
 		void VerComentariosyPuntajes(string titulo);

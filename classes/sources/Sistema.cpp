@@ -98,7 +98,7 @@ ICollection* Sistema::ListarSalas(int idCine) {
 	return c->ListarSalas();
 }
 
-void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idFuncion, string usuario, string banco, string financiera, int descuento) {
+void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idFuncion, string usuario, string banco, string financiera, float descuento) {
 	Pelicula* p = peliculas->find(new KeyString(titulo));
 	Usuario* u = usuarios->find(new KeyString(usuario));
 
@@ -108,9 +108,9 @@ void Sistema::CrearReserva(int cantAsientos, float costo, string titulo, int idF
 	p->CrearReserva(cantAsientos, costo, idFuncion, u, banco, financiera, descuento);
 }
 
-int Sistema::ObtenerDescuentoFinanciera(string financiera)
+double Sistema::ObtenerDescuentoFinanciera(string financiera)
 {
-	int res;
+	double res;
 	Financiera f;
 	if (financiera == "Bacacay") f = Bacacay;
 	if (financiera == "Banco Hipotecario") f = Banco_Hipotecario;
@@ -119,13 +119,13 @@ int Sistema::ObtenerDescuentoFinanciera(string financiera)
 	switch (f)
 	{
 	case Bacacay:
-		res = 20;
+		res = 0.2;
 		break;
 	case Banco_Hipotecario:
-		res = 15;
+		res = 0.15;
 		break;
 	case Cambio_Maiorano:
-		res = 10;
+		res = 0.1;
 		break;
 	default:
 		res = 0;

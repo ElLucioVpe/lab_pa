@@ -245,8 +245,9 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	ISistema* sistema = Sistema::getInstance(); //Obtengo la instancia de Sistema
 
 	string titulo, elegir, banco = "", financiera = "";
-	int cantAsientos, idFuncion, idCine, descuento;
-	float costo = 0;
+	int cantAsientos, idFuncion, idCine; 
+	float costo;
+	double descuento;
 
 	cout << "\n\tCatalogo de Peliculas" << endl << endl;
 	ICollection* t = sistema->ListarTitulos();
@@ -304,7 +305,7 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 	cin >> cantAsientos;
 
 	do {
-		cout << "Elija su tipo de pago (Debito/Credito): ";
+		cout << "\nElija su tipo de pago (Debito/Credito): ";
 		cin.ignore();
 		getline(cin, elegir);
 
@@ -318,17 +319,17 @@ void OpcionCrearReserva(DtUsuario* usuarioActual) {
 				getline(cin, financiera);
 				descuento = sistema->ObtenerDescuentoFinanciera(financiera);
 				
-				if (descuento != 0) cout << "Descuento por financiera: " << std::to_string(descuento) << "%" << endl;
+				if (descuento != 0) cout << "\nDescuento por financiera: " << std::to_string(descuento*100) << "%" << endl;
 			}
 			else cout << "Error: La opcion ingresada no es valida";
 		}
 	} 
 	while (elegir != "Debito" && elegir != "Credito");
 	
-	costo = (float)(cantAsientos * 299.99) * (1 - (descuento / 100));
+	costo = (float) ((cantAsientos * 299.99) * (1 - descuento));
 	cout << "Usted pagara: " << std::to_string(costo) << endl;
 	if (DeseaContinuar("Continuar con la reserva? (Si/No): ") == false) return;
-	sistema->CrearReserva(cantAsientos, (float) costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera, descuento);
+	sistema->CrearReserva(cantAsientos, costo, titulo, idFuncion, usuarioActual->getNickName(), banco, financiera, (float) descuento);
 	cout << "La reserva se ha realizado con exito" << endl;
 	cin.ignore();
 }

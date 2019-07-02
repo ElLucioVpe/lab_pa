@@ -53,7 +53,7 @@ bool Funcion::EsDeCine(int idCine)
 {
 	return _cine->getIdCine() == idCine;
 }
-void Funcion::ReservarFuncion(int cantAsientos, float costo, Usuario* user, string banco, string financiera, int descuento) {
+void Funcion::ReservarFuncion(int cantAsientos, float costo, Usuario* user, string banco, string financiera, float descuento) {
 	
 	if (banco == "") reservas->add(new TarjetaDeCredito(financiera, descuento, costo, cantAsientos, user));
 	else reservas->add(new TarjetaDeDebito(banco, costo, cantAsientos, user));

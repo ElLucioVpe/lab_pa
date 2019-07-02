@@ -24,7 +24,7 @@ public:
 	void setHorario(time_t h);
 	void EliminarReservas();
 	bool EsDeCine(int IdCine);
-	void ReservarFuncion(int, float, Usuario* , string, string, int);
+	void ReservarFuncion(int, float, Usuario* , string, string, float);
 	int AsientosReservados();
 	ICollection* ListarReservas(string user);
 	~Funcion();

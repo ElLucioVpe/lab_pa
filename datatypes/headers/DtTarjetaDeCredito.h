@@ -7,14 +7,14 @@
 
 class DtTarjetaDeCredito : public DtReserva {
 public:
-	DtTarjetaDeCredito(std::string _financiera, int _descuento, float _precio, int _cantAsientos, DtUsuario user);
+	DtTarjetaDeCredito(std::string _financiera, float _descuento, float _precio, int _cantAsientos, DtUsuario user);
 	std::string getFinanciera();
-	int getDescuento();
+	float getDescuento();
     
     virtual ~DtTarjetaDeCredito();
 private:
 	std::string Financiera;
-	int PorcentajeDescuento;
+	float PorcentajeDescuento;
 };
 
 #endif /* DTTARJETADECREDITO_H */
