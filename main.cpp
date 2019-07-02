@@ -454,7 +454,7 @@ void OpcionComentarPelicula(DtUsuario* usuarioActual)
 			   cin >> id_comentario;
 			   padres.push_back(id_comentario);
 
-			   seguir = ("Desea ingresar otra id (Si/No): ");
+			   seguir = DeseaContinuar("Desea ingresar otra id (Si/No): ");
 		   }
 
 		   cout << "Ingrese su comentario: " << endl;
