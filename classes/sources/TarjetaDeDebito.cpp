@@ -4,6 +4,11 @@ TarjetaDeDebito::TarjetaDeDebito(std::string _banco, float _precio, int _cantAsi
 	this->Banco = _banco;
 }
 
+std::string TarjetaDeDebito::getBanco()
+{
+	return this->Banco;
+}
+
 TarjetaDeDebito::TarjetaDeDebito() : Reserva() {
 }
 

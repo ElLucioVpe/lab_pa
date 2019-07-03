@@ -83,7 +83,7 @@ void Pelicula::CrearReserva(int cantAsientos, float costo, int idFuncion, Usuari
 	asientosSala = s->getCantAsientos();
 	disponibles = asientosSala - f->AsientosReservados();
 
-	if ((disponibles + cantAsientos) < asientosSala) throw std::invalid_argument("No quedan suficientes asientos para reservar");
+	if ((disponibles - cantAsientos) < 0) throw std::invalid_argument("No quedan suficientes asientos para reservar");
 
 	f->ReservarFuncion(cantAsientos, costo, usuario, banco, financiera, descuento);
 }
@@ -187,6 +187,7 @@ void Pelicula::ListarReservas(string user)
 	while (it.hasCurrent()) {
 		Funcion* f = it.getCurrent();
 		ICollection* res = f->ListarReservas(user);
+
 		IIterator* resit = res->getIterator();
 
 		while (resit->hasCurrent()) {

@@ -81,16 +81,33 @@ ICollection* Funcion::ListarReservas(string user)
 	while (it.hasCurrent()) {
 		
 		TarjetaDeCredito* c = dynamic_cast<TarjetaDeCredito*>(it.getCurrent());
-		Usuario* u = c->getUsuario();
-		if (user == u->getNickName()) {
+			
 			if (c) {
-				dts->add(new DtTarjetaDeCredito(c->getFinanciera(), c->getDescuento(), c->getPrecio(), c->getCantidadAsientos(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+				Usuario* u = c->getUsuario();
+				if (user == u->getNickName()) {
+					DtTarjetaDeCredito* r = new DtTarjetaDeCredito(
+						c->getFinanciera(),
+						c->getDescuento(),
+						c->getPrecio(),
+						c->getCantidadAsientos(),
+						DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())
+					);
+					dts->add(r);
+				}
 			}
 			else {
-				auto d = (DtTarjetaDeDebito*) it.getCurrent();
-				dts->add(new DtTarjetaDeDebito (d->getBanco() , d->getPrecio(), d->getCantidadAsientos(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+				auto d = (TarjetaDeDebito*) it.getCurrent();
+				Usuario* u = d->getUsuario();
+				if (user == u->getNickName()) {
+					DtTarjetaDeDebito* r = new DtTarjetaDeDebito(
+						d->getBanco(),
+						d->getPrecio(),
+						d->getCantidadAsientos(),
+						DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())
+					);
+					dts->add(r);
+				}
 			}
-		}
 		it.next();
 	}
 	return dts;
