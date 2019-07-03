@@ -42,8 +42,8 @@ ColFunciones::~ColFunciones() {
     IIterator* it = funciones->getIterator();
     while (it->hasCurrent()) {
         Funcion* temp = dynamic_cast<Funcion*>(it->getCurrent());
-        it->next();
-        delete temp;
+		it->next();
+		delete temp;
     }
     delete it;
     delete funciones;

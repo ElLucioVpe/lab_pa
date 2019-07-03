@@ -9,7 +9,7 @@ private:
 	std::string Banco;
 public:
 	TarjetaDeDebito();
-	TarjetaDeDebito(std::string _banco, float _precio, int _cantAsientos);
+	TarjetaDeDebito(std::string _banco, float _precio, int _cantAsientos, Usuario* _user);
 	virtual ~TarjetaDeDebito();
 };
 

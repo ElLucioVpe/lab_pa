@@ -53,10 +53,10 @@ bool Funcion::EsDeCine(int idCine)
 {
 	return _cine->getIdCine() == idCine;
 }
-void Funcion::ReservarFuncion(int cantAsientos, float costo, string usuario, string banco, string financiera) {
+void Funcion::ReservarFuncion(int cantAsientos, float costo, Usuario* user, string banco, string financiera, float descuento) {
 	
-	if (banco == "") reservas->add(new TarjetaDeCredito(financiera, costo, cantAsientos));
-	else reservas->add(new TarjetaDeDebito(banco, costo, cantAsientos));
+	if (banco == "") reservas->add(new TarjetaDeCredito(financiera, descuento, costo, cantAsientos, user));
+	else reservas->add(new TarjetaDeDebito(banco, costo, cantAsientos, user));
 
 	//se deberia agregar un parametro Usuario a Reserva o alguna otra forma de saber quien la reservo
 }
@@ -72,6 +72,28 @@ int Funcion::AsientosReservados()
 	}
 
 	return cant;
+}
+
+ICollection* Funcion::ListarReservas(string user)
+{
+	ICollection* dts = new List();
+	ReservaIterator it = reservas->getIterator();
+	while (it.hasCurrent()) {
+		
+		TarjetaDeCredito* c = dynamic_cast<TarjetaDeCredito*>(it.getCurrent());
+		Usuario* u = c->getUsuario();
+		if (user == u->getNickName()) {
+			if (c) {
+				dts->add(new DtTarjetaDeCredito(c->getFinanciera(), c->getDescuento(), c->getPrecio(), c->getCantidadAsientos(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+			}
+			else {
+				auto d = (DtTarjetaDeDebito*) it.getCurrent();
+				dts->add(new DtTarjetaDeDebito (d->getBanco() , d->getPrecio(), d->getCantidadAsientos(), DtUsuario(u->getNickName(), u->getImgPerfil(), u->getContrasenia(), u->getAdmin())));
+			}
+		}
+		it.next();
+	}
+	return dts;
 }
 
 Funcion::~Funcion()
