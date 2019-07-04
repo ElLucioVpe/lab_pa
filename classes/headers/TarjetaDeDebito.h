@@ -10,6 +10,7 @@ private:
 public:
 	TarjetaDeDebito();
 	TarjetaDeDebito(std::string _banco, float _precio, int _cantAsientos, Usuario* _user);
+	std::string getBanco();
 	virtual ~TarjetaDeDebito();
 };
 

@@ -15,7 +15,7 @@ public:
 	float getDescuento();
 
 	void setFinanciera(std::string f);
-	void setDescuento(int p);
+	void setDescuento(float p);
 
 	~TarjetaDeCredito();
 };

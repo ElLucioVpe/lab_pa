@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-#include <algorithm> //Inlcude necesario en dev-c++s
+#include <algorithm>
 #include <vector>
 #include "classes/headers/Sistema.h"
 #include "datatypes/headers/DtUsuario.h"
@@ -423,7 +423,7 @@ void OpcionPuntuarPelicula(DtUsuario* usuarioActual) {
 	int puntajeAnterior = sistema->YaPuntuo(_nombre, usuarioActual->getNickName());
 	int _puntuacion;
 
-	if (puntajeAnterior = 0) {
+	if (puntajeAnterior == 0) {
 		cout << "Puntuacion Anterior: " << std::to_string(puntajeAnterior) << endl << endl;
 		cout << "Desea modificarla? (Si/No): ";
 		string elegir;

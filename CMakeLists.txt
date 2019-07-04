@@ -108,6 +108,4 @@ add_executable(lab_pa
         KeyInteger.cpp
         KeyString.h
         KeyString.cpp
-        String.h
-        String.cpp
         main.cpp)

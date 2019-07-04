@@ -17,7 +17,7 @@ void TarjetaDeCredito::setFinanciera(std::string f) {
 	this->Financiera = f;
 }
 
-void TarjetaDeCredito::setDescuento(int p) {
+void TarjetaDeCredito::setDescuento(float p) {
 	this->PorcentajeDescuento = p;
 }
 
